@@ -6,16 +6,25 @@ class Product
 	public $color = 'green';
 	public static $total = 1993;
 
-	public function calculateTotal() {
+	public static function calculateTotal() {
 		self::$total = 10*40;
 	}
 
-	public function generateID() {
+	public static function calculateTotalPlus()
+	{
+		self::$total = 10*40*800;
+	}
+
+	public static function sayHi() {
+		return "HI";
+	}
+
+	public static function generateID() {
 		return rand(0,9999);
 	}
 
-	public function read() {
-		self::calculateTotal();
+	public static function read() {
+		self::calculateTotalPlus();
 		return self::$total;
 	}
 }
@@ -23,7 +32,7 @@ class Product
 // Static Object
 // echo Product::$total;
 
-$productObj = new Product();
-echo $productObj::$total;
+echo Product::read();
+echo Product::sayHi();
 
 ?>

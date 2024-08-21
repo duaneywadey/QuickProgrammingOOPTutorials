@@ -41,7 +41,7 @@ class CafeFunction
 	
 	function __construct()
 	{
-		echo "from App\Cafe\CafeFunction";
+		echo "from App\Cafe\CafeFunction" . "<br>";
 	}
 }
 

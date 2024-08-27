@@ -30,6 +30,7 @@ CREATE TABLE Comments (
 );
 
 
+
 -- Insert 5 records into Users Table
 INSERT INTO Users (Username, FirstName, LastName, DateOfBirth, Password) VALUES
 ('user1', 'John', 'Doe', '1990-01-01', 'password1'),

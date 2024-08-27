@@ -42,15 +42,15 @@ INSERT INTO Users (UserID, Username, FirstName, LastName, DateOfBirth, Password)
 -- Insert 10 records into Posts Table
 INSERT INTO Posts (PostID, PostDescription, PostedBy, IsVisible) VALUES
 (1,'Hello World!', 1, TRUE),
-(2,'My first post!', 2, TRUE),
+(2,'My first post!', 2, FALSE),
 (3,'Learning SQL!', 3, TRUE),
-(4,'Group activities!', 4, TRUE),
+(4,'Group activities!', 4, FALSE),
 (5,'Happy to be here!', 5, TRUE),
-(6,'SQL is fun!', 1, TRUE),
+(6,'SQL is fun!', 1, FALSE),
 (7,'Join my group!', 2, TRUE),
 (8,'Post about coding!', 3, TRUE),
 (9,'Weekend plans!', 4, TRUE),
-(10,'Final project update!', 5, TRUE);
+(10,'Final project update!', 5, FALSE);
 
 -- Insert 10 records into Comments Table
 INSERT INTO Comments (CommentID, CommentDescription, AddedBy, PostID) VALUES

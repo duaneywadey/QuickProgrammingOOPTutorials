@@ -35,7 +35,7 @@ class Database {
 
 	protected function run($values = array()) {
 		$stmt = self::$conn->prepare($this->query);
-		$check = $stmt->execute();
+		$check = $stmt->execute($values);
 		if ($check) {
 			$data = $stmt->fetchAll();
 			if (is_array($data) && count($data) > 0) {
@@ -57,8 +57,12 @@ class Database {
 	}
 
 	public function where($where, $values=array()) {
-		$this->query . = " WHERE " . $where;
+		$this->query.= " WHERE " . $where;
 		return $this->run($values);
+	}
+
+	public function update() {
+		return self::$instance;
 	}
 }
 ?>

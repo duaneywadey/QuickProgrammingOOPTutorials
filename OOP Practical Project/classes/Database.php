@@ -42,10 +42,23 @@ class Database {
 				return $data;
 			}
 		}
+
 	}
 
 	public function all() {
-		return $this->run();
+		$stmt = self::$conn->prepare($this->query);
+		$check = $stmt->execute();
+		if ($check) {
+			$data = $stmt->fetchAll();
+			if (is_array($data) && count($data) > 0) {
+				return $data;
+			}
+		}
+	}
+
+	public function where($where, $values=array()) {
+		$this->query . = " WHERE " . $where;
+		return $this->run($values);
 	}
 }
 ?>

@@ -55,11 +55,11 @@ INSERT INTO Posts (PostID, PostDescription, PostedBy, IsVisible) VALUES
 -- Insert 10 records into Comments Table
 INSERT INTO Comments (CommentID, CommentDescription, AddedBy, PostID) VALUES
 (1,'Great post!', 1, 1),
-(2,'Thanks for sharing!', 2, 2),
-(3,'Very informative!', 3, 3),
-(4,'I love this!', 4, 4),
-(5,'Nice work!', 5, 5),
-(6,'Interesting perspective!', 1, 6),
+(2,'Thanks for sharing!', 2, 1),
+(3,'Very informative!', 3, 1),
+(4,'I love this!', 4, 2),
+(5,'Nice work!', 5, 2),
+(6,'Interesting perspective!', 1, 2),
 (7,'Could you elaborate?', 2, 7),
 (8,'I disagree!', 3, 8),
 (9,'Looking forward to more!', 4, 9),

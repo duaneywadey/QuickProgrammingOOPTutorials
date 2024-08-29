@@ -16,8 +16,8 @@ class User
 		return Database::table('users')->select()->all();
 	}
 
-	public function getByID($id) {
-		return Database::table('users')->select()->where("id = :id", ["id" => $id]);
+	public function getByID($user_id) {
+		return Database::table('users')->select()->where("user_id = :user_id", ["user_id" => $user_id]);
 	}
 }
 

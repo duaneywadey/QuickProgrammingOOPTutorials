@@ -5,7 +5,7 @@ require_once 'init.php';
 // $data = Database::table('users')->select()->all();
 // $data = User::action()->getAll();
 
-$data = User::action()->getByID(26);
+$data = Candidate::action()->getByID(30);
 echo "<pre>";
 print_r($data);
 

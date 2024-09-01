@@ -52,6 +52,7 @@ CREATE TABLE available_subjects (
 
 CREATE TABLE students (
     student_id INT PRIMARY KEY,
+    program_id INT,
     username VARCHAR(50) NOT NULL,
     first_name VARCHAR(50) NOT NULL,
     last_name VARCHAR(50) NOT NULL,
@@ -83,7 +84,7 @@ CREATE TABLE deans (
 
 CREATE TABLE grades (
     grade_id INT PRIMARY KEY,
-    available_subject_id INT,
+    class_id INT,
     faculty_id INT,
     student_id INT,
     school_year_id INT,

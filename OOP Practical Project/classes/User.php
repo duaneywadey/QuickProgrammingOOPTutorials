@@ -12,6 +12,10 @@ class User
 		return self::$instance;
 	}
 
+	public function updateById($values,$id) {
+		return DB::table('users')->update($values)->where("id = :id", ["id"=>$id]);
+	}
+
 	public function getAll() {
 		return Database::table('users')->select()->all();
 	}

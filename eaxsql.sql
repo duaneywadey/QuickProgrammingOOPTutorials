@@ -9,6 +9,7 @@ CREATE TABLE Users (
     DateAdded TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+
 -- Create Friends Table
 CREATE TABLE Friends (
     FriendID INT AUTO_INCREMENT PRIMARY KEY,
@@ -47,4 +48,5 @@ CREATE TABLE GroupMembershipRequests (
     IsGroupMemberShipAccepted BOOLEAN,
     DateAccepted TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
 

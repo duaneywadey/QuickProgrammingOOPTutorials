@@ -102,6 +102,7 @@ class Database {
 	public function update(array $values) {
 		$this->query_type = "UPDATE";
 		$this->query = "UPDATE " . self::$table . " SET ";
+		
 		foreach ($values as $key => $value) {
 			$this->query .= $key . "= :" . $key;
 		}

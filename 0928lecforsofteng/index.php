@@ -97,9 +97,107 @@
 	// else {
 	// 	echo "Query failed";
 	// }
-	
+
+
+	// Updating a user from the database
+
+	// $query = "UPDATE eax_comsci_students 
+	// 		  SET first_name = ?, last_name = ?
+	// 		  WHERE id = 302
+	// 		  ";
+
+	// $stmt = $pdo->prepare($query);
+
+	// $executeQuery = $stmt->execute(
+	// 	["Ivan", "Duane"]
+	// );
+
+	// if ($executeQuery) {
+	// 	echo "Update successful!";
+	// }
+	// else {
+	// 	echo "Query failed";
+	// }
+
+	// Deleting a user from the database
+
+	// $query = "DELETE FROM eax_comsci_students 
+	// 		  WHERE id = 301
+	// 		  ";
+
+	// $stmt = $pdo->prepare($query);
+
+	// $executeQuery = $stmt->execute();
+
+	// if ($executeQuery) {
+	// 	echo "Deletion successful!";
+	// }
+	// else {
+	// 	echo "Query failed";
+	// }
+
+
+	// Searching for all the users starting with 'G'
+
+	// $query = "SELECT 
+	// 			first_name,
+	// 			last_name
+	// 		  FROM eax_comsci_students
+	// 		  WHERE first_name LIKE ?
+	// 		  ";
+
+	// $stmt = $pdo->prepare($query);
+
+	// $searchInput = "G";
+	// $executeQuery = $stmt->execute([$searchInput."%"]);
+
+	// if ($executeQuery) {
+	// 	echo "<pre>";
+	// 	print_r($stmt->fetchAll());
+	// 	echo "<pre>";
+	// }
+
+	// else {
+	// 	echo "Query failed";
+	// }
+
+
 	?>
 
-	
+
+	<?php  
+	// Searching for all the users starting with 'G'
+	$query = "SELECT 
+				first_name,
+				last_name
+			  FROM eax_comsci_students
+			  WHERE first_name LIKE ?
+			  ";
+
+	$stmt = $pdo->prepare($query);
+
+	$searchInput = "G";
+	$executeQuery = $stmt->execute([$searchInput."%"]);
+
+	if ($executeQuery) {
+		$allUsersStartingG = $stmt->fetchAll();
+	}
+
+	else {
+		echo "Query failed";
+	}
+
+	?>
+
+	<?php foreach ($allUsersStartingG as $row) { ?>
+		<div class="container" style="border-style: solid; 
+		border-width: 2px; margin-top: 10px; height: 50px;">
+			<?php echo $row['first_name'] . $row['last_name']; ?>
+		</div>
+	<?php } ?>	
+
+
+
+
 </body>
 </html>

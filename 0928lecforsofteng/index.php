@@ -195,9 +195,5 @@
 			<?php echo $row['first_name'] . $row['last_name']; ?>
 		</div>
 	<?php } ?>	
-
-
-
-
 </body>
 </html>

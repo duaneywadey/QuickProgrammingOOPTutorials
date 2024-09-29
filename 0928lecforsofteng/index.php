@@ -6,6 +6,11 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Document</title>
+	<style>
+		table, th, td {
+		  border:1px solid black;
+		}
+	</style>
 </head>
 <body>
 	
@@ -139,9 +144,7 @@
 
 	// Searching for all the users starting with 'G'
 
-	// $query = "SELECT 
-	// 			first_name,
-	// 			last_name
+	// $query = "SELECT *
 	// 		  FROM eax_comsci_students
 	// 		  WHERE first_name LIKE ?
 	// 		  ";
@@ -152,9 +155,7 @@
 	// $executeQuery = $stmt->execute([$searchInput."%"]);
 
 	// if ($executeQuery) {
-	// 	echo "<pre>";
-	// 	print_r($stmt->fetchAll());
-	// 	echo "<pre>";
+	// 	$allUsersStartingG = $stmt->fetchAll();
 	// }
 
 	// else {
@@ -162,38 +163,44 @@
 	// }
 
 
+	// Counting how many students are there per level
+
+	// $query = "SELECT
+	// 			CASE 
+	// 				WHEN year_level = 1 THEN 'First Year'
+	// 				WHEN year_level = 2 THEN 'Second Year'
+	// 				WHEN year_level = 3 THEN 'Third Year'
+	// 				WHEN year_level = 4 THEN 'Fourth Year'
+	// 			END AS year_level, COUNT(*) AS studentCount
+	// 			FROM eax_comsci_students
+	// 			GROUP BY year_level
+	// 		  ";
+
+	// $stmt = $pdo->prepare($query);
+	// $executeQuery = $stmt->execute();
+
+	// if ($executeQuery) {
+	// 	$studentsByYearLevel = $stmt->fetchAll();
+	// }
+
+	// else {
+	// 	echo "Query failed";
+	// }
+
 	?>
+	
+	<table>
+		<tr>
+			<th>Year Level</th>
+			<th>Student Count</th>
+		</tr>
+		<?php foreach ($studentsByYearLevel as $row) { ?>
+		<tr>
+			<td><?php echo $row['year_level']; ?></td>
+			<td><?php echo $row['studentCount']; ?></td>
+		</tr>
+		<?php } ?>
+	</table> 
 
-
-	<?php  
-	// Searching for all the users starting with 'G'
-	$query = "SELECT 
-				first_name,
-				last_name
-			  FROM eax_comsci_students
-			  WHERE first_name LIKE ?
-			  ";
-
-	$stmt = $pdo->prepare($query);
-
-	$searchInput = "G";
-	$executeQuery = $stmt->execute([$searchInput."%"]);
-
-	if ($executeQuery) {
-		$allUsersStartingG = $stmt->fetchAll();
-	}
-
-	else {
-		echo "Query failed";
-	}
-
-	?>
-
-	<?php foreach ($allUsersStartingG as $row) { ?>
-		<div class="container" style="border-style: solid; 
-		border-width: 2px; margin-top: 10px; height: 50px;">
-			<?php echo $row['first_name'] . $row['last_name']; ?>
-		</div>
-	<?php } ?>	
 </body>
 </html>

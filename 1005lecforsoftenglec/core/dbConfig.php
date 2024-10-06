@@ -8,8 +8,4 @@ $dbname = "dequito";
 $dsn = "mysql:host={$host};dbname={$dbname}";
 $pdo = new PDO($dsn, $user, $password);
 
-if ($pdo) {
-	echo "DB Connection to " . $dbname . " successful!";
-}
-
 ?>

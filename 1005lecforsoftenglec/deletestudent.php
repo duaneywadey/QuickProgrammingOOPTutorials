@@ -36,7 +36,6 @@
 			<p>Religion: <?php echo $getStudentById['religion']; ?></p>
 			<input type="submit" name="deleteStudentBtn" value="Delete">
 		</div>
-		
 	</form>
 </body>
 </html>

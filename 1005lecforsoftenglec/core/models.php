@@ -57,6 +57,8 @@ function updateAStudent($pdo, $student_id, $first_name, $last_name,
 	}
 }
 
+
+
 function deleteAStudent($pdo, $student_id) {
 
 	$sql = "DELETE FROM student_records WHERE student_id = ?";

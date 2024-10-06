@@ -35,9 +35,42 @@ function getStudentByID($pdo, $student_id) {
 	}
 }
 
-function FunctionName($value='')
-{
-	// code...
+function updateAStudent($pdo, $student_id, $first_name, $last_name, 
+	$gender, $year_level, $section, $adviser, $religion) {
+
+	$sql = "UPDATE student_records 
+				SET first_name = ?, 
+					last_name = ?, 
+					gender = ?, 
+					year_level = ?, 
+					section = ?, 
+					adviser = ?, 
+					religion = ? 
+			WHERE student_id = ?";
+	$stmt = $pdo->prepare($sql);
+	
+	$executeQuery = $stmt->execute([$first_name, $last_name, $gender, 
+		$year_level, $section, $adviser, $religion, $student_id]);
+
+	if ($executeQuery) {
+		return true;
+	}
 }
+
+function deleteAStudent($pdo, $student_id) {
+
+	$sql = "DELETE FROM student_records WHERE student_id = ?";
+	$stmt = $pdo->prepare($sql);
+
+	$executeQuery = $stmt->execute([$student_id]);
+
+	if ($executeQuery) {
+		return true;
+	}
+
+}
+
+
+
 
 ?>

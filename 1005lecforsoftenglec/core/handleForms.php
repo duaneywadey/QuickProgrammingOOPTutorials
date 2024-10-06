@@ -20,9 +20,42 @@ if (isset($_POST['insertNewStudentBtn'])) {
 	}
 
 	else {
-		echo "Query failed";
+		echo "Insertion failed";
 	}
 
+}
+
+if (isset($_POST['editStudentBtn'])) {
+	$student_id = $_GET['student_id'];
+	$firstName = $_POST['firstName'];
+	$lastName = $_POST['lastName'];
+	$gender = $_POST['gender'];
+	$yearLevel = $_POST['yearLevel'];
+	$section = $_POST['section'];
+	$adviser = $_POST['adviser'];
+	$religion = $_POST['religion'];
+
+	$query = updateAStudent($pdo, $student_id, $firstName, $lastName, 
+		$gender, $yearLevel, $section, $adviser, $religion);
+
+	if ($query) {
+		header("Location: ../index.php");
+	}
+	else {
+		echo "Update failed";
+	}
+}
+
+if (isset($_POST['deleteStudentBtn'])) {
+
+	$query = deleteAStudent($pdo, $_GET['student_id']);
+
+	if ($query) {
+		header("Location: ../index.php");
+	}
+	else {
+		echo "Deletion failed";
+	}
 }
 
 ?>

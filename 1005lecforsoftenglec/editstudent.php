@@ -22,7 +22,7 @@
 </head>
 <body>
 	<?php $getStudentById = getStudentById($pdo, $_GET['student_id']); ?>
-	<form action="core/handleForms.php?student_id=<?php echo $_GET['student_id']; ?>" method="POST">
+	<form action="core/handleForms.php" method="POST">
 		<p>
 			<label for="firstName">First Name</label> 
 			<input type="text" name="firstName" value="<?php echo $getStudentById['first_name']; ?>">

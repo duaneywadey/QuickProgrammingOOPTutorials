@@ -35,13 +35,13 @@
 	</form>
 	<?php $getAllWebDevs = getAllWebDevs($pdo); ?>
 	<?php foreach ($getAllWebDevs as $row) { ?>
-	<div class="container" style="border-style: solid; width: 50%; height: 350px; margin-top: 20px;">
-		<h2>Username: <?php echo $row['username']; ?></h2>
-		<h2>FirstName: <?php echo $row['first_name']; ?></h2>
-		<h2>LastName: <?php echo $row['last_name']; ?></h2>
-		<h2>Date Of Birth: <?php echo $row['date_of_birth']; ?></h2>
-		<h2>Specialization: <?php echo $row['specialization']; ?></h2>
-		<h2>Date Added: <?php echo $row['date_added']; ?></h2>
+	<div class="container" style="border-style: solid; width: 50%; height: 300px; margin-top: 20px;">
+		<h3>Username: <?php echo $row['username']; ?></h3>
+		<h3>FirstName: <?php echo $row['first_name']; ?></h3>
+		<h3>LastName: <?php echo $row['last_name']; ?></h3>
+		<h3>Date Of Birth: <?php echo $row['date_of_birth']; ?></h3>
+		<h3>Specialization: <?php echo $row['specialization']; ?></h3>
+		<h3>Date Added: <?php echo $row['date_added']; ?></h3>
 		<div class="editAndDelete" style="float: right; margin-right: 20px;">
 			<a href="viewprojects.php?web_dev_id=<?php echo $row['web_dev_id']; ?>">View Projects</a>
 			<a href="editwebdev.php?web_dev_id=<?php echo $row['web_dev_id']; ?>">Edit</a>

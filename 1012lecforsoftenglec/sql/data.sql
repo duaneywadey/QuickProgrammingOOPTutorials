@@ -16,3 +16,5 @@ CREATE TABLE projects (
     web_dev_id INT,
     date_added TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+

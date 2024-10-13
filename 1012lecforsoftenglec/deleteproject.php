@@ -15,7 +15,7 @@
 		<h2>Date Added: PHP</h2>
 
 		<div class="deleteBtn" style="float: right; margin-right: 10px;">
-			<form action="#" method="POST">
+			<form action="core/handleForms.php" method="POST">
 				<input type="submit" name="deleteProjectBtn" value="Delete">
 			</form>			
 		</div>	

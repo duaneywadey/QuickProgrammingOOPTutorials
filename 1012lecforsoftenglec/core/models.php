@@ -40,10 +40,6 @@ function deleteWebDev($pdo, $web_dev_id) {
 	$sql = "DELETE FROM web_devs WHERE web_dev_id = ?";
 	$stmt = $pdo->prepare($sql);
 	$executeQuery = $stmt->execute([$web_dev_id]);
-
-	if ($executeQuery) {
-		return true;
-	}
 	
 }
 
@@ -101,7 +97,17 @@ function insertProject($pdo, $project_name, $technologies_used, $web_dev_id) {
 }
 
 function getProjectByID($pdo, $project_id) {
-	$sql = "SELECT * FROM projects WHERE project_id = ?";
+	$sql = "SELECT 
+				projects.project_id AS project_id,
+				projects.project_name AS project_name,
+				projects.technologies_used AS technologies_used,
+				projects.date_added AS date_added,
+				CONCAT(web_devs.first_name,' ',web_devs.last_name) AS project_owner
+			FROM projects
+			JOIN web_devs ON projects.web_dev_id = web_devs.web_dev_id
+			WHERE projects.project_id  = ? 
+			GROUP BY projects.project_name";
+
 	$stmt = $pdo->prepare($sql);
 	$executeQuery = $stmt->execute([$project_id]);
 	if ($executeQuery) {

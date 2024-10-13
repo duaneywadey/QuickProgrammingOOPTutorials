@@ -9,6 +9,8 @@
 	<link rel="stylesheet" href="styles.css">
 </head>
 <body>
+	<a href="index.php">Return to home</a>
+	<h1>Add New Project</h1>
 	<form action="core/handleForms.php?web_dev_id=<?php echo $_GET['web_dev_id']; ?>" method="POST">
 		<p>
 			<label for="firstName">Project Name</label> 
@@ -21,7 +23,7 @@
 		</p>
 	</form>
 
-	<table style="width:50%; margin-top: 50px;">
+	<table style="width:100%; margin-top: 50px;">
 	  <tr>
 	    <th>Project ID</th>
 	    <th>Project Name</th>

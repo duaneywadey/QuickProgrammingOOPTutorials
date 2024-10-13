@@ -64,6 +64,17 @@ if (isset($_POST['editProjectBtn'])) {
 
 }
 
+if (isset($_POST['deleteProjectBtn'])) {
+	$query = deleteProject($pdo, $_GET['project_id']);
+
+	if ($query) {
+		header("Location: ../viewprojects.php?web_dev_id=" .$_GET['web_dev_id']);
+	}
+	else {
+		echo "Deletion failed";
+	}
+}
+
 
 
 

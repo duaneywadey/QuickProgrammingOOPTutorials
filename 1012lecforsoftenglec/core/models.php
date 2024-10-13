@@ -37,9 +37,20 @@ function updateWebDev($pdo, $first_name, $last_name,
 }
 
 function deleteWebDev($pdo, $web_dev_id) {
-	$sql = "DELETE FROM web_devs WHERE web_dev_id = ?";
-	$stmt = $pdo->prepare($sql);
-	$executeQuery = $stmt->execute([$web_dev_id]);
+	$deleteWebDevProj = "DELETE FROM projects WHERE web_dev_id = ?";
+	$deleteStmt = $pdo->prepare($deleteWebDevProj);
+	$executeDeleteQuery = $deleteStmt->execute([$web_dev_id]);
+
+	if ($executeDeleteQuery) {
+		$sql = "DELETE FROM web_devs WHERE web_dev_id = ?";
+		$stmt = $pdo->prepare($sql);
+		$executeQuery = $stmt->execute([$web_dev_id]);
+
+		if ($executeQuery) {
+			return true;
+		}
+
+	}
 	
 }
 

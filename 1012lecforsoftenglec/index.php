@@ -42,11 +42,15 @@
 		<h3>Date Of Birth: <?php echo $row['date_of_birth']; ?></h3>
 		<h3>Specialization: <?php echo $row['specialization']; ?></h3>
 		<h3>Date Added: <?php echo $row['date_added']; ?></h3>
+
+
 		<div class="editAndDelete" style="float: right; margin-right: 20px;">
 			<a href="viewprojects.php?web_dev_id=<?php echo $row['web_dev_id']; ?>">View Projects</a>
 			<a href="editwebdev.php?web_dev_id=<?php echo $row['web_dev_id']; ?>">Edit</a>
 			<a href="deletewebdev.php?web_dev_id=<?php echo $row['web_dev_id']; ?>">Delete</a>
 		</div>
+
+
 	</div> 
 	<?php } ?>
 </body>

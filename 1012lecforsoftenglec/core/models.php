@@ -13,8 +13,9 @@ function insertWebDev($pdo, $username, $first_name, $last_name,
 	if ($executeQuery) {
 		return true;
 	}
-
 }
+
+
 
 function updateWebDev($pdo, $first_name, $last_name, 
 	$date_of_birth, $specialization, $web_dev_id) {
@@ -36,6 +37,7 @@ function updateWebDev($pdo, $first_name, $last_name,
 
 }
 
+
 function deleteWebDev($pdo, $web_dev_id) {
 	$deleteWebDevProj = "DELETE FROM projects WHERE web_dev_id = ?";
 	$deleteStmt = $pdo->prepare($deleteWebDevProj);
@@ -53,6 +55,9 @@ function deleteWebDev($pdo, $web_dev_id) {
 	}
 	
 }
+
+
+
 
 function getAllWebDevs($pdo) {
 	$sql = "SELECT * FROM web_devs";
@@ -73,6 +78,9 @@ function getWebDevByID($pdo, $web_dev_id) {
 		return $stmt->fetch();
 	}
 }
+
+
+
 
 
 function getProjectsByWebDev($pdo, $web_dev_id) {
@@ -148,6 +156,8 @@ function deleteProject($pdo, $project_id) {
 		return true;
 	}
 }
+
+
 
 
 ?>

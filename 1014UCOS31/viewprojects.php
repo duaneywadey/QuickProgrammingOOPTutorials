@@ -10,7 +10,7 @@
 </head>
 <body>
 	<a href="index.php">Return to home</a>
-	<?php $getAllInfoByWebDevID = getAllInfoByWebDevID($_GET['web_dev_id']); ?>
+	<?php $getAllInfoByWebDevID = getAllInfoByWebDevID($pdo, $_GET['web_dev_id']); ?>
 	<h1>Username: <?php echo $getAllInfoByWebDevID['username']; ?></h1>
 	<h1>Add New Project</h1>
 	<form action="core/handleForms.php?web_dev_id=<?php echo $_GET['web_dev_id']; ?>" method="POST">

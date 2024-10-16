@@ -18,11 +18,9 @@
 		<h2>Date Added: <?php echo $getProjectByID['date_added'] ?></h2>
 
 		<div class="deleteBtn" style="float: right; margin-right: 10px;">
-
 			<form action="core/handleForms.php?project_id=<?php echo $_GET['project_id']; ?>&web_dev_id=<?php echo $_GET['web_dev_id']; ?>" method="POST">
 				<input type="submit" name="deleteProjectBtn" value="Delete">
 			</form>			
-			
 		</div>	
 
 	</div>

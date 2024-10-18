@@ -29,7 +29,7 @@
 			<td>Gender</td>
 		</tr>
 		<?php 
-		if (isset($_GET['searchBtn']) && !empty($_GET['searchInput'])) { 
+		if (isset($_GET['searchBtn'])) { 
 			$searchForAUser = searchForAUser($pdo, $_GET['searchInput']);
 			foreach ($searchForAUser as $row) {
 		?>
@@ -40,12 +40,12 @@
 					<td><?php echo $row['email']; ?></td>
 					<td><?php echo $row['gender']; ?></td>
 				</tr>
-				<?php 
-			}
-		} else {
+		<?php }} else { ?>
+
+		<?php
 			$getAllUsers = getAllUsers($pdo);
 			foreach ($getAllUsers as $row) { 
-				?>
+		?>
 				<tr>
 					<td><?php echo $row['id']; ?></td>
 					<td><?php echo $row['first_name']; ?></td>
@@ -53,10 +53,8 @@
 					<td><?php echo $row['email']; ?></td>
 					<td><?php echo $row['gender']; ?></td>
 				</tr>
-				<?php 
-			}
-		} 
-		?>  
+
+		<?php }} ?>  
 	</table>
 
 

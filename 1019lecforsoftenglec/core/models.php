@@ -1,13 +1,10 @@
 <?php  
 
-require_once 'dbConfig.php';
-
 function insertNewUser($pdo, $username, $password) {
 
 	$checkUserSql = "SELECT * FROM user_passwords WHERE username = ?";
 	$checkUserSqlStmt = $pdo->prepare($checkUserSql);
 	$checkUserSqlStmt->execute([$username]);
-	$response = array();
 
 	if ($checkUserSqlStmt->rowCount() == 0) {
 
@@ -28,9 +25,13 @@ function insertNewUser($pdo, $username, $password) {
 	else {
 		$_SESSION['message'] = "User already exists";
 	}
+
+	
 }
 
-function loginAUser($pdo, $username, $password) {
+
+
+function loginUser($pdo, $username, $password) {
 	
 	$sql = "SELECT * FROM user_passwords WHERE username = ?";
 	$stmt = $pdo->prepare($sql);
@@ -49,8 +50,8 @@ function loginAUser($pdo, $username, $password) {
 			$_SESSION['message'] = "Username/password invalid";
 		}
 	}
-	else {
-		$_SESSION['message'] = "Cant find user from the database";		
+	if ($stmt->rowCount() == 0) {
+		$_SESSION['message'] = "Username/password invalid";
 	}
 
 }

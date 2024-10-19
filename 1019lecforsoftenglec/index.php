@@ -1,6 +1,10 @@
 <?php 
 require_once 'core/models.php'; 
 require_once 'core/handleForms.php'; 
+
+if (!isset($_SESSION['username'])) {
+	header("Location: login.php");
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -16,6 +20,7 @@ require_once 'core/handleForms.php';
 
 	<?php if (isset($_SESSION['username'])) { ?>
 		<h1>Hello there!! <?php echo $_SESSION['username']; ?></h1>
+		<a href="core/handleForms.php?logoutAUser=1">Logout</a>
 	<?php } else { echo "<h1>No user logged in</h1>";}?>
 
 </body>

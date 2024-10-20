@@ -13,7 +13,9 @@ function getAllUsers($pdo) {
 
 
 function searchForAUser($pdo, $searchQuery) {
-	$sql = "SELECT * FROM mock_data WHERE first_name LIKE ?";
+	$sql = "SELECT * FROM mock_data WHERE 
+			CONCAT(first_name,last_name,email,gender,ip_address,quote) 
+			LIKE ?";
 	$stmt = $pdo->prepare($sql);
 	$executeQuery = $stmt->execute(["%".$searchQuery."%"]);
 	if ($executeQuery) {

@@ -23,6 +23,7 @@ if (isset($_POST['loginUserBtn'])) {
 	} 
 }
 
+
 if (isset($_GET['logoutAUser'])) {
 	unset($_SESSION['username']);
 	header('Location: ../login.php');

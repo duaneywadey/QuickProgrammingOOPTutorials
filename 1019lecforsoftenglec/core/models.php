@@ -35,8 +35,9 @@ function loginUser($pdo, $username, $password) {
 	
 	$sql = "SELECT * FROM user_passwords WHERE username = ?";
 	$stmt = $pdo->prepare($sql);
+	$executeQuery = $stmt->execute([$username]); 
 
-	if ($stmt->execute([$username])) {
+	if ($executeQuery) {
 		$userInfoRow = $stmt->fetch();
 		$usernameFromDB = $userInfoRow['username']; 
 		$passwordFromDB = $userInfoRow['password'];
@@ -50,10 +51,32 @@ function loginUser($pdo, $username, $password) {
 			$_SESSION['message'] = "Username/password invalid";
 		}
 	}
+
+	
 	if ($stmt->rowCount() == 0) {
-		$_SESSION['message'] = "Username/password invalid";
+		$_SESSION['message'] = "Username doesn't exist from the database. You may consider registration first";
 	}
 
+}
+
+function getAllUsers($pdo) {
+	$sql = "SELECT * FROM user_passwords";
+	$stmt = $pdo->prepare($sql);
+	$executeQuery = $stmt->execute();
+
+	if ($executeQuery) {
+		return $stmt->fetchAll();
+	}
+
+}
+
+function getUserByID($pdo, $user_id) {
+	$sql = "SELECT * FROM user_passwords WHERE user_id = ?";
+	$stmt = $pdo->prepare($sql);
+	$executeQuery = $stmt->execute([$user_id]);
+	if ($executeQuery) {
+		return $stmt->fetch();
+	}
 }
 
 

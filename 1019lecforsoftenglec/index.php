@@ -47,6 +47,7 @@ if (!isset($_SESSION['username'])) {
 			</li>
 		<?php } ?>
 	</ul>
+
 	
 </body>
 </html>

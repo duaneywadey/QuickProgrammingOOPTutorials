@@ -1,5 +1,7 @@
 <?php  
 
+require_once 'dbConfig.php';
+
 function insertNewUser($pdo, $username, $password) {
 
 	$checkUserSql = "SELECT * FROM user_passwords WHERE username = ?";
@@ -32,12 +34,11 @@ function insertNewUser($pdo, $username, $password) {
 
 
 function loginUser($pdo, $username, $password) {
-	
-	$sql = "SELECT * FROM user_passwords WHERE username = ?";
+	$sql = "SELECT * FROM user_passwords WHERE username=?";
 	$stmt = $pdo->prepare($sql);
-	$executeQuery = $stmt->execute([$username]); 
+	$stmt->execute([$username]); 
 
-	if ($executeQuery) {
+	if ($stmt->rowCount() == 1) {
 		$userInfoRow = $stmt->fetch();
 		$usernameFromDB = $userInfoRow['username']; 
 		$passwordFromDB = $userInfoRow['password'];
@@ -47,8 +48,9 @@ function loginUser($pdo, $username, $password) {
 			$_SESSION['message'] = "Login successful!";
 			return true;
 		}
+
 		else {
-			$_SESSION['message'] = "Username/password invalid";
+			$_SESSION['message'] = "Password is invalid, but user exists";
 		}
 	}
 

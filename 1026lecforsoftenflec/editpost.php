@@ -48,11 +48,9 @@ if (!isset($_SESSION['username'])) {
 			<label for="username">Title</label>
 			<input type="text" name="title" value="<?php echo $getPostByID['title']; ?>">
 		</p>
-		<p>
-			<label for="username">Body</label>
-			<input type="text" name="body" value="<?php echo $getPostByID['body']; ?>">
-			<input type="submit" name="editPostBtn">
-		</p>
+		<p><label for="username">Body</label></p>
+		<p><textarea name="body" rows="10" cols="50"><?php echo $getPostByID['body']; ?></textarea></p>
+		<p><input type="submit" name="editPostBtn"></p>
 	</form>
 
 </html>

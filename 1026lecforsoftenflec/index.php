@@ -55,7 +55,7 @@ if (!isset($_SESSION['username'])) {
 
 	<?php $getAllPosts = getAllPosts($pdo); ?>
 	<?php foreach ($getAllPosts as $row) { ?>
-	<div class="postContainer" style="border-style: solid; width: 100%; height: 300px; margin-top: 20px;">
+	<div class="postContainer" style="border-style: solid; width: 100%; height: auto; margin-top: 20px;">
 		<a href="viewuser.php?user_id=<?php echo $row['user_id']; ?>">
 			<h1><?php echo $row['userFullName']; ?></h1>
 		</a>

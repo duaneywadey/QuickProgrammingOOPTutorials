@@ -29,11 +29,11 @@ if (!isset($_SESSION['username'])) {
 <body>
 	<?php include 'navbar.php'; ?>
 	<?php $getUserByID = getUserByID($pdo, $_GET['user_id']); ?>
-	<h1>Username: <?php echo $getUserByID['username']; ?></h1>
-	<h1>First Name: <?php echo $getUserByID['first_name']; ?></h1>
-	<h1>Last Name: <?php echo $getUserByID['last_name']; ?></h1>
-	<h1>Date Joined: <?php echo $getUserByID['date_added']; ?></h1>
-	<h1>All Posts</h1>
+	<h3>Username: <?php echo $getUserByID['username']; ?></h3>
+	<h3>First Name: <?php echo $getUserByID['first_name']; ?></h3>
+	<h3>Last Name: <?php echo $getUserByID['last_name']; ?></h3>
+	<h3>Date Joined: <?php echo $getUserByID['date_added']; ?></h3>
+	<h3>All Posts</h3>
 
 	<?php $getAllPostsByUser = getAllPostsByUser($pdo, $_GET['user_id']); ?>
 	<?php foreach ($getAllPostsByUser as $row) { ?>

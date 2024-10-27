@@ -39,10 +39,10 @@ if (!isset($_SESSION['username'])) {
 	<?php foreach ($getAllPostsByUser as $row) { ?>
 	<div class="postContainer" style="border-style: solid; width: 50%; height: 300px; margin-top: 20px;">
 		<a href="viewuser.php?user_id=<?php echo $row['user_id']; ?>">
-			<h1><?php echo $row['userFullName']; ?></h1>
+			<h2><?php echo $row['userFullName']; ?></h2>
 		</a>
 		<i><?php echo $row['date_added']; ?></i>
-		<h2><?php echo $row['title']; ?></h2>
+		<h3><?php echo $row['title']; ?></h3>
 		<p><?php echo $row['body']; ?></p>
 		
 		<?php if ($_SESSION['user_id'] == $row['user_id']) { ?>

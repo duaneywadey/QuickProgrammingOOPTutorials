@@ -57,10 +57,10 @@ if (!isset($_SESSION['username'])) {
 	<?php foreach ($getAllPosts as $row) { ?>
 	<div class="postContainer" style="border-style: solid; width: 100%; height: auto; margin-top: 20px;">
 		<a href="viewuser.php?user_id=<?php echo $row['user_id']; ?>">
-			<h1><?php echo $row['userFullName']; ?></h1>
+			<h2><?php echo $row['userFullName']; ?></h2>
 		</a>
 		<i><?php echo $row['date_added']; ?></i>
-		<h2><?php echo $row['title']; ?></h2>
+		<h3><?php echo $row['title']; ?></h3>
 		<p><?php echo $row['body']; ?></p>
 		
 		<?php if ($_SESSION['user_id'] == $row['user_id']) { ?>
@@ -69,9 +69,7 @@ if (!isset($_SESSION['username'])) {
 			<a href="deletepost.php?user_post_id=<?php echo $row['user_post_id']; ?>">Delete</a>	
 		</div>
 		<?php } ?>
-
 	</div>
 	<?php } ?>
 </body>
 </html>
-

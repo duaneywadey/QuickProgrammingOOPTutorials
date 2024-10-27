@@ -80,10 +80,20 @@ if (isset($_POST['insertNewPostBtn'])) {
 	$body = $_POST['body'];
 	$userID = $_SESSION['user_id'];
 
-	$insertQuery = insertNewPost($pdo, $title, $body, $userID);
+	if (!empty($title) && !empty($body) && !empty($userID)) {
 
-	if ($insertQuery) {
-		header("Location: ../index.php");
+		if (sanitizeInput($title) && sanitizeInput($body)) {		
+
+			$insertQuery = insertNewPost($pdo, $title, $body, $userID);
+
+			if ($insertQuery) {
+				header("Location: ../index.php");
+			}
+		}
+	}
+
+	else {
+		$_SESSION['message'] = "Make sure input fields are not empty!";
 	}
 
 }
@@ -94,10 +104,20 @@ if (isset($_POST['editPostBtn'])) {
 	$body = $_POST['body'];
 	$user_post_id = $_GET['user_post_id'];
 
-	$editQuery = editAPost($pdo, $title, $body, $user_post_id);
+	if (!empty($title) && !empty($body)) {
 
-	if ($editQuery) {
-		header("Location: ../index.php");
+		if (sanitizeInput($title) && sanitizeInput($body)) {
+
+			$editQuery = editAPost($pdo, $title, $body, $user_post_id);
+
+			if ($editQuery) {
+				header("Location: ../index.php");
+			}
+		}
+	}
+
+	else {
+		$_SESSION['message'] = "Make sure input fields are not empty!";
 	}
 }
 

@@ -5,32 +5,47 @@ require_once 'validate.php';
 
 if (isset($_POST['registerUserBtn'])) {
 
-	$username = $_POST['username'];
-	$first_name = $_POST['first_name'];
-	$last_name = $_POST['last_name'];
-	$password = sha1($_POST['password']);
+	$username = sanitizeInput($_POST['username']);
+	$first_name = sanitizeInput($_POST['first_name']);
+	$last_name = sanitizeInput($_POST['last_name']);
+	$password = $_POST['password'];
+	$confirm_password = $_POST['confirm_password'];
 
-	if (!empty($username) && !empty($password)) {
+	if (!empty($username) && !empty($first_name) && !empty($last_name) 
+		&& !empty($password) && !empty($confirm_password)) {
 
-		if (sanitizeInput($username) && sanitizeInput($first_name) && sanitizeInput($last_name)) {
+		if ($password == $confirm_password) {
 
-			$insertQuery = insertNewUser($pdo, $username, $first_name, $last_name, $password);
+			if (validatePassword($password)) {
 
-			if ($insertQuery) {
-				header("Location: ../login.php");
+				$insertQuery = insertNewUser($pdo, $username, $first_name, $last_name, sha1($password));
+
+				if ($insertQuery) {
+					header("Location: ../login.php");
+				}
+				else {
+					header("Location: ../register.php");
+				}
 			}
+
 			else {
+				$_SESSION['message'] = "Password should be more than 8 characters and should contain both uppercase, lowercase, and numbers";
 				header("Location: ../register.php");
 			}
 		}
 
+		else {
+			$_SESSION['message'] = "Please check if both passwords are equal!";
+			header("Location: ../register.php");
+		}
+	
 	}
 
 	else {
 		$_SESSION['message'] = "Please make sure the input fields 
 		are not empty for registration!";
 
-		header("Location: ../login.php");
+		header("Location: ../register.php");
 	}
 
 }
@@ -45,19 +60,16 @@ if (isset($_POST['loginUserBtn'])) {
 
 	if (!empty($username) && !empty($password)) {
 
-		if (sanitizeInput($username)) {
+		$loginQuery = loginUser($pdo, $username, $password);
 
-			$loginQuery = loginUser($pdo, $username, $password);
-
-			if ($loginQuery) {
-				header("Location: ../index.php");
-			}
-			
-			else {
-				header("Location: ../login.php");
-			}
+		if ($loginQuery) {
+			header("Location: ../index.php");
 		}
-
+		
+		else {
+			header("Location: ../login.php");
+		}
+	
 	}
 
 	else {
@@ -91,6 +103,7 @@ if (isset($_POST['insertNewPostBtn'])) {
 	}
 
 	else {
+		header("Location: ../index.php");
 		$_SESSION['message'] = "Make sure input fields are not empty!";
 	}
 
@@ -113,6 +126,7 @@ if (isset($_POST['editPostBtn'])) {
 	}
 
 	else {
+		header("Location: ../index.php");
 		$_SESSION['message'] = "Make sure input fields are not empty!";
 	}
 }

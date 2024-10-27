@@ -43,6 +43,10 @@ require_once 'core/handleForms.php';
 		<p>
 			<label for="username">Password</label>
 			<input type="password" name="password">
+		</p>
+		<p>
+			<label for="username">Confirm Password</label>
+			<input type="password" name="confirm_password">
 			<input type="submit" name="registerUserBtn">
 		</p>
 	</form>

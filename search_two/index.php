@@ -8,6 +8,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Document</title>
 	<link rel="stylesheet" href="styles.css">
+	<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 </head>
 <body>
 
@@ -73,5 +74,14 @@
 
 		<?php }} ?>  
 	</table>
+
+	<div class="hello">
+	</div>
+
+	<script>
+		$('.hello').on('click', function (e) {
+			alert($(this).text());
+		})
+	</script>
 </body>
 </html>

@@ -20,4 +20,21 @@ if (isset($_POST['deleteUserBtn'])) {
 	}
 }
 
+if (isset($_GET['searchBtn'])) {
+	$searchForAUser = searchForAUser($pdo, $_GET['searchInput']);
+	foreach ($searchForAUser as $row) {
+		echo "<tr> 
+				<td>$row['id']</td>
+				<td>$row['first_name']</td>
+				<td>$row['last_name']</td>
+				<td>$row['email']</td>
+				<td>$row['gender']</td>
+				<td>$row['address']</td>
+				<td>$row['state']</td>
+				<td>$row['nationality']</td>
+				<td>$row['car_brand']</td>
+			  </tr>";
+	}
+}
+
 ?>

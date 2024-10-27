@@ -32,15 +32,12 @@ function validatePassword($password) {
 	}
 }
 
-function sanitizeInput($userInput) {
+function sanitizeInput($data) {
 
-	if (stripslashes($userInput)) {
-		if (htmlspecialchars($userInput)) {
-			if (trim($userInput)) {
-				return $userInput;
-			}
-		}
-	}
+  $data = trim($data);
+  $data = stripslashes($data);
+  $data = htmlspecialchars($data);
+  return $data;
 
 }
 

@@ -5,7 +5,7 @@ $string = "\Lorem \ipsum \dolor, \sit \amet \consectetur
 		   \explicabo \soluta \enetur \excepturi \deleniti 
 		   \quae \expedita \earum, \qui \praesenium 
 		   \culpaquidem \quo \dolore \aut \quos nobis! Nemo 
-		   at repellatotam!";
+		   \at repellatotam!";
 
 echo "NO STRIPSLASHES: ". $string . "<br><br>";
 

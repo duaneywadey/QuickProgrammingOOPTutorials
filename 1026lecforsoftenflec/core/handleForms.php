@@ -76,20 +76,18 @@ if (isset($_GET['logoutAUser'])) {
 
 if (isset($_POST['insertNewPostBtn'])) {
 
-	$title = $_POST['title'];
-	$body = $_POST['body'];
+	$title = sanitizeInput($_POST['title']);
+	$body = sanitizeInput($_POST['body']);
 	$userID = $_SESSION['user_id'];
 
 	if (!empty($title) && !empty($body) && !empty($userID)) {
 
-		if (sanitizeInput($title) && sanitizeInput($body)) {		
+		$insertQuery = insertNewPost($pdo, $title, $body, $userID);
 
-			$insertQuery = insertNewPost($pdo, $title, $body, $userID);
-
-			if ($insertQuery) {
-				header("Location: ../index.php");
-			}
+		if ($insertQuery) {
+			header("Location: ../index.php");
 		}
+		
 	}
 
 	else {
@@ -100,20 +98,18 @@ if (isset($_POST['insertNewPostBtn'])) {
 
 if (isset($_POST['editPostBtn'])) {
 
-	$title = $_POST['title'];
-	$body = $_POST['body'];
+	$title = sanitizeInput($_POST['title']);
+	$body = sanitizeInput($_POST['body']);
 	$user_post_id = $_GET['user_post_id'];
 
 	if (!empty($title) && !empty($body)) {
 
-		if (sanitizeInput($title) && sanitizeInput($body)) {
+		$editQuery = editAPost($pdo, $title, $body, $user_post_id);
 
-			$editQuery = editAPost($pdo, $title, $body, $user_post_id);
-
-			if ($editQuery) {
-				header("Location: ../index.php");
-			}
+		if ($editQuery) {
+			header("Location: ../index.php");
 		}
+	
 	}
 
 	else {

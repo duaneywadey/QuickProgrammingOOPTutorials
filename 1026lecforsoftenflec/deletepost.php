@@ -52,7 +52,6 @@ if (!isset($_SESSION['username'])) {
 				<input type="submit" name="deletePostBtn" style="float: right; margin-right: 10px;" value="Delete">
 		</form>
 
-
 	</div>
 
 

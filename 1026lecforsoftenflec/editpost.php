@@ -52,6 +52,6 @@ if (!isset($_SESSION['username'])) {
 		<p><textarea name="body" rows="10" cols="50"><?php echo $getPostByID['body']; ?></textarea></p>
 		<p><input type="submit" name="editPostBtn"></p>
 	</form>
-
+</body>
 </html>
 

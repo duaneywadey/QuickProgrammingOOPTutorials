@@ -55,7 +55,7 @@ if (isset($_POST['registerUserBtn'])) {
 
 if (isset($_POST['loginUserBtn'])) {
 
-	$username = $_POST['username'];
+	$username = sanitizeInput($_POST['username']);
 	$password = sha1($_POST['password']);
 
 	if (!empty($username) && !empty($password)) {

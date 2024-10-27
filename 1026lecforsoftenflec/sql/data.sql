@@ -15,3 +15,5 @@ CREATE TABLE user_posts (
 	date_added TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 )
 
+
+

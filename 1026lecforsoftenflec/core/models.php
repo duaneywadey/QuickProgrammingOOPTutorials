@@ -120,7 +120,6 @@ function editAPost($pdo, $title, $body, $user_post_id) {
 
 }
 
-
 function deleteAPost($pdo, $user_post_id) {
 
 	$sql = "DELETE FROM user_posts WHERE user_post_id = ?";

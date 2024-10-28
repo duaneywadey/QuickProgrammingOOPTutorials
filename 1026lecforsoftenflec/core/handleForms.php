@@ -89,7 +89,7 @@ if (isset($_GET['logoutAUser'])) {
 if (isset($_POST['insertNewPostBtn'])) {
 
 	$title = sanitizeInput($_POST['title']);
-	$body = sanitizeInput($_POST['body']);
+	$body = $_POST['body'];
 	$userID = $_SESSION['user_id'];
 
 	if (!empty($title) && !empty($body) && !empty($userID)) {

@@ -36,49 +36,47 @@
 			<th>Date Added</th>
 			<th>Action</th>
 		</tr>
-		<?php 
-		if (isset($_GET['searchBtn'])) { 
-			$searchForAUser = searchForAUser($pdo, $_GET['searchInput']);
-			foreach ($searchForAUser as $row) {
-		?>
-				<tr>
-					<td><?php echo $row['first_name']; ?></td>
-					<td><?php echo $row['last_name']; ?></td>
-					<td><?php echo $row['email']; ?></td>
-					<td><?php echo $row['gender']; ?></td>
-					<td><?php echo $row['address']; ?></td>
-					<td><?php echo $row['state']; ?></td>
-					<td><?php echo $row['nationality']; ?></td>
-					<td><?php echo $row['car_brand']; ?></td>
-					<td><?php echo $row['date_added']; ?></td>
-					<td>
-						<a href="edit.php?id=<?php echo $row['id']; ?>">Edit</a>
-						<a href="delete.php?id=<?php echo $row['id']; ?>">Delete</a>
-					</td>
-				</tr>
-		<?php }} else { ?>
 
-		<?php
-			$getAllUsers = getAllUsers($pdo);
-			foreach ($getAllUsers as $row) { 
-		?>
-				<tr>
-					<td><?php echo $row['first_name']; ?></td>
-					<td><?php echo $row['last_name']; ?></td>
-					<td><?php echo $row['email']; ?></td>
-					<td><?php echo $row['gender']; ?></td>
-					<td><?php echo $row['address']; ?></td>
-					<td><?php echo $row['state']; ?></td>
-					<td><?php echo $row['nationality']; ?></td>
-					<td><?php echo $row['car_brand']; ?></td>
-					<td><?php echo $row['date_added']; ?></td>
-					<td>
-						<a href="edit.php?id=<?php echo $row['id']; ?>">Edit</a>
-						<a href="delete.php?id=<?php echo $row['id']; ?>">Delete</a>
-					</td>
-				</tr>
-
-		<?php }} ?>  
+		<?php if (!isset($_GET['searchBtn'])) { ?>
+			<?php $getAllUsers = getAllUsers($pdo); ?>
+				<?php foreach ($getAllUsers as $row) { ?>
+					<tr>
+						<td><?php echo $row['first_name']; ?></td>
+						<td><?php echo $row['last_name']; ?></td>
+						<td><?php echo $row['email']; ?></td>
+						<td><?php echo $row['gender']; ?></td>
+						<td><?php echo $row['address']; ?></td>
+						<td><?php echo $row['state']; ?></td>
+						<td><?php echo $row['nationality']; ?></td>
+						<td><?php echo $row['car_brand']; ?></td>
+						<td><?php echo $row['date_added']; ?></td>
+						<td>
+							<a href="edit.php?id=<?php echo $row['id']; ?>">Edit</a>
+							<a href="delete.php?id=<?php echo $row['id']; ?>">Delete</a>
+						</td>
+					</tr>
+			<?php } ?>
+			
+		<?php } else { ?>
+			<?php $searchForAUser =  searchForAUser($pdo, $_GET['searchInput']); ?>
+				<?php foreach ($searchForAUser as $row) { ?>
+					<tr>
+						<td><?php echo $row['first_name']; ?></td>
+						<td><?php echo $row['last_name']; ?></td>
+						<td><?php echo $row['email']; ?></td>
+						<td><?php echo $row['gender']; ?></td>
+						<td><?php echo $row['address']; ?></td>
+						<td><?php echo $row['state']; ?></td>
+						<td><?php echo $row['nationality']; ?></td>
+						<td><?php echo $row['car_brand']; ?></td>
+						<td><?php echo $row['date_added']; ?></td>
+						<td>
+							<a href="edit.php?id=<?php echo $row['id']; ?>">Edit</a>
+							<a href="delete.php?id=<?php echo $row['id']; ?>">Delete</a>
+						</td>
+					</tr>
+				<?php } ?>
+		<?php } ?>	
 	</table>
 </body>
 </html>

@@ -78,24 +78,47 @@ if (isset($_POST['updateBranchBtn'])) {
 		);
 
 		$getBranchByID = getBranchByID($pdo, $_GET['branch_id']);
-
 		$result = array_diff($inputArr, $getBranchByID);
 
-		echo "<pre>";
-		print_r($result);
-		echo "<pre>";
+		$logParams = [
+			"address"=>null,
+			"head_manager"=>null,
+			"contact_number"=>null
+		];
 
-		// $updateBranch = updateBranch($pdo, $address, $head_manager, $contact_number, $date, $_SESSION['user_id'], $_GET['branch_id']);
+		foreach ($result as $key => $value) {
+            if ($value !== null) {
+                $logParams[$key] = $value;
+            }
+        }
 
-		// $insertIntoBranchUpdateLogs = insertIntoBranchUpdateLogs($pdo, $address, $head_manager, $contact_number, $_GET['branch_id'], $_SESSION['user_id']);
+        if (!empty(array_filter($logParams))) {
+            insertIntoBranchUpdateLogs($pdo, $logParams['address'], $logParams['head_manager'], $logParams['contact_number'], $_GET['branch_id'], $_SESSION['user_id']);
+        }
 
+		$updateBranch = updateBranch($pdo, $address, $head_manager, $contact_number, $date, $_SESSION['user_id'], $_GET['branch_id']);
 
-		// if ($updateBranch) {
-		// 	$_SESSION['message'] = "Successfully updated!";
-		// 	header("Location: ../index.php");
-		// }
+		if ($updateBranch) {
+			$_SESSION['message'] = "Successfully updated!";
+			header("Location: ../index.php");
+		}
 	}
-
 }
 
+
+$arrTest = array(
+	"FirstName"=>"Ivan Duane",
+	"LastName"=>"Dequito",
+	"Age"=>"24",
+	"Hobbies"=>null,
+	"Dreams"=>null
+);
+
+echo "<pre>";
+print_r($arrTest);
+echo "<pre>";
+
+echo "<pre>";
+print_r(array_filter($arrTest));
+echo "<pre>";
 ?>

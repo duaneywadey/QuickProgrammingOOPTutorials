@@ -113,8 +113,8 @@ function updateBranch($pdo, $address, $head_manager, $contact_number,
 	}
 }
 
-function insertIntoBranchUpdateLogs($pdo, $address, $head_manager, 
-	$contact_number, $branch_id, $added_by) {
+function insertIntoBranchUpdateLogs($pdo, $address=null, $head_manager=null, 
+	$contact_number=null, $branch_id, $added_by) {
 
 	$sql = "INSERT INTO branches_update_logs (address, head_manager, contact_number, branch_id, added_by) VALUES(?,?,?,?,?)";
 
@@ -126,7 +126,6 @@ function insertIntoBranchUpdateLogs($pdo, $address, $head_manager,
 	if ($executeQuery) {
 		return true;
 	}
-
 
 }
 ?>

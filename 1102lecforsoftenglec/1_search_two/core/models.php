@@ -3,7 +3,8 @@
 require_once 'dbConfig.php';
 
 function getAllUsers($pdo) {
-	$sql = "SELECT * FROM search_users_data";
+	$sql = "SELECT * FROM search_users_data 
+			ORDER BY first_name ASC";
 	$stmt = $pdo->prepare($sql);
 	$executeQuery = $stmt->execute();
 	if ($executeQuery) {
@@ -19,6 +20,36 @@ function getUserByID($pdo, $id) {
 	if ($executeQuery) {
 		return $stmt->fetch();
 	}
+}
+
+function insertNewUser($pdo, $first_name, $last_name, $email, 
+	$gender, $address, $state, $nationality, $car_brand) {
+
+	$sql = "INSERT INTO search_users_data 
+			(
+				first_name,
+				last_name,
+				email,
+				gender,
+				address,
+				state,
+				nationality,
+				car_brand
+			)
+			VALUES (?,?,?,?,?,?,?,?)
+			";
+
+	$stmt = $pdo->prepare($sql);
+	$executeQuery = $stmt->execute([
+		$first_name, $last_name, $email, 
+		$gender, $address, $state, 
+		$nationality, $car_brand,
+	]);
+
+	if ($executeQuery) {
+		return true;
+	}
+
 }
 
 function editUser($pdo, $first_name, $last_name, $email, $gender, 
@@ -61,7 +92,7 @@ function searchForAUser($pdo, $searchQuery) {
 	
 	$sql = "SELECT * FROM search_users_data WHERE 
 			CONCAT(first_name,last_name,email,gender,
-				address,state,nationality,car_brand) 
+				address,state,nationality,car_brand,date_added) 
 			LIKE ?";
 
 	$stmt = $pdo->prepare($sql);

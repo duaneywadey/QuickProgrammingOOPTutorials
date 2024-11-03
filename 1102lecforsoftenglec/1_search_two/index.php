@@ -12,14 +12,19 @@
 </head>
 <body>
 
+	<?php if (isset($_SESSION['message'])) { ?>
+	<h1 style="color: green; text-align: center; background-color: ghostwhite; border-style: solid;">	<?php echo $_SESSION['message']; ?>
+	</h1>
+	<?php } unset($_SESSION['message']); ?>
+
 	<form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" method="GET">
 		<input type="text" name="searchInput">
 		<input type="submit" name="searchBtn">
 	</form>
-	<a href="index.php">Clear Search Query</a>
+	<p><a href="index.php">Clear Search Query</a></p>
+	<p><a href="insert.php">Insert New User</a></p>
 	<table style="width:100%; margin-top: 20px;">
 		<tr>
-			<th>ID</th>
 			<th>First Name</th>
 			<th>Last Name</th>
 			<th>Email</th>
@@ -28,6 +33,7 @@
 			<th>State</th>
 			<th>Nationality</th>
 			<th>Car Brand</th>
+			<th>Date Added</th>
 			<th>Action</th>
 		</tr>
 		<?php 
@@ -36,7 +42,6 @@
 			foreach ($searchForAUser as $row) {
 		?>
 				<tr>
-					<td><?php echo $row['id']; ?></td>
 					<td><?php echo $row['first_name']; ?></td>
 					<td><?php echo $row['last_name']; ?></td>
 					<td><?php echo $row['email']; ?></td>
@@ -45,6 +50,7 @@
 					<td><?php echo $row['state']; ?></td>
 					<td><?php echo $row['nationality']; ?></td>
 					<td><?php echo $row['car_brand']; ?></td>
+					<td><?php echo $row['date_added']; ?></td>
 					<td>
 						<a href="edit.php?id=<?php echo $row['id']; ?>">Edit</a>
 						<a href="delete.php?id=<?php echo $row['id']; ?>">Delete</a>
@@ -57,7 +63,6 @@
 			foreach ($getAllUsers as $row) { 
 		?>
 				<tr>
-					<td><?php echo $row['id']; ?></td>
 					<td><?php echo $row['first_name']; ?></td>
 					<td><?php echo $row['last_name']; ?></td>
 					<td><?php echo $row['email']; ?></td>
@@ -66,6 +71,7 @@
 					<td><?php echo $row['state']; ?></td>
 					<td><?php echo $row['nationality']; ?></td>
 					<td><?php echo $row['car_brand']; ?></td>
+					<td><?php echo $row['date_added']; ?></td>
 					<td>
 						<a href="edit.php?id=<?php echo $row['id']; ?>">Edit</a>
 						<a href="delete.php?id=<?php echo $row['id']; ?>">Delete</a>
@@ -74,14 +80,5 @@
 
 		<?php }} ?>  
 	</table>
-
-	<div class="hello">
-	</div>
-
-	<script>
-		$('.hello').on('click', function (e) {
-			alert($(this).text());
-		})
-	</script>
 </body>
 </html>

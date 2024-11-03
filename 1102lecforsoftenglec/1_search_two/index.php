@@ -13,16 +13,19 @@
 <body>
 
 	<?php if (isset($_SESSION['message'])) { ?>
-	<h1 style="color: green; text-align: center; background-color: ghostwhite; border-style: solid;">	<?php echo $_SESSION['message']; ?>
-	</h1>
+		<h1 style="color: green; text-align: center; background-color: ghostwhite; border-style: solid;">	
+			<?php echo $_SESSION['message']; ?>
+		</h1>
 	<?php } unset($_SESSION['message']); ?>
 
 	<form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" method="GET">
-		<input type="text" name="searchInput">
+		<input type="text" name="searchInput" placeholder="Search here">
 		<input type="submit" name="searchBtn">
 	</form>
+
 	<p><a href="index.php">Clear Search Query</a></p>
 	<p><a href="insert.php">Insert New User</a></p>
+
 	<table style="width:100%; margin-top: 20px;">
 		<tr>
 			<th>First Name</th>
@@ -77,6 +80,7 @@
 					</tr>
 				<?php } ?>
 		<?php } ?>	
+		
 	</table>
 </body>
 </html>

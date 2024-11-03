@@ -22,6 +22,22 @@ function getUserByID($pdo, $id) {
 	}
 }
 
+function searchForAUser($pdo, $searchQuery) {
+	
+	$sql = "SELECT * FROM search_users_data WHERE 
+			CONCAT(first_name,last_name,email,gender,
+				address,state,nationality,car_brand,date_added) 
+			LIKE ?";
+
+	$stmt = $pdo->prepare($sql);
+	$executeQuery = $stmt->execute(["%".$searchQuery."%"]);
+	if ($executeQuery) {
+		return $stmt->fetchAll();
+	}
+}
+
+
+
 function insertNewUser($pdo, $first_name, $last_name, $email, 
 	$gender, $address, $state, $nationality, $car_brand) {
 
@@ -68,7 +84,8 @@ function editUser($pdo, $first_name, $last_name, $email, $gender,
 			";
 
 	$stmt = $pdo->prepare($sql);
-	$executeQuery = $stmt->execute([$first_name, $last_name, $email, $gender, $address, $state, $nationality,$car_brand, $id]);
+	$executeQuery = $stmt->execute([$first_name, $last_name, $email, $gender, 
+		$address, $state, $nationality,$car_brand, $id]);
 
 	if ($executeQuery) {
 		return true;
@@ -78,7 +95,8 @@ function editUser($pdo, $first_name, $last_name, $email, $gender,
 
 
 function deleteUser($pdo, $id) {
-	$sql = "DELETE FROM search_users_data WHERE id = ?";
+	$sql = "DELETE FROM search_users_data 
+			WHERE id = ?";
 	$stmt = $pdo->prepare($sql);
 	$executeQuery = $stmt->execute([$id]);
 
@@ -88,19 +106,6 @@ function deleteUser($pdo, $id) {
 }
 
 
-function searchForAUser($pdo, $searchQuery) {
-	
-	$sql = "SELECT * FROM search_users_data WHERE 
-			CONCAT(first_name,last_name,email,gender,
-				address,state,nationality,car_brand,date_added) 
-			LIKE ?";
-
-	$stmt = $pdo->prepare($sql);
-	$executeQuery = $stmt->execute(["%".$searchQuery."%"]);
-	if ($executeQuery) {
-		return $stmt->fetchAll();
-	}
-}
 
 
 ?>

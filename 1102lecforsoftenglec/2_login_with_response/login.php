@@ -23,9 +23,22 @@ require_once 'core/handleForms.php';
 	</style>
 </head>
 <body>
-	<?php if (isset($_SESSION['message'])) { ?>
-		<h1 style="color: red;"><?php echo $_SESSION['message']; ?></h1>
-	<?php } unset($_SESSION['message']); ?>
+	<?php  
+	if (isset($_SESSION['message']) && isset($_SESSION['status'])) {
+
+		if ($_SESSION['status'] == "200") {
+			echo "<h1 style='color: green;'>{$_SESSION['message']}</h1>";
+		}
+
+		else {
+			echo "<h1 style='color: red;'>{$_SESSION['message']}</h1>";	
+		}
+
+	}
+	unset($_SESSION['message']);
+	unset($_SESSION['status']);
+	?>
+	
 	<h1>Login Now!</h1>
 	<form action="core/handleForms.php" method="POST">
 		<p>

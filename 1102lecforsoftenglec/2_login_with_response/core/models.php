@@ -11,14 +11,16 @@ function checkIfUserExists($pdo, $username) {
 
 		if ($stmt->rowCount() > 0) {
 			$response = array(
-				"response" => "true",
+				"result"=> true,
+				"status" => "200",
 				"userInfoArray" => $userInfoArray
 			);
 		}
 
 		else {
 			$response = array(
-				"response" => "false"
+				"status" => "400",
+				"message"=> "User doesn't exist from the database"
 			);
 		}
 	}
@@ -29,8 +31,9 @@ function checkIfUserExists($pdo, $username) {
 
 function insertNewUser($pdo, $username, $first_name, $last_name, $password) {
 	$response = array();
+	$checkIfUserExists = checkIfUserExists($pdo, $username); 
 
-	if (!checkIfUserExists($pdo, $username)) {
+	if (!$checkIfUserExists['result']) {
 
 		$sql = "INSERT INTO user_accounts (username, first_name, last_name, password) 
 		VALUES (?,?,?,?)";

@@ -14,19 +14,23 @@ if (isset($_POST['insertNewUserBtn'])) {
 		if ($password == $confirm_password) {
 
 			$insertQuery = insertNewUser($pdo, $username, $first_name, $last_name, password_hash($password, PASSWORD_DEFAULT));
-			$_SESSION['message'] = $insertQuery['message'];
 
 			if ($insertQuery['status'] == '200') {
+				$_SESSION['message'] = $insertQuery['message'];
+				$_SESSION['status'] = $insertQuery['status'];
 				header("Location: ../login.php");
 			}
 
 			else {
+				$_SESSION['message'] = $insertQuery['message'];
+				$_SESSION['status'] = $insertQuery['status'];
 				header("Location: ../register.php");
 			}
 
 		}
 		else {
 			$_SESSION['message'] = "Please make sure both passwords are equal";
+			$_SESSION['status'] = "400";
 			header("Location: ../register.php");
 		}
 
@@ -34,6 +38,7 @@ if (isset($_POST['insertNewUserBtn'])) {
 
 	else {
 		$_SESSION['message'] = "Please make sure there are no empty input fields";
+		$_SESSION['status'] = "400";
 		header("Location: ../register.php");
 	}
 }
@@ -45,13 +50,28 @@ if (isset($_POST['loginUserBtn'])) {
 	if (!empty($username) && !empty($password)) {
 
 		$loginQuery = checkIfUserExists($pdo, $username);
-		$usernameFromDB = $loginQuery['userInfoArray']['username'];
-		$passwordFromDB = $loginQuery['userInfoArray']['password'];
 
-		if (password_verify($password, $passwordFromDB)) {
-			$_SESSION['username'] = $usernameFromDB;
-			header("Location: ../index.php");
+		if ($loginQuery['status'] == '200') {
+			$usernameFromDB = $loginQuery['userInfoArray']['username'];
+			$passwordFromDB = $loginQuery['userInfoArray']['password'];
+
+			if (password_verify($password, $passwordFromDB)) {
+				$_SESSION['username'] = $usernameFromDB;
+				header("Location: ../index.php");
+			}
 		}
+
+		else {
+			$_SESSION['message'] = $loginQuery['message'];
+			$_SESSION['status'] = $loginQuery['status'];
+			header("Location: ../login.php");
+		}
+	}
+
+	else {
+		$_SESSION['message'] = "Please make sure no input fields are empty";
+		$_SESSION['status'] = "400";
+		header("Location: ../login.php");
 	}
 }
 

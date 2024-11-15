@@ -23,6 +23,7 @@ require_once 'core/handleForms.php';
 	</style>
 </head>
 <body>
+	
 	<?php  
 	if (isset($_SESSION['message']) && isset($_SESSION['status'])) {
 

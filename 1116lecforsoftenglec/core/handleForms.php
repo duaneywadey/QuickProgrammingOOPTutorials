@@ -17,10 +17,14 @@ if (isset($_POST['insertNewUserBtn'])) {
 			$_SESSION['message'] = $insertQuery['message'];
 
 			if ($insertQuery['status'] == '200') {
+				$_SESSION['message'] = $insertQuery['message'];
+				$_SESSION['status'] = $insertQuery['status'];
 				header("Location: ../login.php");
 			}
 
 			else {
+				$_SESSION['message'] = $insertQuery['message'];
+				$_SESSION['status'] = $insertQuery['status'];
 				header("Location: ../register.php");
 			}
 
@@ -62,6 +66,20 @@ if (isset($_GET['logoutUserBtn'])) {
 	header("Location: ../login.php");
 }
 
+if (isset($_POST['insertNewBranchBtn'])) {
+	$address = trim($_POST['address']);
+	$head_manager = trim($_POST['head_manager']);
+	$contact_number = trim($_POST['contact_number']);
+
+	if (!empty($address) && !empty($head_manager) && !empty($contact_number)) {
+		$insertABranch = insertABranch($pdo, $address, $head_manager, $contact_number, $_SESSION['username']);
+		$_SESSION['status'] =  $insertABranch['status']; 
+		$_SESSION['message'] =  $insertABranch['message']; 
+		header("Location: ../index.php");
+	}
+
+}
+
 if (isset($_POST['updateBranchBtn'])) {
 
 	$address = $_POST['address'];
@@ -71,54 +89,23 @@ if (isset($_POST['updateBranchBtn'])) {
 
 	if (!empty($address) && !empty($head_manager) && !empty($contact_number)) {
 
-		$inputArr = array(
-			"address"=>$_POST['address'],
-			"head_manager"=>$_POST['head_manager'],
-			"contact_number"=>$_POST['contact_number']
-		);
+		$updateBranch = updateBranch($pdo, $address, $head_manager, $contact_number, $date, $_SESSION['username'], $_GET['branch_id']);
 
-		$getBranchByID = getBranchByID($pdo, $_GET['branch_id']);
-		$result = array_diff($inputArr, $getBranchByID);
-
-		$logParams = [
-			"address"=>null,
-			"head_manager"=>null,
-			"contact_number"=>null
-		];
-
-		foreach ($result as $key => $value) {
-            if ($value !== null) {
-                $logParams[$key] = $value;
-            }
-        }
-
-        if (!empty(array_filter($logParams))) {
-            insertIntoBranchUpdateLogs($pdo, $logParams['address'], $logParams['head_manager'], $logParams['contact_number'], $_GET['branch_id'], $_SESSION['user_id']);
-        }
-
-		$updateBranch = updateBranch($pdo, $address, $head_manager, $contact_number, $date, $_SESSION['user_id'], $_GET['branch_id']);
-
-		if ($updateBranch) {
-			$_SESSION['message'] = "Successfully updated!";
-			header("Location: ../index.php");
-		}
+		$_SESSION['message'] = $updateBranch['message'];
+		$_SESSION['status'] = $updateBranch['status'];
+		header("Location: ../index.php");
 	}
 }
 
+if (isset($_POST['deleteBranchBtn'])) {
+	$branch_id = $_GET['branch_id'];
 
-$arrTest = array(
-	"FirstName"=>"Ivan Duane",
-	"LastName"=>"Dequito",
-	"Age"=>"24",
-	"Hobbies"=>null,
-	"Dreams"=>null
-);
+	if (!empty($branch_id)) {
+		$deleteBranch = deleteABranch($pdo, $branch_id);
+		$_SESSION['message'] = $deleteBranch['message'];
+		$_SESSION['status'] = $deleteBranch['status'];
+		header("Location: ../index.php");
+	}
+}
 
-echo "<pre>";
-print_r($arrTest);
-echo "<pre>";
-
-echo "<pre>";
-print_r(array_filter($arrTest));
-echo "<pre>";
 ?>

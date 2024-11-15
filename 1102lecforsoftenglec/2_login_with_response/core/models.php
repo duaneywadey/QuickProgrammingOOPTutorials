@@ -19,6 +19,7 @@ function checkIfUserExists($pdo, $username) {
 
 		else {
 			$response = array(
+				"result"=> false,
 				"status" => "400",
 				"message"=> "User doesn't exist from the database"
 			);
@@ -28,6 +29,8 @@ function checkIfUserExists($pdo, $username) {
 	return $response;
 
 }
+
+
 
 function insertNewUser($pdo, $username, $first_name, $last_name, $password) {
 	$response = array();

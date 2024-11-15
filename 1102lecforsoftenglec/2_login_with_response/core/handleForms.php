@@ -9,11 +9,13 @@ if (isset($_POST['insertNewUserBtn'])) {
 	$password = trim($_POST['password']);
 	$confirm_password = trim($_POST['confirm_password']);
 
-	if (!empty($username) && !empty($first_name) && !empty($last_name) && !empty($password) && !empty($confirm_password)) {
+	if (!empty($username) && !empty($first_name) && !empty($last_name) && 
+		!empty($password) && !empty($confirm_password)) {
 
 		if ($password == $confirm_password) {
 
-			$insertQuery = insertNewUser($pdo, $username, $first_name, $last_name, password_hash($password, PASSWORD_DEFAULT));
+			$insertQuery = insertNewUser($pdo, $username, $first_name, $last_name, 
+				password_hash($password, PASSWORD_DEFAULT));
 
 			if ($insertQuery['status'] == '200') {
 				$_SESSION['message'] = $insertQuery['message'];

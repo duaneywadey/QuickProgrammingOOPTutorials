@@ -15,15 +15,7 @@ if (!isset($_SESSION['username'])) {
 	<link rel="stylesheet" href="styles/styles.css">
 </head>
 <body>
-	<?php if (isset($_SESSION['message'])) { ?>
-		<h1 style="color: red;"><?php echo $_SESSION['message']; ?></h1>
-	<?php } unset($_SESSION['message']); ?>
-
-	<div class="greeting">
-		<h1>Hello theree! Welcome, <span style="color: blue;"><?php echo $_SESSION['username']; ?></span></h1>
-	</div>
 	<?php include 'navbar.php'; ?>
-
 	<div class="searchForm">
 		<form action="index.php" method="GET">
 			<p>
@@ -33,6 +25,22 @@ if (!isset($_SESSION['username'])) {
 			</p>
 		</form>
 	</div>
+
+	<?php  
+	if (isset($_SESSION['message']) && isset($_SESSION['status'])) {
+
+		if ($_SESSION['status'] == "200") {
+			echo "<h1 style='color: green;'>{$_SESSION['message']}</h1>";
+		}
+
+		else {
+			echo "<h1 style='color: red;'>{$_SESSION['message']}</h1>";	
+		}
+
+	}
+	unset($_SESSION['message']);
+	unset($_SESSION['status']);
+	?>
 
 	<div class="tableClass">
 		<table style="width: 100%;">
@@ -59,6 +67,7 @@ if (!isset($_SESSION['username'])) {
 					<td><?php echo $row['last_updated_by']; ?></td>
 					<td>
 						<a href="updatebranch.php?branch_id=<?php echo $row['branch_id']; ?>">Update</a>
+						<a href="deletebranch.php?branch_id=<?php echo $row['branch_id']; ?>">Delete</a>
 					</td>
 				</tr>
 				<?php } ?>
@@ -75,6 +84,7 @@ if (!isset($_SESSION['username'])) {
 					<td><?php echo $row['last_updated_by']; ?></td>
 					<td>
 						<a href="updatebranch.php?branch_id=<?php echo $row['branch_id']; ?>">Update</a>
+						<a href="deletebranch.php?branch_id=<?php echo $row['branch_id']; ?>">Delete</a>
 					</td>
 				</tr>
 				<?php } ?>

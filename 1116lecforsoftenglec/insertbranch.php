@@ -33,7 +33,7 @@ if (!isset($_SESSION['username'])) {
 	</form>
 
 	<div class="tableClass">
-		<table style="width: 100%;">
+		<table style="width: 100%;" cellpadding="20">
 			<tr>
 				<th>Address</th>
 				<th>Head Manager</th>

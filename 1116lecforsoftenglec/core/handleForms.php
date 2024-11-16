@@ -31,6 +31,7 @@ if (isset($_POST['insertNewUserBtn'])) {
 		}
 		else {
 			$_SESSION['message'] = "Please make sure both passwords are equal";
+			$_SESSION['status'] = '400';
 			header("Location: ../register.php");
 		}
 
@@ -38,6 +39,7 @@ if (isset($_POST['insertNewUserBtn'])) {
 
 	else {
 		$_SESSION['message'] = "Please make sure there are no empty input fields";
+		$_SESSION['status'] = '400';
 		header("Location: ../register.php");
 	}
 }
@@ -58,13 +60,22 @@ if (isset($_POST['loginUserBtn'])) {
 			$_SESSION['username'] = $usernameFromDB;
 			header("Location: ../index.php");
 		}
+
+		else {
+			$_SESSION['message'] = "Username/password invalid";
+			$_SESSION['status'] = "400";
+			header("Location: ../login.php");
+		}
 	}
+
+	else {
+		$_SESSION['message'] = "Please make sure there are no empty input fields";
+		$_SESSION['status'] = '400';
+		header("Location: ../register.php");
+	}
+
 }
 
-if (isset($_GET['logoutUserBtn'])) {
-	unset($_SESSION['username']);
-	header("Location: ../login.php");
-}
 
 if (isset($_POST['insertNewBranchBtn'])) {
 	$address = trim($_POST['address']);
@@ -75,6 +86,12 @@ if (isset($_POST['insertNewBranchBtn'])) {
 		$insertABranch = insertABranch($pdo, $address, $head_manager, $contact_number, $_SESSION['username']);
 		$_SESSION['status'] =  $insertABranch['status']; 
 		$_SESSION['message'] =  $insertABranch['message']; 
+		header("Location: ../index.php");
+	}
+
+	else {
+		$_SESSION['message'] = "Please make sure there are no empty input fields";
+		$_SESSION['status'] = '400';
 		header("Location: ../index.php");
 	}
 
@@ -95,6 +112,13 @@ if (isset($_POST['updateBranchBtn'])) {
 		$_SESSION['status'] = $updateBranch['status'];
 		header("Location: ../index.php");
 	}
+
+	else {
+		$_SESSION['message'] = "Please make sure there are no empty input fields";
+		$_SESSION['status'] = '400';
+		header("Location: ../register.php");
+	}
+
 }
 
 if (isset($_POST['deleteBranchBtn'])) {
@@ -106,6 +130,11 @@ if (isset($_POST['deleteBranchBtn'])) {
 		$_SESSION['status'] = $deleteBranch['status'];
 		header("Location: ../index.php");
 	}
+}
+
+if (isset($_GET['logoutUserBtn'])) {
+	unset($_SESSION['username']);
+	header("Location: ../login.php");
 }
 
 ?>

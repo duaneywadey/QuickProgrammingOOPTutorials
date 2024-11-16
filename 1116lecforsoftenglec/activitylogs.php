@@ -17,7 +17,7 @@ if (!isset($_SESSION['username'])) {
 <body>
 	<?php include 'navbar.php'; ?>
 	<div class="tableClass">
-		<table style="width: 100%;">
+		<table style="width: 100%;" cellpadding="20">
 			<tr>
 				<th>Activity Log ID</th>
 				<th>Operation</th>
@@ -26,6 +26,7 @@ if (!isset($_SESSION['username'])) {
 				<th>Head Manager</th>
 				<th>Contact Number</th>
 				<th>Username</th>
+				<th>Date Added</th>
 			</tr>
 			<?php $getAllActivityLogs = getAllActivityLogs($pdo); ?>
 			<?php foreach ($getAllActivityLogs as $row) { ?>

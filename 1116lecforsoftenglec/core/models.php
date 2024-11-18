@@ -1,5 +1,7 @@
 <?php  
 
+require_once 'dbConfig.php';
+
 function checkIfUserExists($pdo, $username) {
 	$response = array();
 	$sql = "SELECT * FROM user_accounts WHERE username = ?";
@@ -113,7 +115,9 @@ function getBranchByID($pdo, $branch_id) {
 function insertAnActivityLog($pdo, $operation, $branch_id, $address, 
 		$head_manager, $contact_number, $username) {
 
-	$sql = "INSERT INTO activity_logs (operation, branch_id, address, head_manager, contact_number, username) VALUES(?,?,?,?,?,?)";
+	$sql = "INSERT INTO activity_logs (operation, branch_id, address, 
+		head_manager, contact_number, username) VALUES(?,?,?,?,?,?)";
+
 	$stmt = $pdo->prepare($sql);
 	$executeQuery = $stmt->execute([$operation, $branch_id, $address, 
 		$head_manager, $contact_number, $username]);
@@ -144,7 +148,9 @@ function insertABranch($pdo, $address, $head_manager, $contact_number, $added_by
 		$stmtfindInsertedItemSQL->execute();
 		$getBranchID = $stmtfindInsertedItemSQL->fetch();
 
-		$insertAnActivityLog = insertAnActivityLog($pdo, "INSERT", $getBranchID['branch_id'], $getBranchID['address'], $getBranchID['head_manager'], $getBranchID['contact_number'], $_SESSION['username']);
+		$insertAnActivityLog = insertAnActivityLog($pdo, "INSERT", $getBranchID['branch_id'], 
+			$getBranchID['address'], $getBranchID['head_manager'], 
+			$getBranchID['contact_number'], $_SESSION['username']);
 
 		if ($insertAnActivityLog) {
 			$response = array(
@@ -196,7 +202,9 @@ function updateBranch($pdo, $address, $head_manager, $contact_number,
 		$stmtfindInsertedItemSQL->execute([$branch_id]);
 		$getBranchID = $stmtfindInsertedItemSQL->fetch(); 
 
-		$insertAnActivityLog = insertAnActivityLog($pdo, "UPDATE", $getBranchID['branch_id'], $getBranchID['address'], $getBranchID['head_manager'], $getBranchID['contact_number'], $_SESSION['username']);
+		$insertAnActivityLog = insertAnActivityLog($pdo, "UPDATE", $getBranchID['branch_id'], 
+			$getBranchID['address'], $getBranchID['head_manager'], 
+			$getBranchID['contact_number'], $_SESSION['username']);
 
 		if ($insertAnActivityLog) {
 
@@ -226,6 +234,7 @@ function updateBranch($pdo, $address, $head_manager, $contact_number,
 
 }
 
+
 function deleteABranch($pdo, $branch_id) {
 	$response = array();
 	$sql = "SELECT * FROM branches WHERE branch_id = ?";
@@ -233,7 +242,9 @@ function deleteABranch($pdo, $branch_id) {
 	$stmt->execute([$branch_id]);
 	$getBranchByID = $stmt->fetch();
 
-	$insertAnActivityLog = insertAnActivityLog($pdo, "DELETE", $getBranchByID['branch_id'], $getBranchByID['address'], $getBranchByID['head_manager'], $getBranchByID['contact_number'], $_SESSION['username']);
+	$insertAnActivityLog = insertAnActivityLog($pdo, "DELETE", $getBranchByID['branch_id'], 
+		$getBranchByID['address'], $getBranchByID['head_manager'], 
+		$getBranchByID['contact_number'], $_SESSION['username']);
 
 	if ($insertAnActivityLog) {
 		$deleteSql = "DELETE FROM branches WHERE branch_id = ?";
@@ -262,5 +273,13 @@ function deleteABranch($pdo, $branch_id) {
 
 	return $response;
 }
+
+
+// $getAllBranchesBySearch = getAllBranchesBySearch($pdo, "Dasma");
+// echo "<pre>";
+// print_r($getAllBranchesBySearch);
+// echo "<pre>";
+
+
 
 ?>

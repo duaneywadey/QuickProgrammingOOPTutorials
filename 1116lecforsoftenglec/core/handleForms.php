@@ -83,7 +83,8 @@ if (isset($_POST['insertNewBranchBtn'])) {
 	$contact_number = trim($_POST['contact_number']);
 
 	if (!empty($address) && !empty($head_manager) && !empty($contact_number)) {
-		$insertABranch = insertABranch($pdo, $address, $head_manager, $contact_number, $_SESSION['username']);
+		$insertABranch = insertABranch($pdo, $address, $head_manager, 
+			$contact_number, $_SESSION['username']);
 		$_SESSION['status'] =  $insertABranch['status']; 
 		$_SESSION['message'] =  $insertABranch['message']; 
 		header("Location: ../index.php");
@@ -106,7 +107,8 @@ if (isset($_POST['updateBranchBtn'])) {
 
 	if (!empty($address) && !empty($head_manager) && !empty($contact_number)) {
 
-		$updateBranch = updateBranch($pdo, $address, $head_manager, $contact_number, $date, $_SESSION['username'], $_GET['branch_id']);
+		$updateBranch = updateBranch($pdo, $address, $head_manager, $contact_number, 
+			$date, $_SESSION['username'], $_GET['branch_id']);
 
 		$_SESSION['message'] = $updateBranch['message'];
 		$_SESSION['status'] = $updateBranch['status'];

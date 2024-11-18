@@ -29,5 +29,3 @@ CREATE TABLE activity_logs (
 	date_added TIMESTAMP DEFAULT CURRENT_TIMESTAMP 
 );
 
-
-

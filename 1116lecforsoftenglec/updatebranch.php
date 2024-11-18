@@ -15,9 +15,6 @@ if (!isset($_SESSION['username'])) {
 	<link rel="stylesheet" href="styles/styles.css">
 </head>
 <body>
-	<div class="greeting">
-		<h1>Hello theree! Welcome, <span style="color: blue;"><?php echo $_SESSION['username']; ?></span></h1>
-	</div>
 	<?php include 'navbar.php'; ?>
 
 	<?php $getBranchByID = getBranchByID($pdo, $_GET['branch_id']); ?>

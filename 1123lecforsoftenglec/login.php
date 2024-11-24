@@ -38,7 +38,7 @@ require_once 'core/handleForms.php';
 		<p>
 			<label for="username">Password</label>
 			<input type="password" name="password">
-			<input type="submit" name="loginUserBtn">
+			<input type="submit" name="loginUserBtn" style="margin-top: 25px; ">
 		</p>
 	</form>
 	<p>Don't have an account? You may register <a href="register.php">here</a></p>

@@ -47,7 +47,7 @@ require_once 'core/handleForms.php';
 		<p>
 			<label for="username">Confirm Password</label>
 			<input type="password" name="confirm_password">
-			<input type="submit" name="insertNewUserBtn">
+			<input type="submit" name="insertNewUserBtn" style="margin-top: 25px;">
 		</p>
 	</form>
 </body>

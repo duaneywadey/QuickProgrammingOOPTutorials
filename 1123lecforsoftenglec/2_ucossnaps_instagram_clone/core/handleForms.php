@@ -120,6 +120,7 @@ if (isset($_POST['insertPhotoBtn'])) {
 		// Specify path
 		$folder = "../images/".$imageName;
 
+		// Move file to the specified path 
 		if (move_uploaded_file($tempFileName, $folder)) {
 			header("Location: ../index.php");
 		}

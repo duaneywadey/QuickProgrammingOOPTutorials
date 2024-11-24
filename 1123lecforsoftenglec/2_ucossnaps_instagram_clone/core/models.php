@@ -112,7 +112,7 @@ function insertPhoto($pdo, $photo_name, $username, $description, $photo_id=null)
 
 function getAllPhotos($pdo, $username=null) {
 	if (empty($username)) {
-		$sql = "SELECT * FROM photos";
+		$sql = "SELECT * FROM photos ORDER BY date_added DESC";
 		$stmt = $pdo->prepare($sql);
 		$executeQuery = $stmt->execute();
 
@@ -121,7 +121,7 @@ function getAllPhotos($pdo, $username=null) {
 		}
 	}
 	else {
-		$sql = "SELECT * FROM photos WHERE username = ?";
+		$sql = "SELECT * FROM photos WHERE username = ? ORDER BY date_added DESC";
 		$stmt = $pdo->prepare($sql);
 		$executeQuery = $stmt->execute([$username]);
 

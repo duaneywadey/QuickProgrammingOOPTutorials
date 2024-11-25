@@ -1,4 +1,6 @@
 <?php  
+
+
 session_start();
 if (isset($_POST['insertTextFileBtn'])) {
 
@@ -29,13 +31,15 @@ if (isset($_POST['insertTextFileBtn'])) {
 }
 
 
-// // Check if the form has been submitted by checking if the 'insertTextFileBtn' is set in the POST request
+// // Check if the form has been submitted by checking if the 
+// // 'insertTextFileBtn' is set in the POST request
 // if (isset($_POST['insertTextFileBtn'])) {
 
 //     // Output the start of a preformatted text 
 //     echo "<pre>";
     
-//     // Print the details of the uploaded file from the $_FILES superglobal array
+//     // Print the details of the uploaded file from 
+//     // the $_FILES superglobal array
 //     print_r($_FILES['textFile']);
     
 //     // Close the preformatted text block

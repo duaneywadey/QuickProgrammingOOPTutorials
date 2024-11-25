@@ -26,6 +26,7 @@
 	</style>
 </head>
 <body>
+	
 	<h1>Uploading File in PHP</h1>
 
 	<?php if (isset($_SESSION['message'])) { ?>
@@ -40,5 +41,7 @@
 			<input type="submit" name="insertTextFileBtn">
 		</p>
 	</form>
+
+
 </body>
 </html>

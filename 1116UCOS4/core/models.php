@@ -1,5 +1,7 @@
 <?php  
 
+require_once 'dbConfig.php';
+
 function checkIfUserExists($pdo, $username) {
 	$response = array();
 	$sql = "SELECT * FROM user_accounts WHERE username = ?";
@@ -29,7 +31,6 @@ function checkIfUserExists($pdo, $username) {
 	return $response;
 
 }
-
 
 function insertNewUser($pdo, $username, $first_name, $last_name, $password) {
 	$response = array();
@@ -128,7 +129,7 @@ function insertAnActivityLog($pdo, $operation, $branch_id, $address,
 }
 
 function getAllActivityLogs($pdo) {
-	$sql = "SELECT * FROM activity_logs";
+	$sql = "SELECT * FROM activity_logs ORDER BY date_added DESC";
 	$stmt = $pdo->prepare($sql);
 	if ($stmt->execute()) {
 		return $stmt->fetchAll();
@@ -145,7 +146,7 @@ function insertABranch($pdo, $address, $head_manager, $contact_number, $added_by
 		$findInsertedItemSQL = "SELECT * FROM branches ORDER BY date_added DESC LIMIT 1";
 		$stmtfindInsertedItemSQL = $pdo->prepare($findInsertedItemSQL);
 		$stmtfindInsertedItemSQL->execute();
-		$getBranchID = $stmtfindInsertedItemSQL->fetch();
+		$getBranchID = $stmtfindInsertedItemSQL->fetch(); // returns assoc. array
 
 		$insertAnActivityLog = insertAnActivityLog($pdo, "INSERT", $getBranchID['branch_id'], 
 			$getBranchID['address'], $getBranchID['head_manager'], 
@@ -232,7 +233,6 @@ function updateBranch($pdo, $address, $head_manager, $contact_number,
 	return $response;
 
 }
-
 
 function deleteABranch($pdo, $branch_id) {
 	$response = array();

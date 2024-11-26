@@ -14,6 +14,7 @@ if (isset($_POST['insertNewUserBtn'])) {
 		if ($password == $confirm_password) {
 
 			$insertQuery = insertNewUser($pdo, $username, $first_name, $last_name, password_hash($password, PASSWORD_DEFAULT));
+
 			$_SESSION['message'] = $insertQuery['message'];
 
 			if ($insertQuery['status'] == '200') {
@@ -71,7 +72,7 @@ if (isset($_POST['loginUserBtn'])) {
 	else {
 		$_SESSION['message'] = "Please make sure there are no empty input fields";
 		$_SESSION['status'] = '400';
-		header("Location: ../register.php");
+		header("Location: ../login.php");
 	}
 
 }
@@ -137,5 +138,3 @@ if (isset($_GET['logoutUserBtn'])) {
 	unset($_SESSION['username']);
 	header("Location: ../login.php");
 }
-
-?>

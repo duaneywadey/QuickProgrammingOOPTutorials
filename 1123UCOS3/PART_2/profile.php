@@ -17,7 +17,6 @@ if (!isset($_SESSION['username'])) {
 </head>
 <body>
 	<?php include 'navbar.php'; ?>
-
 	<?php $getUserByID = getUserByID($pdo, $_GET['username']); ?>
 	<div class="container" style="display: flex; justify-content: center;">
 		<div class="userInfo" style="background-color: ghostwhite; border-style: solid; border-color: gray;width: 50%; text-align: center;">

@@ -82,8 +82,10 @@ if (isset($_POST['insertNewBranchBtn'])) {
 	$contact_number = trim($_POST['contact_number']);
 
 	if (!empty($address) && !empty($head_manager) && !empty($contact_number)) {
+
 		$insertABranch = insertABranch($pdo, $address, $head_manager, 
 			$contact_number, $_SESSION['username']);
+
 		$_SESSION['status'] =  $insertABranch['status']; 
 		$_SESSION['message'] =  $insertABranch['message']; 
 		header("Location: ../index.php");
@@ -117,7 +119,7 @@ if (isset($_POST['updateBranchBtn'])) {
 	else {
 		$_SESSION['message'] = "Please make sure there are no empty input fields";
 		$_SESSION['status'] = '400';
-		header("Location: ../register.php");
+		header("Location: ../index.php");
 	}
 
 }

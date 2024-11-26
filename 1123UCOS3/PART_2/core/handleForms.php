@@ -76,66 +76,65 @@ if (isset($_POST['loginUserBtn'])) {
 
 }
 
-if (isset($_POST['insertNewBranchBtn'])) {
-	$address = trim($_POST['address']);
-	$head_manager = trim($_POST['head_manager']);
-	$contact_number = trim($_POST['contact_number']);
-
-	if (!empty($address) && !empty($head_manager) && !empty($contact_number)) {
-		$insertABranch = insertABranch($pdo, $address, $head_manager, 
-			$contact_number, $_SESSION['username']);
-		$_SESSION['status'] =  $insertABranch['status']; 
-		$_SESSION['message'] =  $insertABranch['message']; 
-		header("Location: ../index.php");
-	}
-
-	else {
-		$_SESSION['message'] = "Please make sure there are no empty input fields";
-		$_SESSION['status'] = '400';
-		header("Location: ../index.php");
-	}
-
-}
-
-if (isset($_POST['updateBranchBtn'])) {
-
-	$address = $_POST['address'];
-	$head_manager = $_POST['head_manager'];
-	$contact_number = $_POST['contact_number'];
-	$date = date('Y-m-d H:i:s');
-
-	if (!empty($address) && !empty($head_manager) && !empty($contact_number)) {
-
-		$updateBranch = updateBranch($pdo, $address, $head_manager, $contact_number, 
-			$date, $_SESSION['username'], $_GET['branch_id']);
-
-		$_SESSION['message'] = $updateBranch['message'];
-		$_SESSION['status'] = $updateBranch['status'];
-		header("Location: ../index.php");
-	}
-
-	else {
-		$_SESSION['message'] = "Please make sure there are no empty input fields";
-		$_SESSION['status'] = '400';
-		header("Location: ../register.php");
-	}
-
-}
-
-if (isset($_POST['deleteBranchBtn'])) {
-	$branch_id = $_GET['branch_id'];
-
-	if (!empty($branch_id)) {
-		$deleteBranch = deleteABranch($pdo, $branch_id);
-		$_SESSION['message'] = $deleteBranch['message'];
-		$_SESSION['status'] = $deleteBranch['status'];
-		header("Location: ../index.php");
-	}
-}
-
 if (isset($_GET['logoutUserBtn'])) {
+	unset($_SESSION['user_id']);
 	unset($_SESSION['username']);
 	header("Location: ../login.php");
 }
 
-?>
+if (isset($_POST['insertPhotoBtn'])) {
+
+	// Get Description
+	$description = $_POST['photoDescription'];
+
+	// Get file name
+	$fileName = $_FILES['image']['name'];
+
+	// Get temporary file name
+	$tempFileName = $_FILES['image']['tmp_name'];
+
+	// Get file extension
+	$fileExtension = pathinfo($fileName, PATHINFO_EXTENSION);
+
+	// Generate random characters for image name
+	$uniqueID = sha1(md5(rand(1,9999999)));
+
+	// Combine image name and file extension
+	$imageName = $uniqueID.".".$fileExtension;
+
+	// If we want edit a photo
+	if (isset($_POST['photo_id'])) {
+		$photo_id = $_POST['photo_id'];
+	}
+	else {
+		$photo_id = "";
+	}
+
+	// Save image 'record' to database
+	$saveImgToDb = insertPhoto($pdo, $imageName, $_SESSION['username'], $description, $photo_id);
+
+	// Store actual 'image file' to images folder
+	if ($saveImgToDb) {
+
+		// Specify path
+		$folder = "../images/".$imageName;
+
+		// Move file to the specified path 
+		if (move_uploaded_file($tempFileName, $folder)) {
+			header("Location: ../index.php");
+		}
+	}
+
+}
+
+if (isset($_POST['deletePhotoBtn'])) {
+	$photo_name = $_POST['photo_name'];
+	$photo_id = $_POST['photo_id'];
+	$deletePhoto = deletePhoto($pdo, $photo_id);
+
+	if ($deletePhoto) {
+		unlink("../images/".$photo_name);
+		header("Location: ../index.php");
+	}
+
+}

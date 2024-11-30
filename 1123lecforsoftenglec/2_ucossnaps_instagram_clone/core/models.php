@@ -194,3 +194,15 @@ function deleteComment($pdo, $comment_id) {
 		return true;
 	}
 }
+
+function getAllPhotosJson($pdo) {
+	if (empty($username)) {
+		$sql = "SELECT * FROM photos";
+		$stmt = $pdo->prepare($sql);
+		$executeQuery = $stmt->execute();
+
+		if ($executeQuery) {
+			return $stmt->fetchAll();
+		}
+	}
+}

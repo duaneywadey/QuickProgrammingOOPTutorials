@@ -32,6 +32,16 @@ function checkIfUserExists($pdo, $username) {
 
 }
 
+function getUserByID($pdo, $user_id) {
+	$sql = "SELECT * FROM user_accounts WHERE user_id = ?";
+	$stmt = $pdo->prepare($sql);
+	$executeQuery = $stmt->execute([$user_id]);
+
+	if ($executeQuery) {
+		return $stmt->fetch();
+	}
+}
+
 function insertNewUser($pdo, $username, $first_name, $last_name, $password) {
 	$response = array();
 	$checkIfUserExists = checkIfUserExists($pdo, $username); 
@@ -275,11 +285,44 @@ function deleteABranch($pdo, $branch_id) {
 	return $response;
 }
 
+function getAllInquiries($pdo) {
+	$sql = "SELECT * FROM inquiries";
+	$stmt = $pdo->prepare($sql);
+	$executeQuery = $stmt->execute();
 
-// $getAllBranchesBySearch = getAllBranchesBySearch($pdo, "Dasma");
-// echo "<pre>";
-// print_r($getAllBranchesBySearch);
-// echo "<pre>";
+	if ($executeQuery) {
+		return $stmt->fetchAll();
+	}
+}
+
+function getAllRepliesByInquiry($pdo, $inquiry_id) {
+	$sql = "SELECT * FROM replies WHERE inquiry_id = ?";
+	$stmt = $pdo->prepare($sql);
+	$executeQuery = $stmt->execute([$inquiry_id]);
+
+	if ($executeQuery) {
+		return $stmt->fetchAll();
+	}
+}
+
+function insertReplyBtn($description, $inquiry_id, $user_id) {
+	$sql = "INSERT INTO replies (description, inquiry_id, user_id) VALUES(?,?,?)";
+	$stmt = $pdo->prepare($sql);
+	$executeQuery = $stmt->execute([$description, $inquiry_id, $user_id]);
+	if ($executeQuery) {
+		return true;
+	}
+}
+
+
+function getReplyByID($reply_id) {
+	$sql = "SELECT * FROM replies WHERE reply_id = ?";
+	$stmt = $pdo->prepare($sql);
+	$executeQuery = $stmt->execute([$reply_id]);
+	if ($executeQuery) {
+		return $stmt->fetch();
+	}
+}
 
 
 

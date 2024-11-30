@@ -139,4 +139,34 @@ if (isset($_GET['logoutUserBtn'])) {
 	header("Location: ../login.php");
 }
 
+if (isset($_POST['insertReplyBtn'])) {
+	$reply_description = $_POST['reply_description'];
+	$inquiry_id = $_POST['inquiry_id'];
+	$insertQuery = insertReply($pdo, $reply_description, $inquiry_id, $_SESSION['user_id']);
+	if ($insertQuery) {
+		header("Location: ../admin/reply-to-inquiry.php?inquiry_id=" . $inquiry_id);
+	}
+}
+
+if (isset($_POST['updateReplyBtn'])) {
+	$reply_description = $_POST['reply_description'];
+	$reply_id = $_POST['reply_id'];
+	$inquiry_id = $_POST['inquiry_id'];
+	$editQuery = editReply($pdo, $reply_description, $reply_id);
+	if ($editQuery) {
+		header("Location: ../admin/reply-to-inquiry.php?inquiry_id=" . $inquiry_id);
+	}
+}
+
+if (isset($_POST['deleteReplyBtn'])) {
+	$reply_id = $_POST['reply_id'];
+	$inquiry_id = $_POST['inquiry_id'];
+	$deleteQuery = deleteReply($pdo, $reply_id);
+
+	if ($deleteQuery) {
+		header("Location: ../admin/reply-to-inquiry.php?inquiry_id=" . $inquiry_id);
+	}
+
+}
+
 ?>

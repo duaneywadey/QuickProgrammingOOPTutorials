@@ -98,26 +98,6 @@ function getUserByID($pdo, $user_id) {
 	}
 }
 
-function getAllInquiries($pdo) {
-	$sql = "SELECT * FROM inquiries";
-	$stmt = $pdo->prepare($sql);
-	$executeQuery = $stmt->execute();
-
-	if ($executeQuery) {
-		return $stmt->fetchAll();
-	}
-}
-
-function getAllRepliesByInquiry($pdo, $inquiry_id) {
-	$sql = "SELECT * FROM replies WHERE inquiry_id = ?";
-	$stmt = $pdo->prepare($sql);
-	$executeQuery = $stmt->execute([$inquiry_id]);
-
-	if ($executeQuery) {
-		return $stmt->fetchAll();
-	}
-}
-
 
 function insertInquiry($pdo, $description, $user_id) {
 	$sql = "INSERT INTO inquiries (description, user_id) VALUES(?,?)";
@@ -125,5 +105,82 @@ function insertInquiry($pdo, $description, $user_id) {
 	$executeQuery = $stmt->execute([$description, $user_id]);
 	if ($executeQuery) {
 		return true;
+	}
+}
+
+function editInquiry($pdo, $description, $inquiry_id) {
+	$sql = "UPDATE inquiries SET description = ? WHERE inquiry_id = ?";
+	$stmt = $pdo->prepare($sql);
+	$executeQuery = $stmt->execute([$description, $inquiry_id]);
+	if ($executeQuery) {
+		return true;
+	}
+}
+
+function deleteInquiry($pdo, $inquiry_id) {
+	$sql = "DELETE FROM inquiries WHERE inquiry_id = ?";
+	$stmt = $pdo->prepare($sql);
+}
+
+function getAllInquiries($pdo, $inquiry_id=NULL) {
+
+	if (!empty($inquiry_id)) {
+		$sql = "SELECT 
+					user_accounts.username AS username,
+					inquiries.inquiry_id AS inquiry_id,
+					inquiries.description AS description,
+					inquiries.date_added AS date_added
+				FROM inquiries
+				JOIN user_accounts 
+				ON inquiries.user_id = user_accounts.user_id
+				WHERE inquiries.inquiry_id = ?
+				";
+		$stmt = $pdo->prepare($sql);
+		$executeQuery = $stmt->execute([$inquiry_id]);
+
+		if ($executeQuery) {
+			return $stmt->fetch();
+		}
+
+	}
+	else {
+		$sql = "SELECT 
+					user_accounts.username AS username,
+					inquiries.inquiry_id AS inquiry_id,
+					inquiries.description AS description,
+					inquiries.date_added AS date_added
+				FROM inquiries
+				JOIN user_accounts 
+				ON inquiries.user_id = user_accounts.user_id
+				";
+		$stmt = $pdo->prepare($sql);
+		$executeQuery = $stmt->execute();
+
+		if ($executeQuery) {
+			return $stmt->fetchAll();
+		}
+
+	}
+}
+
+
+function getAllRepliesByInquiry($pdo, $inquiry_id) {
+	$sql = "SELECT 
+				user_accounts.username AS username,
+				replies.reply_id AS reply_id,
+				replies.description AS description,
+				replies.date_added AS date_added
+			FROM replies
+			JOIN user_accounts 
+			ON replies.user_id = user_accounts.user_id
+			JOIN inquiries 
+			ON replies.inquiry_id = inquiries.inquiry_id
+			WHERE inquiries.inquiry_id = ?
+			";
+	$stmt = $pdo->prepare($sql);
+	$executeQuery = $stmt->execute([$inquiry_id]);
+
+	if ($executeQuery) {
+		return $stmt->fetchAll();
 	}
 }

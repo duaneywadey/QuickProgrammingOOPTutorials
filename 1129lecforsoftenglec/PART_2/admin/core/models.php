@@ -285,18 +285,61 @@ function deleteABranch($pdo, $branch_id) {
 	return $response;
 }
 
-function getAllInquiries($pdo) {
-	$sql = "SELECT * FROM inquiries";
-	$stmt = $pdo->prepare($sql);
-	$executeQuery = $stmt->execute();
+function getAllInquiries($pdo, $inquiry_id=NULL) {
 
-	if ($executeQuery) {
-		return $stmt->fetchAll();
+	if (!empty($inquiry_id)) {
+		$sql = "SELECT 
+					user_accounts.username AS username,
+					inquiries.inquiry_id AS inquiry_id,
+					inquiries.description AS description,
+					inquiries.date_added AS date_added
+				FROM inquiries
+				JOIN user_accounts 
+				ON inquiries.user_id = user_accounts.user_id
+				WHERE inquiries.inquiry_id = ?
+				";
+		$stmt = $pdo->prepare($sql);
+		$executeQuery = $stmt->execute([$inquiry_id]);
+
+		if ($executeQuery) {
+			return $stmt->fetch();
+		}
+
+	}
+	else {
+		$sql = "SELECT 
+					user_accounts.username AS username,
+					inquiries.inquiry_id AS inquiry_id,
+					inquiries.description AS description,
+					inquiries.date_added AS date_added
+				FROM inquiries
+				JOIN user_accounts 
+				ON inquiries.user_id = user_accounts.user_id
+				";
+		$stmt = $pdo->prepare($sql);
+		$executeQuery = $stmt->execute();
+
+		if ($executeQuery) {
+			return $stmt->fetchAll();
+		}
+
 	}
 }
 
+
 function getAllRepliesByInquiry($pdo, $inquiry_id) {
-	$sql = "SELECT * FROM replies WHERE inquiry_id = ?";
+	$sql = "SELECT 
+				user_accounts.username AS username,
+				replies.reply_id AS reply_id,
+				replies.description AS description,
+				replies.date_added AS date_added
+			FROM replies
+			JOIN user_accounts 
+			ON replies.user_id = user_accounts.user_id
+			JOIN inquiries 
+			ON replies.inquiry_id = inquiries.inquiry_id
+			WHERE inquiries.inquiry_id = ?
+			";
 	$stmt = $pdo->prepare($sql);
 	$executeQuery = $stmt->execute([$inquiry_id]);
 
@@ -305,7 +348,7 @@ function getAllRepliesByInquiry($pdo, $inquiry_id) {
 	}
 }
 
-function insertReplyBtn($description, $inquiry_id, $user_id) {
+function insertReply($pdo, $description, $inquiry_id, $user_id) {
 	$sql = "INSERT INTO replies (description, inquiry_id, user_id) VALUES(?,?,?)";
 	$stmt = $pdo->prepare($sql);
 	$executeQuery = $stmt->execute([$description, $inquiry_id, $user_id]);
@@ -315,7 +358,7 @@ function insertReplyBtn($description, $inquiry_id, $user_id) {
 }
 
 
-function getReplyByID($reply_id) {
+function getReplyByID($pdo, $reply_id) {
 	$sql = "SELECT * FROM replies WHERE reply_id = ?";
 	$stmt = $pdo->prepare($sql);
 	$executeQuery = $stmt->execute([$reply_id]);
@@ -324,6 +367,23 @@ function getReplyByID($reply_id) {
 	}
 }
 
+function editReply($pdo, $description, $reply_id) {
+	$sql = "UPDATE replies SET description = ? WHERE reply_id = ?";
+	$stmt = $pdo->prepare($sql);
+	$executeQuery = $stmt->execute([$description, $reply_id]);
+	if ($executeQuery) {
+		return true;
+	}
+}
+
+function deleteReply($pdo, $reply_id) {
+	$sql = "DELETE FROM replies WHERE reply_id = ?";
+	$stmt = $pdo->prepare($sql);
+	$executeQuery = $stmt->execute([$reply_id]);
+	if ($executeQuery) {
+		return true;
+	}
+}
 
 
 ?>

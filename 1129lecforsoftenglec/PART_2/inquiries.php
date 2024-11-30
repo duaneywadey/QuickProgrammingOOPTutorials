@@ -32,8 +32,10 @@ if ($getUserByID['is_suspended'] == 1) {
 	<?php foreach ($getAllInquiries as $row) { ?>
 	<div class="inquiry" style="display: flex; justify-content: center; margin-top: 25px;">
 		<div class="inquiryContainer" style="background-color: ghostwhite; border-style: solid; border-color: gray;width: 50%; padding: 25px;">
+			<h2><?php echo $row['username']; ?></h2>
+			<i><?php echo $row['date_added']; ?></i>
 			<p><?php echo $row['description']; ?></p>
-			<a href="see-all-replies.php" style="float: right;">See All Replies</a>
+			<a href="see-all-replies.php?inquiry_id=<?php echo $row['inquiry_id']; ?>" style="float: right;">See All Replies</a>
 		</div>
 	</div>
 	<?php } ?>

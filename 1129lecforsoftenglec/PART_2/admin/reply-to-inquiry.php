@@ -38,21 +38,35 @@ if ($getUserByID['is_admin'] == 0) {
 	unset($_SESSION['message']);
 	unset($_SESSION['status']);
 	?>
-	<h2>All Inquiries</h2>
-
+	<h1>All Inquiries</h1>
 	<div class="inquiryContainer" style="border-style: solid; padding: 25px;">
-		<h1>Ivan</h1>
-		<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor voluptatum quo maiores dicta officiis laudantium quasi, repellendus. Et nobis sapiente quos, aut distinctio, consectetur doloremque a nisi assumenda temporibus eaque?</p>
+		<?php $getAllInquiries = getAllInquiries($pdo, $_GET['inquiry_id']); ?>
+		<h2><?php echo $getAllInquiries['username']; ?></h2>
+		<i><?php echo $getAllInquiries['date_added']; ?></i>
+		<p><?php echo $getAllInquiries['description']; ?></p>
 		<hr>
 		<div class="replyContainer" style="margin-left: 25px;">
 			<h1>All Replies</h1>
+			<?php $getAllRepliesByInquiry = getAllRepliesByInquiry($pdo, $_GET['inquiry_id']);  ?>
+			<?php foreach ($getAllRepliesByInquiry as $row) { ?>
 			<div class="reply" style="padding: 10px;">
-				<h3>Ivan</h3>
-				<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem accusantium doloribus obcaecati, ullam voluptate mollitia optio soluta, laudantium nobis, eum ipsa natus aliquam quasi? Ex ullam corrupti, adipisci quaerat ad.</p>
+				<h3><?php echo $row['username']; ?></h3>
+				<i><?php echo $row['date_added']; ?></i>
+				<p><?php echo $row['description']; ?></p>
+
+				<?php if ($_SESSION['username'] == $row['username']) { ?>
+					<div class="editAndDelete" style="float:right;">
+						<a href="editreply.php?reply_id=<?php echo $row['reply_id'] ?>">Edit</a>
+						<a href="deletereply.php?reply_id=<?php echo $row['reply_id'] ?>">Delete</a>
+					</div>
+				<?php } ?>
+
 			</div>	
+			<?php } ?>
 			<form action="index.php" method="POST">
 				<p>
-					<input type="text" name="searchQuery" placeholder="Search here" style="width: 100%">
+					<input type="text" name="reply_description" placeholder="Reply here" style="width: 100%">
+					<input type="hidden" name="inquiry_id" value="<?php echo $_GET['inquiry_id']; ?>">
 					<input type="submit" name="insertReplyBtn" value="Reply" style="float: right; height: auto;">
 				</p>
 			</form>

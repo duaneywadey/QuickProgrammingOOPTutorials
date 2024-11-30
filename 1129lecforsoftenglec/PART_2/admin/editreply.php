@@ -38,15 +38,16 @@ if ($getUserByID['is_admin'] == 0) {
 	unset($_SESSION['message']);
 	unset($_SESSION['status']);
 	?>
-	<h1>All Inquiries</h1>
-	<?php $getAllInquiries = getAllInquiries($pdo);?>
-	<?php foreach ($getAllInquiries as $row) { ?>
-	<div class="inquiryContainer" style="border-style: solid; padding: 25px; margin-top: 10px;">
-		<h2><?php echo $row['username']; ?></h2>
-		<i><?php echo $row['date_added']; ?></i>
-		<p><?php echo $row['description']; ?></p>
-		<a href="reply-to-inquiry.php?inquiry_id=<?php echo $row['inquiry_id']; ?>" style="float: right;">See All Replies</a>
-	</div>
-	<?php } ?>
+
+	<?php $getReplyByID = getReplyByID($pdo, $_GET['reply_id']); ?>
+	<form action="index.php" method="POST">
+		<p>
+			<input type="text" name="reply_description" placeholder="Reply here" style="width: 100%" value="<?php echo $getReplyByID['description']; ?>">
+			<input type="hidden" name="inquiry_id" value="<?php echo $getReplyByID['inquiry_id']; ?>">
+			<input type="hidden" name="reply_id" value="<?php echo $getReplyByID['reply_id']; ?>">
+			<input type="submit" name="updateReplyBtn" value="Edit" style="float: right; height: auto;">
+		</p>
+	</form>
+
 </body>
 </html>

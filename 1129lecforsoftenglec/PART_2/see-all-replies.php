@@ -30,13 +30,20 @@ if ($getUserByID['is_suspended'] == 1) {
 
 	<div class="branches" style="display: flex; justify-content: center; margin-top: 25px;">
 		<div class="branchContainer" style="background-color: ghostwhite; border-style: solid; border-color: gray;width: 50%; padding: 25px;">
-			<h2>Ivan</h2>
-			<p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Adipisci mollitia sit dolores sapiente enim quo rerum nemo libero nulla iusto repudiandae accusantium voluptate neque asperiores ut, assumenda odio sunt minima.</p>
+			<?php $getAllInquiries = getAllInquiries($pdo, $_GET['inquiry_id']); ?>
+			<h2><?php echo $getAllInquiries['username']; ?></h2>
+			<i><?php echo $getAllInquiries['date_added']; ?></i>
+			<p><?php echo $getAllInquiries['description']; ?></p>
+			<hr>
 			<h1>All Replies</h1>
+			<?php $getAllRepliesByInquiry = getAllRepliesByInquiry($pdo, $_GET['inquiry_id']); ?>
+			<?php foreach ($getAllRepliesByInquiry as $row) { ?>
 			<div class="reply" style="margin-left: 25px; margin-top: 10px;">
-				<h3>Ivan</h3>
-				<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem accusantium doloribus obcaecati, ullam voluptate mollitia optio soluta, laudantium nobis, eum ipsa natus aliquam quasi? Ex ullam corrupti, adipisci quaerat ad.</p>
-			</div>				
+				<h3><?php echo $row['username'];?></h3>
+				<i><?php echo $row['date_added']; ?></i>
+				<p><?php echo $row['description']; ?></p>
+			</div>
+			<?php } ?>
 		</div>
 	</div>
 </body>

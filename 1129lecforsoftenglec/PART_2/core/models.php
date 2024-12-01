@@ -108,6 +108,15 @@ function insertInquiry($pdo, $description, $user_id) {
 	}
 }
 
+function getInquiryByID($pdo, $inquiry_id) {
+	$sql = "SELECT * FROM inquiries WHERE inquiry_id = ?";
+	$stmt = $pdo->prepare($sql);
+	$executeQuery = $stmt->execute([$inquiry_id]);
+	if ($executeQuery) {
+		return $stmt->fetch();
+	}
+}
+
 function editInquiry($pdo, $description, $inquiry_id) {
 	$sql = "UPDATE inquiries SET description = ? WHERE inquiry_id = ?";
 	$stmt = $pdo->prepare($sql);

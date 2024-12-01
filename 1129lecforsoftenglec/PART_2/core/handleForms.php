@@ -89,3 +89,19 @@ if (isset($_POST['insertInquiryBtn'])) {
 		header("Location: ../inquiries.php");
 	}
 }
+if (isset($_POST['editInquiryBtn'])) {
+	$inquiry_id = $_POST['inquiry_id'];
+	$inquiry_description = $_POST['inquiry_description'];
+	$updateQuery = editInquiry($pdo, $inquiry_description, $inquiry_id);
+	if ($updateQuery) {
+		header("Location: ../inquiries.php");
+	}
+}
+
+if (isset($_POST['deleteInquiryBtn'])) {
+	$inquiry_id = $_POST['inquiry_id'];
+	$deleteQuery = deleteInquiry($pdo, $inquiry_id);
+	if ($deleteQuery) {
+		header("Location: ../inquiries.php");
+	}
+}

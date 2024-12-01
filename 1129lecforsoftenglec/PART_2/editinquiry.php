@@ -26,15 +26,18 @@ if ($getUserByID['is_suspended'] == 1) {
 </head>
 <body>
 	<?php include 'navbar.php'; ?>
-	<h1 style="text-align:center;">Send an Inquiry</h1>
+	<h1 style="text-align:center;">Edit an Inquiry</h1>
 	<div class="formContainer" style="display: flex; justify-content: center;">
+		<?php $getInquiryByID = getInquiryByID($pdo, $_GET['inquiry_id']); ?>
 		<form action="core/handleForms.php" method="POST">
 			<p>
 				<label for="username">Inquiry</label>
-				<input type="text" name="inquiry_description">
+				<input type="hidden" name="inquiry_id" value="<?php echo $_GET['inquiry_id']; ?>"> 
+				<input type="text" name="inquiry_description" value="<?php echo $getInquiryByID['description']; ?>">
 				<input type="submit" name="editInquiryBtn" style="margin-top: 25px; ">
 			</p>
-		</form>	
+		</form>
+
 	</div>
 	
 </body>

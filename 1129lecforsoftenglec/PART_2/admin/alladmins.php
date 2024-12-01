@@ -25,8 +25,8 @@ if ($getUserByID['is_admin'] == 0) {
 	<?php include 'navbar.php'; ?>
 	<h2>All Admins</h2>
 	<ul>
-		<?php $getAllUsers = getAllUsers($pdo);?>
-		<?php foreach ($getAllUsers as $row) { ?>
+		<?php $getAllAdmins = getAllAdmins($pdo);?>
+		<?php foreach ($getAllAdmins as $row) { ?>
 			<li><?php echo $row['username']; ?></li>
 		<?php } ?>
 	</ul>

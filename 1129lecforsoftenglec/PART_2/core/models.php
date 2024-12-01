@@ -120,6 +120,10 @@ function editInquiry($pdo, $description, $inquiry_id) {
 function deleteInquiry($pdo, $inquiry_id) {
 	$sql = "DELETE FROM inquiries WHERE inquiry_id = ?";
 	$stmt = $pdo->prepare($sql);
+	$executeQuery = $stmt->execute([$inquiry_id]);
+	if ($executeQuery) {
+		return true;
+	}
 }
 
 function getAllInquiries($pdo, $inquiry_id=NULL) {

@@ -4,11 +4,13 @@
 
 <div class="navbar">
 	<h3>
-		<a href="index.php">Home</a>
-		<a href="insertbranch.php">Add New Branch</a>
-		<a href="allusers.php">All Users</a>
-		<a href="allinquiries.php">All Inquiries</a>
-		<a href="activitylogs.php">Activity Logs</a>
-		<a href="core/handleForms.php?logoutUserBtn=1">Logout</a>	
+		<a href="index.php">Home | </a>
+		<a href="insertbranch.php">Add New Branch | </a>
+		<a href="register-an-admin.php">Add New Admin | </a>
+		<a href="alladmins.php">All Admins | </a>
+		<a href="allusers.php">All Users | </a>
+		<a href="allinquiries.php">All Inquiries | </a>
+		<a href="activitylogs.php">Activity Logs | </a>
+		<a href="core/handleForms.php?logoutUserBtn=1">Logout |</a>	
 	</h3>	
 </div>

@@ -23,7 +23,8 @@ require_once 'core/handleForms.php';
 	</style>
 </head>
 <body>
-	<h1>Register here!</h1>
+	<?php include 'navbar.php'; ?>
+	<h1>Register An Admin!</h1>
 	<?php  
 	if (isset($_SESSION['message']) && isset($_SESSION['status'])) {
 
@@ -39,6 +40,7 @@ require_once 'core/handleForms.php';
 	unset($_SESSION['message']);
 	unset($_SESSION['status']);
 	?>
+
 	<form action="core/handleForms.php" method="POST">
 		<p>
 			<label for="username">Username</label>
@@ -62,5 +64,6 @@ require_once 'core/handleForms.php';
 			<input type="submit" name="insertNewUserBtn">
 		</p>
 	</form>
+	<h1 style="color: red; border-style: solid; padding: 10px;">Please don't forget to take note of the password</h1>
 </body>
 </html>

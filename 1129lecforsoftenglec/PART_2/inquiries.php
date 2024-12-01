@@ -35,7 +35,14 @@ if ($getUserByID['is_suspended'] == 1) {
 			<h2><?php echo $row['username']; ?></h2>
 			<i><?php echo $row['date_added']; ?></i>
 			<p><?php echo $row['description']; ?></p>
-			<a href="see-all-replies.php?inquiry_id=<?php echo $row['inquiry_id']; ?>" style="float: right;">See All Replies</a>
+			<div class="buttons" style="float:right;">
+				<a href="see-all-replies.php?inquiry_id=<?php echo $row['inquiry_id']; ?>">See All Replies</a>
+
+				<?php if ($_SESSION['username'] == $row['username']) { ?>
+					<a href="editinquiry.php?inquiry_id=<?php echo $row['inquiry_id']; ?>">Edit</a>
+					<a href="deleteinquiry.php?inquiry_id=<?php echo $row['inquiry_id']; ?>">Delete</a>
+				<?php } ?>
+			</div>
 		</div>
 	</div>
 	<?php } ?>

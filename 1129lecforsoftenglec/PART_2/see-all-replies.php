@@ -39,7 +39,7 @@ if ($getUserByID['is_suspended'] == 1) {
 			<?php $getAllRepliesByInquiry = getAllRepliesByInquiry($pdo, $_GET['inquiry_id']); ?>
 			<?php foreach ($getAllRepliesByInquiry as $row) { ?>
 			<div class="reply" style="margin-left: 25px; margin-top: 10px;">
-				<h3><?php echo $row['username'];?></h3>
+				<h3><?php echo $row['username'];?><span style="color:red;"> (Admin)</span></h3>
 				<i><?php echo $row['date_added']; ?></i>
 				<p><?php echo $row['description']; ?></p>
 			</div>

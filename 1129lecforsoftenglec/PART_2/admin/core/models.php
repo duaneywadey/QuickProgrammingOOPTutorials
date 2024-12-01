@@ -42,18 +42,18 @@ function getUserByID($pdo, $user_id) {
 	}
 }
 
-function insertNewUser($pdo, $username, $first_name, $last_name, $password) {
+function insertNewUser($pdo, $username, $first_name, $last_name, $password, $is_admin) {
 	$response = array();
 	$checkIfUserExists = checkIfUserExists($pdo, $username); 
 
 	if (!$checkIfUserExists['result']) {
 
-		$sql = "INSERT INTO user_accounts (username, first_name, last_name, password) 
-		VALUES (?,?,?,?)";
+		$sql = "INSERT INTO user_accounts (username, first_name, last_name, password, is_admin) 
+		VALUES (?,?,?,?,?)";
 
 		$stmt = $pdo->prepare($sql);
 
-		if ($stmt->execute([$username, $first_name, $last_name, $password])) {
+		if ($stmt->execute([$username, $first_name, $last_name, $password, $is_admin])) {
 			$response = array(
 				"status" => "200",
 				"message" => "User successfully inserted!"
@@ -78,8 +78,20 @@ function insertNewUser($pdo, $username, $first_name, $last_name, $password) {
 	return $response;
 }
 
+function getAllAdmins($pdo) {
+	$sql = "SELECT * FROM user_accounts 
+			WHERE is_admin = 1";
+	$stmt = $pdo->prepare($sql);
+	$executeQuery = $stmt->execute();
+
+	if ($executeQuery) {
+		return $stmt->fetchAll();
+	}
+}
+
 function getAllUsers($pdo) {
-	$sql = "SELECT * FROM user_accounts";
+	$sql = "SELECT * FROM user_accounts 
+			WHERE is_admin = 0";
 	$stmt = $pdo->prepare($sql);
 	$executeQuery = $stmt->execute();
 

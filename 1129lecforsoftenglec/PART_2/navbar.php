@@ -1,4 +1,5 @@
 <div class="navbar" style="text-align: center; margin-bottom: 50px;">
+		<img src="macinasal.png" alt=""width="150" height="150">
 	<h1>Hello theree! Welcome to MacInasal, <span style="color: blue;"><?php echo $_SESSION['username']; ?></span></h1>
 	<h3>
 		<a href="index.php">Home</a>

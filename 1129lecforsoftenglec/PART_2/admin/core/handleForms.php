@@ -8,31 +8,32 @@ if (isset($_POST['insertNewUserBtn'])) {
 	$last_name = trim($_POST['last_name']);
 	$password = trim($_POST['password']);
 	$confirm_password = trim($_POST['confirm_password']);
+	$is_admin = true;
 
 	if (!empty($username) && !empty($first_name) && !empty($last_name) && !empty($password) && !empty($confirm_password)) {
 
 		if ($password == $confirm_password) {
 
-			$insertQuery = insertNewUser($pdo, $username, $first_name, $last_name, password_hash($password, PASSWORD_DEFAULT));
+			$insertQuery = insertNewUser($pdo, $username, $first_name, $last_name, password_hash($password, PASSWORD_DEFAULT), $is_admin);
 			$_SESSION['message'] = $insertQuery['message'];
 
 			if ($insertQuery['status'] == '200') {
 				$_SESSION['message'] = $insertQuery['message'];
 				$_SESSION['status'] = $insertQuery['status'];
-				header("Location: ../login.php");
+				header("Location: ../index.php");
 			}
 
 			else {
 				$_SESSION['message'] = $insertQuery['message'];
 				$_SESSION['status'] = $insertQuery['status'];
-				header("Location: ../register.php");
+				header("Location: ../register-an-admin.php");
 			}
 
 		}
 		else {
 			$_SESSION['message'] = "Please make sure both passwords are equal";
 			$_SESSION['status'] = '400';
-			header("Location: ../register.php");
+			header("Location: ../register-an-admin.php");
 		}
 
 	}
@@ -40,7 +41,7 @@ if (isset($_POST['insertNewUserBtn'])) {
 	else {
 		$_SESSION['message'] = "Please make sure there are no empty input fields";
 		$_SESSION['status'] = '400';
-		header("Location: ../register.php");
+		header("Location: ../register-an-admin.php");
 	}
 }
 

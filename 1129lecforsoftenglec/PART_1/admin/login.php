@@ -40,6 +40,9 @@ require_once 'core/handleForms.php';
 			<input type="submit" name="loginUserBtn" style="margin-top: 25px; ">
 		</p>
 	</form>
+
+	<!-- Dont allow registration for admin side -->
+	
 	<!-- <p>Don't have an account? You may register <a href="register.php">here</a></p> -->
 </body>
 </html>

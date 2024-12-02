@@ -1,3 +1,5 @@
+
+
 CREATE TABLE user_accounts (
 	user_id INT AUTO_INCREMENT PRIMARY KEY,
 	username VARCHAR(255),

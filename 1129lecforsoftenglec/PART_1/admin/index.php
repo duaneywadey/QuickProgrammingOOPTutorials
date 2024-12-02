@@ -11,6 +11,7 @@ $getUserByID = getUserByID($pdo, $_SESSION['user_id']);
 if ($getUserByID['is_admin'] == 0) {
 	header("Location: ../index.php");
 }
+
 ?>
 
 <!DOCTYPE html>

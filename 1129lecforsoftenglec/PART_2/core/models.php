@@ -69,7 +69,7 @@ function insertNewUser($pdo, $username, $first_name, $last_name, $password) {
 }
 
 function getAllBranches($pdo) {
-	$sql = "SELECT * FROM branches";
+	$sql = "SELECT * FROM branches ORDER BY date_added DESC";
 	$stmt = $pdo->prepare($sql);
 	$executeQuery = $stmt->execute();
 

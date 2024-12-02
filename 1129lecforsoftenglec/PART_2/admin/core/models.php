@@ -327,6 +327,7 @@ function getAllInquiries($pdo, $inquiry_id=NULL) {
 				FROM inquiries
 				JOIN user_accounts 
 				ON inquiries.user_id = user_accounts.user_id
+				ORDER BY inquiries.date_added DESC
 				";
 		$stmt = $pdo->prepare($sql);
 		$executeQuery = $stmt->execute();

@@ -59,9 +59,9 @@ class Database {
 					break;
 
 				case 'delete':
+					return true;
 					break;
 				
-
 				default:
 					break;
 			}
@@ -99,17 +99,48 @@ class Database {
 		}
 	}
 
+	public function insert(array $values) {
+		$this->query_type = "INSERT";
+		$this->query = "INSERT INTO " . self::$table . " (";
+		foreach ($values as $key => $value) {
+			$this->query .= $key . ",";
+		 } 
+		$this->query = trim($this->query, ",");
+		$this->query .= ") values (";
+
+		foreach ($values as $key => $value) {
+			$this->query = .= ":" . $key . ",";
+		}
+		$this->query = trim($this->query, ",");
+		$this->query .= ")";
+		$this->values = $values;
+		return self::$instance;
+	}
+
 	public function update(array $values) {
 		$this->query_type = "UPDATE";
 		$this->query = "UPDATE " . self::$table . " SET ";
 		
 		foreach ($values as $key => $value) {
-			$this->query .= $key . "= :" . $key;
+			$this->query .= $key . "= :" . $key . ", ";
 		}
 
 		$this->query = trim($this->query, ",");
 		$this->values = $values;
 		return self::$instance;
 	}
+
+	public function query($query, $values=array()) {
+		$stmt = self::$conn->prepare($query);
+		$check = $stmt->execute($values);
+		if ($check) {
+			$data = $stmt->fetchAll(PDO::FETCH_OBJ);
+			if (is_array($data) && count($data) > 0) {
+				return $data;
+			}
+		}
+		return false;
+	}
 }
+
 ?>

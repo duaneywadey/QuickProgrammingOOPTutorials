@@ -40,8 +40,7 @@ class Database {
             $stmt->bindValue(':' . $key, $value);
         }
 
-        $stmt->execute();
-        return (int)$this->pdo->lastInsertId();
+        return $stmt->execute();
     }
 
     /**
@@ -70,8 +69,7 @@ class Database {
             $stmt->bindValue(':' . $key, $value);
         }
 
-        $stmt->execute();
-        return $stmt->rowCount();
+        return $stmt->execute();
     }
 
     /**

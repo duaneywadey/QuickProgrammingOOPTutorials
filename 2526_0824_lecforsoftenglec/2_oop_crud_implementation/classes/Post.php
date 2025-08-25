@@ -6,11 +6,11 @@ require_once 'Database.php';
 class Post extends Database {
     protected $table = 'posts';
 
-    public function createPost($title, $content) {
+    public function createPost($description, $user_id) {
         $data = [
-            'title' => $title,
-            'content' => $content,
-            'created_at' => date('Y-m-d H:i:s')
+            'description' => $description,
+            'user_id' => $user_id,
+            'date_added' => date('Y-m-d H:i:s')
         ];
         return $this->insert($this->table, $data);
     }
@@ -23,11 +23,11 @@ class Post extends Database {
         return $this->selectOne($this->table, 'id = :id', ['id' => $id]);
     }
 
-    public function updatePost($id, $title, $content) {
+    public function updatePost($id, $description, $user_id) {
         $data = [
-            'title' => $title,
-            'content' => $content,
-            'updated_at' => date('Y-m-d H:i:s')
+            'description' => $description,
+            'user_id' => $user_id,
+            'last_updated' => date('Y-m-d H:i:s')
         ];
         return $this->update($this->table, $data, 'id = :id', ['id' => $id]);
     }

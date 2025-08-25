@@ -1,38 +1,9 @@
 <?php
-// index.php
-
-require_once 'classes/Post.php';
-require_once 'classes/Comment.php';
-
-echo "<h1>CRUD Operations Demonstration</h1>";
 
 try {
     // --- Create instances of Post and Comment ---
     $postManager = new Post();
     $commentManager = new Comment();
-
-    // Ensure database tables exist (you'd typically do this via migrations or a setup script)
-    // For demonstration, let's assume 'test_db' exists with 'posts' and 'comments' tables.
-    // Example SQL to create tables:
-    /*
-    CREATE TABLE posts (
-        id INT AUTO_INCREMENT PRIMARY KEY,
-        title VARCHAR(255) NOT NULL,
-        content TEXT NOT NULL,
-        created_at DATETIME NOT NULL,
-        updated_at DATETIME
-    );
-
-    CREATE TABLE comments (
-        id INT AUTO_INCREMENT PRIMARY KEY,
-        post_id INT NOT NULL,
-        author VARCHAR(255) NOT NULL,
-        comment_text TEXT NOT NULL,
-        created_at DATETIME NOT NULL,
-        updated_at DATETIME,
-        FOREIGN KEY (post_id) REFERENCES posts(id) ON DELETE CASCADE
-    );
-    */
 
     // --- INSERT a new Post ---
     echo "<h2>1. Inserting New Posts</h2>";
@@ -84,9 +55,13 @@ try {
     echo "<h2>5. Updating Post ID {$postId1}</h2>";
     $updatedRowsPost = $postManager->updatePost($postId1, "My Updated First Post", "This content has been updated and is even more exciting now!");
     echo "Updated " . $updatedRowsPost . " row(s) for Post ID " . $postId1 . ".<br>";
+
+
     $updatedPost = $postManager->getPostById($postId1);
     echo "New Title: " . $updatedPost['title'] . ", New Content: " . substr($updatedPost['content'], 0, 50) . "...<br>";
     echo "<hr>";
+
+    
 
     // --- UPDATE a Comment ---
     echo "<h2>6. Updating Comment ID {$commentId2}</h2>";

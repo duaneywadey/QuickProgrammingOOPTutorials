@@ -63,8 +63,7 @@ try {
 
     // Prepare the SQL UPDATE statement with named placeholders
     $sql = "UPDATE posts 
-            SET description = :description, 
-            last_updated = :last_updated 
+            SET description = :description, last_updated = :last_updated 
             WHERE id = :id";
             
     $stmt = $pdo->prepare($sql);

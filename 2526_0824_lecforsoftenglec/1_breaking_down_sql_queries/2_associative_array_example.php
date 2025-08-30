@@ -1,23 +1,23 @@
 <?php
-
-// Printing key value pairs example
+// Names and their favorite ice cream flavor
 $premiumIceCream = [
-    1 => 'Madagascar Vanilla',
-    2 => 'Belgian Chocolate',
-    3 => 'Strawberry Cheesecake',
-    4 => 'Mint Chocolate Chip',
-    5 => 'Coffee',
-    6 => 'Salted Caramel',
-    7 => 'Pistachio',
-    8 => 'Cookies and Cream',
-    9 => 'Rocky Road',
-    10 => 'Butter Pecan',
+    'Alice' => 'Madagascar Vanilla', 'Brian' => 'Belgian Chocolate',
+    'Chloe' => 'Strawberry Cheesecake', 'David' => 'Mint Chocolate Chip',
+    'Emma' => 'Coffee', 'Finn' => 'Salted Caramel',
+    'Grace' => 'Pistachio', 'Henry' => 'Cookies and Cream',
+    'Isla' => 'Rocky Road', 'Jack' => 'Butter Pecan',
 ];
 
+// Printing key value pairs example
 foreach ($premiumIceCream as $key => $value) {
-    echo "ID:" . $key . " , Flavor: " . $value . "<br>";
+    echo "Name: " . $key . " , Favorite Flavor: " . $value . "<br>";
 }
 
+
+// Array keys example
+echo "<pre>";
+print_r(array_keys($premiumIceCream));
+echo "<pre>";
 
 // Implode function example
 $latinAmericanCities = [

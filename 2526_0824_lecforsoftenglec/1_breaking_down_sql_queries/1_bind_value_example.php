@@ -1,5 +1,4 @@
 <?php
-
 // Database connection details
 $dsn = 'mysql:host=localhost;dbname=mockdb;charset=utf8';
 $username = 'root';
@@ -29,12 +28,8 @@ try {
 
     // Execute the prepared statement
     $stmt->execute();
-
-    echo "New record created successfully! ";
-
+    
 } catch (PDOException $e) {
     echo "Error: " . $e->getMessage();
 }
-
-
 ?>

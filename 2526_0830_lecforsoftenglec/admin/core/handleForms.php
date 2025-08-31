@@ -66,3 +66,8 @@ if (isset($_POST['loginUserBtn'])) {
 	}
 
 }
+
+if (isset($_GET['logoutUserBtn'])) {
+	$userObj->logout();
+	header("Location: ../index.php");
+}

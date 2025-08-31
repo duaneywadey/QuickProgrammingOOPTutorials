@@ -1,11 +1,40 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Document</title>
-</head>
-<body>
-	<h1 style="color:red;">You must login first!</h1>
-</body>
-</html>
+<!doctype html>
+  <html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <style>
+      body {
+        font-family: "Arial";
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark p-4" style="background-color: #355E3B;">
+      <a class="navbar-brand" href="#">School Publication Homepage</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </nav>
+    <div class="container-fluid">
+      <div class="display-4 text-center">Hello there and welcome to the main homepage!</div>
+      <div class="display-4 text-center">All articles are below!!</div>
+      <div class="row justify-content-center">
+        <div class="col-md-6">
+          <div class="card mt-4 shadow">
+            <div class="card-body"> 
+              <h1>Lorem</h1>
+              <small>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vitae, quod architecto recusandae cum velit reiciendis aut impedit qui, ipsam minima explicabo, excepturi quaerat, ea eveniet? Soluta repudiandae, culpa numquam totam?  </small>
+              <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eaque ipsum at, quibusdam facilis id facere eius nobis culpa tempore tempora impedit nostrum labore eos quasi asperiores deleniti repudiandae possimus est.  </p>
+            </div>
+          </div>  
+        </div>
+      </div>
+    </div>
+  </body>
+  </html>

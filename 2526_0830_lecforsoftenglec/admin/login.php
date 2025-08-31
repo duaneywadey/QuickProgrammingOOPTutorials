@@ -26,9 +26,24 @@
             </div>
             <form action="core/handleForms.php" method="POST">
               <div class="card-body">
+                <?php  
+                if (isset($_SESSION['message']) && isset($_SESSION['status'])) {
+
+                  if ($_SESSION['status'] == "200") {
+                    echo "<h1 style='color: green;'>{$_SESSION['message']}</h1>";
+                  }
+
+                  else {
+                    echo "<h1 style='color: red;'>{$_SESSION['message']}</h1>"; 
+                  }
+
+                }
+                unset($_SESSION['message']);
+                unset($_SESSION['status']);
+              ?>
                 <div class="form-group">
                   <label for="exampleInputEmail1">Username</label>
-                  <input type="text" class="form-control" name="username">
+                  <input type="email" class="form-control" name="email">
                 </div>
                 <div class="form-group">
                   <label for="exampleInputEmail1">Password</label>

@@ -1,3 +1,10 @@
+<?php require_once 'classloader.php'; ?>
+
+<?php 
+if (!$userObj->isLoggedIn()) {
+  header("Location: ../index.php");
+} 
+?>
 <!doctype html>
   <html lang="en">
   <head>

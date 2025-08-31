@@ -1,3 +1,10 @@
+<?php require_once 'classloader.php'; ?>
+
+<?php 
+if (!$userObj->isLoggedIn() && !$userObj->isAdmin()) {
+  header("Location: ../index.php");
+} 
+?>
 <!doctype html>
   <html lang="en">
   <head>
@@ -17,7 +24,7 @@
   <body>
     <?php include 'includes/navbar.php'; ?>
     <div class="container-fluid">
-      <div class="display-4 text-center">Hello there and welcome! <span class="text-success"></span>. Here are all the articles</div>
+      <div class="display-4 text-center">Hello there and welcome! <span class="text-success"><?php echo $_SESSION['username']; ?></span>. Here are all the articles</div>
       <div class="row justify-content-center">
         <div class="col-md-6">
           <div class="card mt-4 shadow">

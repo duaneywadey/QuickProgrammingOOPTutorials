@@ -60,8 +60,7 @@ class Database {
      */
     protected function executeNonQuery($sql, $params = []) {
         $stmt = $this->pdo->prepare($sql);
-        $stmt->execute($params);
-        return $stmt->rowCount();
+        return $stmt->execute($params);
     }
 
     /**

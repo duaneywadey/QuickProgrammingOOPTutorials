@@ -11,7 +11,7 @@
     <style>
       body {
         font-family: "Arial";
-        background-image: url("https://img.freepik.com/free-vector/winter-blue-pink-gradient-background-vector_53876-117275.jpg?t=st=1746104039~exp=1746107639~hmac=2f238261c795cf2f54851b4f9f1b1bda806f8a408384522f6de69dcd5115750f&w=1380");
+        background-image: url("https://images.unsplash.com/photo-1488190211105-8b0e65b80b4e?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
       }
     </style>
     <title>Hello, world!</title>
@@ -40,10 +40,10 @@
                 }
                 unset($_SESSION['message']);
                 unset($_SESSION['status']);
-              ?>
+                ?>
                 <div class="form-group">
-                  <label for="exampleInputEmail1">Username</label>
-                  <input type="text" class="form-control" name="username" required>
+                  <label for="exampleInputEmail1">Email</label>
+                  <input type="email" class="form-control" name="email" required>
                 </div>
                 <div class="form-group">
                   <label for="exampleInputEmail1">Password</label>

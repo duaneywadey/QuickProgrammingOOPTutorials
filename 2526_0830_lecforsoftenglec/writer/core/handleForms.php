@@ -72,14 +72,13 @@ if (isset($_GET['logoutUserBtn'])) {
 	header("Location: ../index.php");
 }
 
-if (isset($_POST['insertAdminArticleBtn'])) {
+if (isset($_POST['insertArticleBtn'])) {
 	$title = $_POST['title'];
 	$description = $_POST['description'];
 	$author_id = $_SESSION['user_id'];
 	if ($articleObj->createArticle($title, $description, $author_id)) {
 		header("Location: ../index.php");
 	}
-
 }
 
 if (isset($_POST['editArticleBtn'])) {

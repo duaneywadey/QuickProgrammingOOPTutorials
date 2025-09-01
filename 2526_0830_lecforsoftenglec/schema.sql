@@ -14,5 +14,5 @@ CREATE TABLE articles (
     author_id INT NOT NULL,
     is_active TINYINT(1) NOT NULL DEFAULT 0,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (author_id) REFERENCES users(id) ON DELETE CASCADE
+    FOREIGN KEY (author_id) REFERENCES users(user_id) ON DELETE CASCADE
 );

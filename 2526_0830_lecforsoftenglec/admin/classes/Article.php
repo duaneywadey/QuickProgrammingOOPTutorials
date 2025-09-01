@@ -15,9 +15,8 @@ class Article extends Database {
      * @return int The ID of the newly created article.
      */
     public function createArticle($title, $content, $author_id) {
-        $sql = "INSERT INTO articles (title, content, author_id, is_active) VALUES (?, ?, ?, 0)";
-        $this->executeNonQuery($sql, [$title, $content, $author_id]);
-        return $this->lastInsertId();
+        $sql = "INSERT INTO articles (title, content, author_id, is_active) VALUES (?, ?, ?, 1)";
+        return $this->executeNonQuery($sql, [$title, $content, $author_id]);
     }
 
     /**
@@ -30,8 +29,17 @@ class Article extends Database {
             $sql = "SELECT * FROM articles WHERE article_id = ?";
             return $this->executeQuerySingle($sql, [$id]);
         }
-        $sql = "SELECT * FROM articles";
+        $sql = "SELECT * FROM articles JOIN school_publication_users ON articles.author_id = school_publication_users.user_id ORDER BY articles.created_at DESC";
         return $this->executeQuery($sql);
+    }
+
+
+    public function getArticlesByUserID($user_id) {
+        $sql = "SELECT * FROM articles 
+                JOIN school_publication_users ON 
+                articles.author_id = school_publication_users.user_id
+                WHERE author_id = ? ORDER BY articles.created_at DESC";
+        return $this->executeQuery($sql, [$user_id]);
     }
 
     /**

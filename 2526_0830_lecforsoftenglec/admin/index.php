@@ -2,7 +2,7 @@
 
 <?php 
 if (!$userObj->isLoggedIn() && !$userObj->isAdmin()) {
-  header("Location: ../index.php");
+  header("Location: login.php");
 } 
 ?>
 <!doctype html>
@@ -27,11 +27,27 @@ if (!$userObj->isLoggedIn() && !$userObj->isAdmin()) {
       <div class="display-4 text-center">Hello there and welcome to the admin side! <span class="text-success"><?php echo $_SESSION['username']; ?></span>. Here are all the articles</div>
       <div class="row justify-content-center">
         <div class="col-md-6">
+          <form action="core/handleForms.php" method="POST">
+            <div class="form-group">
+              <input type="text" class="form-control mt-4" name="title" placeholder="Input title here">
+            </div>
+            <div class="form-group">
+              <textarea name="description" class="form-control mt-4" placeholder="Message as admin"></textarea>
+            </div>
+            <input type="submit" class="btn btn-primary form-control float-right mt-4 mb-4" name="insertAdminArticleBtn">
+          </form>
+          <?php $articles = $articleObj->getArticles(); ?>
+          <?php foreach ($articles as $article) { ?>
           <div class="card mt-4 shadow">
-            <div class="card-body"> 
-              <h1>Lorem</h1>
-              <small>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vitae, quod architecto recusandae cum velit reiciendis aut impedit qui, ipsam minima explicabo, excepturi quaerat, ea eveniet? Soluta repudiandae, culpa numquam totam?  </small>
-              <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eaque ipsum at, quibusdam facilis id facere eius nobis culpa tempore tempora impedit nostrum labore eos quasi asperiores deleniti repudiandae possimus est.  </p>
+            <div class="card-body">
+              <h1><?php echo $article['title']; ?></h1> 
+              <?php if ($article['is_admin'] == 1) { ?>
+                <p><small class="bg-primary text-white p-1">  
+                  Message From Admin
+                </small></p>
+              <?php } ?>
+              <small><strong><?php echo $article['username'] ?></strong> - <?php echo $article['created_at']; ?> </small>
+              <p><?php echo $article['content']; ?> </p>
               <form action="core/handleForms.php" method="POST">
                 <input type="submit" class="ml-1 btn btn-info float-right" value="Hide">
               </form>
@@ -40,6 +56,7 @@ if (!$userObj->isLoggedIn() && !$userObj->isAdmin()) {
               </form>
             </div>
           </div>  
+          <?php } ?> 
         </div>
       </div>
     </div>

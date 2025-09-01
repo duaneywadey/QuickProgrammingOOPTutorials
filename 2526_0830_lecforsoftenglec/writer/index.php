@@ -3,7 +3,11 @@
 <?php 
 if (!$userObj->isLoggedIn()) {
   header("Location: login.php");
-} 
+}
+
+if ($userObj->isAdmin()) {
+  header("Location: ../admin/index.php");
+}  
 ?>
 <!doctype html>
   <html lang="en">
@@ -36,7 +40,7 @@ if (!$userObj->isLoggedIn()) {
             </div>
             <input type="submit" class="btn btn-primary form-control float-right mt-4 mb-4" name="insertArticleBtn">
           </form>
-          <?php $articles = $articleObj->getArticles(); ?>
+          <?php $articles = $articleObj->getActiveArticles(); ?>
           <?php foreach ($articles as $article) { ?>
           <div class="card mt-4 shadow">
             <div class="card-body">
@@ -48,12 +52,6 @@ if (!$userObj->isLoggedIn()) {
               <?php } ?>
               <small><strong><?php echo $article['username'] ?></strong> - <?php echo $article['created_at']; ?> </small>
               <p><?php echo $article['content']; ?> </p>
-              <form action="core/handleForms.php" method="POST">
-                <input type="submit" class="ml-1 btn btn-info float-right" value="Hide">
-              </form>
-              <form action="core/handleForms.php" method="POST">
-                <input type="submit" class="btn btn-danger float-right" value="Delete">
-              </form>
             </div>
           </div>  
           <?php } ?> 

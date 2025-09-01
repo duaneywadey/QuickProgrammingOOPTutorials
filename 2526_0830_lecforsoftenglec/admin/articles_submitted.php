@@ -1,9 +1,13 @@
 <?php require_once 'classloader.php'; ?>
 
 <?php 
-if (!$userObj->isLoggedIn() && !$userObj->isAdmin()) {
+if (!$userObj->isLoggedIn()) {
   header("Location: login.php");
-} 
+}
+
+if (!$userObj->isAdmin()) {
+  header("Location: ../writer/index.php");
+}  
 ?>
 <!doctype html>
   <html lang="en">

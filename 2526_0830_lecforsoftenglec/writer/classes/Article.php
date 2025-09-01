@@ -33,6 +33,19 @@ class Article extends Database {
         return $this->executeQuery($sql);
     }
 
+    public function getActiveArticles($id = null) {
+        if ($id) {
+            $sql = "SELECT * FROM articles WHERE article_id = ?";
+            return $this->executeQuerySingle($sql, [$id]);
+        }
+        $sql = "SELECT * FROM articles 
+                JOIN school_publication_users ON 
+                articles.author_id = school_publication_users.user_id 
+                WHERE is_active = 1 ORDER BY articles.created_at DESC";
+                
+        return $this->executeQuery($sql);
+    }
+
     public function getArticlesByUserID($user_id) {
         $sql = "SELECT * FROM articles 
                 JOIN school_publication_users ON 

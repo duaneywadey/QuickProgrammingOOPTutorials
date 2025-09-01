@@ -95,3 +95,9 @@ if (isset($_POST['deleteArticleBtn'])) {
 	$article_id = $_POST['article_id'];
 	echo $articleObj->deleteArticle($article_id);
 }
+
+if (isset($_POST['updateArticleVisibility'])) {
+	$article_id = $_POST['article_id'];
+	$status = $_POST['status'];
+	echo $articleObj->updateArticleVisibility($article_id,$status);
+}

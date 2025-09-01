@@ -1,9 +1,13 @@
 <?php require_once 'classloader.php'; ?>
 
 <?php 
-if (!$userObj->isLoggedIn() && !$userObj->isAdmin()) {
+if (!$userObj->isLoggedIn()) {
   header("Location: login.php");
-} 
+}
+
+if (!$userObj->isAdmin()) {
+  header("Location: ../writer/index.php");
+}  
 ?>
 <!doctype html>
   <html lang="en">
@@ -36,7 +40,7 @@ if (!$userObj->isLoggedIn() && !$userObj->isAdmin()) {
             </div>
             <input type="submit" class="btn btn-primary form-control float-right mt-4 mb-4" name="insertAdminArticleBtn">
           </form>
-          <?php $articles = $articleObj->getArticles(); ?>
+          <?php $articles = $articleObj->getActiveArticles(); ?>
           <?php foreach ($articles as $article) { ?>
           <div class="card mt-4 shadow">
             <div class="card-body">

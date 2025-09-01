@@ -29,7 +29,24 @@ class Article extends Database {
             $sql = "SELECT * FROM articles WHERE article_id = ?";
             return $this->executeQuerySingle($sql, [$id]);
         }
-        $sql = "SELECT * FROM articles JOIN school_publication_users ON articles.author_id = school_publication_users.user_id ORDER BY articles.created_at DESC";
+        $sql = "SELECT * FROM articles 
+                JOIN school_publication_users ON 
+                articles.author_id = school_publication_users.user_id 
+                ORDER BY articles.created_at DESC";
+
+        return $this->executeQuery($sql);
+    }
+
+    public function getActiveArticles($id = null) {
+        if ($id) {
+            $sql = "SELECT * FROM articles WHERE article_id = ?";
+            return $this->executeQuerySingle($sql, [$id]);
+        }
+        $sql = "SELECT * FROM articles 
+                JOIN school_publication_users ON 
+                articles.author_id = school_publication_users.user_id 
+                WHERE is_active = 1 ORDER BY articles.created_at DESC";
+                
         return $this->executeQuery($sql);
     }
 
@@ -62,12 +79,8 @@ class Article extends Database {
      * @return int The number of affected rows.
      */
     public function updateArticleVisibility($id, $is_active) {
-        $userModel = new User();
-        if (!$userModel->isAdmin()) {
-            return 0;
-        }
         $sql = "UPDATE articles SET is_active = ? WHERE article_id = ?";
-        return $this->executeNonQuery($sql, [(int)$is_active, $id]);
+        return $this->executeNonQuery($sql, [$is_active, $id]);
     }
 
 

@@ -3,7 +3,11 @@
 <?php 
 if (!$userObj->isLoggedIn()) {
   header("Location: login.php");
-} 
+}
+
+if ($userObj->isAdmin()) {
+  header("Location: ../admin/index.php");
+}  
 ?>
 <!doctype html>
   <html lang="en">
@@ -43,6 +47,12 @@ if (!$userObj->isLoggedIn()) {
             <div class="card-body">
               <h1><?php echo $article['title']; ?></h1> 
               <small><?php echo $article['username'] ?> - <?php echo $article['created_at']; ?> </small>
+              <?php if ($article['is_active'] == 0) { ?>
+                <p class="text-danger">Status: PENDING</p>
+              <?php } ?>
+              <?php if ($article['is_active'] == 1) { ?>
+                <p class="text-danger">Status: ACTIVE</p>
+              <?php } ?>
               <p><?php echo $article['content']; ?> </p>
               <form class="deleteArticleForm">
                 <input type="hidden" name="article_id" value="<?php echo $article['article_id']; ?>" class="article_id">

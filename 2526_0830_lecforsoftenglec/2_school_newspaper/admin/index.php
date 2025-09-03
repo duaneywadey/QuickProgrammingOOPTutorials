@@ -52,12 +52,6 @@ if (!$userObj->isAdmin()) {
               <?php } ?>
               <small><strong><?php echo $article['username'] ?></strong> - <?php echo $article['created_at']; ?> </small>
               <p><?php echo $article['content']; ?> </p>
-              <form action="core/handleForms.php" method="POST">
-                <input type="submit" class="ml-1 btn btn-info float-right" value="Hide">
-              </form>
-              <form action="core/handleForms.php" method="POST">
-                <input type="submit" class="btn btn-danger float-right" value="Delete">
-              </form>
             </div>
           </div>  
           <?php } ?> 

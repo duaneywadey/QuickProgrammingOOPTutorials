@@ -51,7 +51,7 @@ if ($userObj->isAdmin()) {
                 <p class="text-danger">Status: PENDING</p>
               <?php } ?>
               <?php if ($article['is_active'] == 1) { ?>
-                <p class="text-danger">Status: ACTIVE</p>
+                <p class="text-success">Status: ACTIVE</p>
               <?php } ?>
               <p><?php echo $article['content']; ?> </p>
               <form class="deleteArticleForm">

@@ -86,33 +86,33 @@ if (!$userObj->isAdmin()) {
       </div>
     </div>
     <script>
-      $('.articleCard').on('dblclick', function (event) {
-        var updateArticleForm = $(this).find('.updateArticleForm');
-        updateArticleForm.toggleClass('d-none');
-      });
+      // $('.articleCard').on('dblclick', function (event) {
+      //   var updateArticleForm = $(this).find('.updateArticleForm');
+      //   updateArticleForm.toggleClass('d-none');
+      // });
 
-      $('.deleteArticleForm').on('submit', function (event) {
-        event.preventDefault();
-        var formData = {
-          article_id: $(this).find('.article_id').val(),
-          deleteArticleBtn: 1
-        }
-        if (confirm("Are you sure you want to delete this article?")) {
-          $.ajax({
-            type:"POST",
-            url: "core/handleForms.php",
-            data:formData,
-            success: function (data) {
-              if (data) {
-                location.reload();
-              }
-              else{
-                alert("Deletion failed");
-              }
-            }
-          })
-        }
-      })
+      // $('.deleteArticleForm').on('submit', function (event) {
+      //   event.preventDefault();
+      //   var formData = {
+      //     article_id: $(this).find('.article_id').val(),
+      //     deleteArticleBtn: 1
+      //   }
+      //   if (confirm("Are you sure you want to delete this article?")) {
+      //     $.ajax({
+      //       type:"POST",
+      //       url: "core/handleForms.php",
+      //       data:formData,
+      //       success: function (data) {
+      //         if (data) {
+      //           location.reload();
+      //         }
+      //         else{
+      //           alert("Deletion failed");
+      //         }
+      //       }
+      //     })
+      //   }
+      // })
 
       $('.is_active_select').on('change', function (event) {
         event.preventDefault();

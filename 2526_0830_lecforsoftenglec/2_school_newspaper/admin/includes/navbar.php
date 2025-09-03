@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-dark p-4" style="background-color: #008080;">
-  <a class="navbar-brand" href="#">Admin Side</a>
+  <a class="navbar-brand" href="index.php">Admin Side</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>

@@ -22,9 +22,14 @@ class User extends Database {
      * @return bool True if username exists, false otherwise.
      */
     public function usernameExists($username) {
-        $sql = "SELECT COUNT(*) FROM school_publication_users WHERE username = ?";
+        $sql = "SELECT COUNT(*) as username_count FROM school_publication_users WHERE username = ?";
         $count = $this->executeQuerySingle($sql, [$username]);
-        return $count > 0;
+        if ($count['username_count'] > 0) {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
     
 

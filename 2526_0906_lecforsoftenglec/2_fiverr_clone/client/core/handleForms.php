@@ -94,6 +94,17 @@ if (isset($_POST['updateOfferBtn'])) {
 	$description = htmlspecialchars($_POST['description']);
 	$offer_id = $_POST['offer_id'];
 	if ($offerObj->updateOffer($description, $offer_id)) {
+		$_SESSION['message'] = "Offer updated successfully!";
+		$_SESSION['status'] = '200';
+		header("Location: ../index.php");
+	}
+}
+
+if (isset($_POST['deleteOfferBtn'])) {
+	$offer_id = $_POST['offer_id'];
+	if ($offerObj->deleteOffer($offer_id)) {
+		$_SESSION['message'] = "Offer deleted successfully!";
+		$_SESSION['status'] = '200';
 		header("Location: ../index.php");
 	}
 }

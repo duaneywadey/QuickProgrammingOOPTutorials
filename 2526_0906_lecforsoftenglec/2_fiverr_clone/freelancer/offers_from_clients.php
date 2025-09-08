@@ -45,8 +45,20 @@ if ($userObj->isAdmin()) {
                   </div>
                 </div>
                 <div class="col-md-6">
-                  <h2><a href="#">All Offers</a></h2>
-                  <p>Lorem ipsum dolor sit amet consectetur adipisicing, elit. Illo tempora atque voluptates delectus quos, expedita velit, magnam vitae ut error eligendi sint provident iure esse dolor dolorem alias cumque earum?</p>
+                  <div class="card">
+                    <div class="card-header"><h2>All Offers</h2></div>
+                    <div class="card-body overflow-auto">
+                      <?php $getOffersByProposalID = $offerObj->getOffersByProposalID($proposal['proposal_id']); ?>
+                      <?php foreach ($getOffersByProposalID as $offer) { ?>
+                      <div class="offer">
+                        <h4><?php echo $offer['username']; ?> <span class="text-primary">( <?php echo $offer['contact_number']; ?> )</span></h4>
+                        <small><i><?php echo $offer['offer_date_added']; ?></i></small>
+                        <p><?php echo $offer['description']; ?></p>
+                        <hr>
+                      </div>
+                      <?php } ?>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

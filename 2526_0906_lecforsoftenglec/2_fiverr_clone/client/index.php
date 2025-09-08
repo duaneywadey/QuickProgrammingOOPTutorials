@@ -28,6 +28,23 @@ if (!$userObj->isAdmin()) {
     <?php include 'includes/navbar.php'; ?>
     <div class="container-fluid">
       <div class="display-4 text-center">Hello there and welcome! <span class="text-success"><?php echo $_SESSION['username']; ?>. </span> Double click to edit your offers and then press enter to save!</div>
+      <div class="text-center">
+        <?php  
+          if (isset($_SESSION['message']) && isset($_SESSION['status'])) {
+
+            if ($_SESSION['status'] == "200") {
+              echo "<h1 style='color: green;'>{$_SESSION['message']}</h1>";
+            }
+
+            else {
+              echo "<h1 style='color: red;'>{$_SESSION['message']}</h1>"; 
+            }
+
+          }
+          unset($_SESSION['message']);
+          unset($_SESSION['status']);
+        ?>
+      </div>
       <div class="row justify-content-center">
         <div class="col-md-12">
           <?php $getProposals = $proposalObj->getProposals(); ?>
@@ -56,7 +73,8 @@ if (!$userObj->isAdmin()) {
                         <?php if ($offer['user_id'] == $_SESSION['user_id']) { ?>
                           <form action="core/handleForms.php" method="POST">
                             <div class="form-group">
-                              <input type="submit" class="btn btn-danger" value="Delete">
+                              <input type="hidden" class="form-control" value="<?php echo $offer['offer_id']; ?>" name="offer_id" >
+                              <input type="submit" class="btn btn-danger" value="Delete" name="deleteOfferBtn">
                             </div>
                           </form>
 
@@ -72,7 +90,6 @@ if (!$userObj->isAdmin()) {
                         <hr>
                       </div>
                       <?php } ?>
-
                     </div>
                     <div class="card-footer">
                       <form action="core/handleForms.php" method="POST">

@@ -66,7 +66,7 @@ class User extends Database {
             $this->startSession();
             $_SESSION['user_id'] = $user['user_id'];
             $_SESSION['username'] = $user['username'];
-            $_SESSION['is_admin'] = (bool)$user['is_admin'];
+            $_SESSION['is_client'] = (bool)$user['is_client'];
             return true;
         }
         return false;
@@ -87,7 +87,7 @@ class User extends Database {
      */
     public function isAdmin() {
         $this->startSession();
-        return isset($_SESSION['is_admin']) && $_SESSION['is_admin'];
+        return isset($_SESSION['is_client']) && $_SESSION['is_client'];
     }
 
     /**

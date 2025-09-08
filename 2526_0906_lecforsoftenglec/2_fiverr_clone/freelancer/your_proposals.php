@@ -1,5 +1,15 @@
 <?php require_once 'classloader.php'; ?>
 
+<?php 
+if (!$userObj->isLoggedIn()) {
+  header("Location: login.php");
+}
+
+if ($userObj->isAdmin()) {
+  header("Location: ../client/index.php");
+}  
+?>
+
 <!doctype html>
   <html lang="en">
   <head>
@@ -48,6 +58,13 @@
               <p class="mt-4"><i><?php echo $proposal['proposals_date_added']; ?></i></p>
               <p class="mt-2"><?php echo $proposal['description']; ?></p>
               <h4><i><?php echo number_format($proposal['min_price']) . " - " . number_format($proposal['max_price']);?></i></h4>
+              <form action="core/handleForms.php" method="POST">
+                <div class="form-group">
+                  <input type="hidden" name="proposal_id" value="<?php echo $proposal['proposal_id']; ?>">
+                  <input type="hidden" name="image" value="<?php echo $proposal['image']; ?>">
+                  <input type="submit" name="deleteProposalBtn" class="btn btn-danger float-right" value="Delete">
+                </div>
+              </form>
                 <form action="core/handleForms.php" method="POST" class="updateProposalForm d-none">
                   <div class="row mt-4">
                     <div class="col-md-6">

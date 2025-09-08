@@ -34,9 +34,11 @@ class Offer extends Database {
 
 
     public function getOffersByProposalID($proposal_id) {
-        $sql = "SELECT * FROM Offers WHERE proposal_id = ? 
+        $sql = "SELECT * FROM Offers JOIN fiverr_clone_users ON 
+                offers.user_id = fiverr_clone_users.user_id
+                WHERE proposal_id = ? 
                 ORDER BY Offers.date_added DESC";
-        return $this->executeQuery($sql, [$user_id]);
+        return $this->executeQuery($sql, [$proposal_id]);
     }
 
     /**

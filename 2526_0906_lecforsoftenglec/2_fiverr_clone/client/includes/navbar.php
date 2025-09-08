@@ -6,10 +6,10 @@
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav">
       <li class="nav-item">
-        <a class="nav-link" href="articles_from_students.php">Project Offers Submitted </a>
+        <a class="nav-link" href="project_offers_submitted.php">Project Offers Submitted </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="articles_submitted.php">Profile</a>
+        <a class="nav-link" href="profile.php">Profile</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="core/handleForms.php?logoutUserBtn=1">Logout</a>

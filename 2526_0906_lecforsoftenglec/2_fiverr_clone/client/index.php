@@ -1,5 +1,13 @@
 <?php require_once 'classloader.php'; ?>
+<?php 
+if (!$userObj->isLoggedIn()) {
+  header("Location: login.php");
+}
 
+if (!$userObj->isAdmin()) {
+  header("Location: ../freelancer/index.php");
+} 
+?>
 <!doctype html>
   <html lang="en">
   <head>
@@ -19,28 +27,50 @@
   <body>
     <?php include 'includes/navbar.php'; ?>
     <div class="container-fluid">
-      <div class="display-4 text-center">Hello there and welcome! </div>
+      <div class="display-4 text-center">Hello there and welcome! <span class="text-success"><?php echo $_SESSION['username']; ?></span></div>
       <div class="row justify-content-center">
         <div class="col-md-12">
+          <?php $getProposals = $proposalObj->getProposals(); ?>
+          <?php foreach ($getProposals as $proposal) { ?>
           <div class="card shadow mt-4 mb-4">
             <div class="card-body">
               <div class="row">
                 <div class="col-md-6">
-                  <h2><a href="#">Ivan</a></h2>
-                  <img src="https://images.unsplash.com/photo-1755371034010-51c25321312d?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="img-fluid" alt="">
-                  <p class="mt-4 mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus ab, eum alias quaerat minus! Delectus tenetur, maxime velit, deleniti eius sint vero. Atque tempora nam natus magni architecto voluptas, distinctio!</p>
-                  <h4><i>5000 - 10000 PHP</i></h4>
-                  <div class="float-right">
-                    <a href="#">Check out services</a>
-                  </div>
+                  <h2><a href="#"><?php echo $proposal['username']; ?></a></h2>
+                  <img src="<?php echo '../images/'.$proposal['image']; ?>" class="img-fluid" alt="">
+                  <p class="mt-4 mb-4"><?php echo $proposal['description']; ?></p>
+                  <h4><i><?php echo number_format($proposal['min_price']) . " - " . number_format($proposal['max_price']);?> PHP</i></h4>
                 </div>
                 <div class="col-md-6">
-                  <h2><a href="#">All Offers</a></h2>
-                  <p>Lorem ipsum dolor sit amet consectetur adipisicing, elit. Illo tempora atque voluptates delectus quos, expedita velit, magnam vitae ut error eligendi sint provident iure esse dolor dolorem alias cumque earum?</p>
+                  <div class="card" style="height: 600px;">
+                    <div class="card-header"><h2>All Offers</h2></div>
+                    <div class="card-body overflow-auto">
+
+                      <?php $getOffersByProposalID = $offerObj->getOffersByProposalID($proposal['proposal_id']); ?>
+                      <?php foreach ($getOffersByProposalID as $offer) { ?>
+                      <div class="offer">
+                        <h4><?php echo $offer['username']; ?></h4>
+                        <p><?php echo $offer['description']; ?></p>
+                      </div>
+                      <?php } ?>
+
+                    </div>
+                    <div class="card-footer">
+                      <form action="core/handleForms.php" method="POST">
+                        <div class="form-group">
+                          <label for="#">Description</label>
+                          <input type="text" class="form-control" name="description">
+                          <input type="hidden" class="form-control" name="proposal_id" value="<?php echo $proposal['proposal_id']; ?>">
+                          <input type="submit" class="btn btn-primary float-right mt-4" name="insertOfferBtn"> 
+                        </div>
+                      </form>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
+          <?php } ?>
         </div>
       </div>
     </div>

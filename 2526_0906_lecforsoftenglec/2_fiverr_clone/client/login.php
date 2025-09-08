@@ -52,6 +52,9 @@
                   <input type="password" class="form-control" name="password">
                   <input type="submit" class="btn btn-primary float-right mt-4" name="loginUserBtn">
                 </div>
+                <div class="form-group">
+                  <p>Don't have an account yet? You may <a href="register.php"> register here!</a></p>
+                </div>
               </div>
             </form>
           </div>

@@ -128,3 +128,17 @@ if (isset($_POST['updateProposalBtn'])) {
 		header("Location: ../your_proposals.php");
 	}
 }
+
+if (isset($_POST['deleteProposalBtn'])) {
+	$proposal_id = $_POST['proposal_id'];
+	$image = $_POST['image'];
+
+	if ($proposalObj->deleteProposal($proposal_id)) {
+		// Delete file inside images folder
+		unlink("../../images/".$image);
+		
+		$_SESSION['status'] = "200";
+		$_SESSION['message'] = "Proposal deleted successfully!";
+		header("Location: ../your_proposals.php");
+	}
+}

@@ -19,33 +19,70 @@
   <body>
     <?php include 'includes/navbar.php'; ?>
     <div class="container-fluid">
-      <div class="display-4 text-center">Hello there and welcome! </div>
+      <div class="display-4 text-center">Double click to edit!</div>
+      <div class="text-center">
+        <?php  
+          if (isset($_SESSION['message']) && isset($_SESSION['status'])) {
+
+            if ($_SESSION['status'] == "200") {
+              echo "<h1 style='color: green;'>{$_SESSION['message']}</h1>";
+            }
+
+            else {
+              echo "<h1 style='color: red;'>{$_SESSION['message']}</h1>"; 
+            }
+
+          }
+          unset($_SESSION['message']);
+          unset($_SESSION['status']);
+        ?>
+      </div>
       <div class="row justify-content-center">
         <div class="col-md-6">
-          <div class="card shadow mt-4 mb-4">
+          <?php $getProposalsByUserID = $proposalObj->getProposalsByUserID($_SESSION['user_id']); ?>
+          <?php foreach ($getProposalsByUserID as $proposal) { ?>
+          <div class="card proposalCard shadow mt-4 mb-4">
             <div class="card-body">
-              <h2><a href="#">Ivan</a></h2>
-              <img src="https://images.unsplash.com/photo-1755371034010-51c25321312d?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="img-fluid" alt="">
-              <p class="mt-4 mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus ab, eum alias quaerat minus! Delectus tenetur, maxime velit, deleniti eius sint vero. Atque tempora nam natus magni architecto voluptas, distinctio!</p>
-              <h4><i>5000 - 10000 PHP</i></h4>
-              <div class="float-right">
-                <a href="#">Check out services</a>
-              </div>
+              <h2><a href="#"><?php echo $proposal['username']; ?></a></h2>
+              <img src="<?php echo "../images/".$proposal['image']; ?>" class="img-fluid" alt="">
+              <p class="mt-4"><i><?php echo $proposal['proposals_date_added']; ?></i></p>
+              <p class="mt-2"><?php echo $proposal['description']; ?></p>
+              <h4><i><?php echo number_format($proposal['min_price']) . " - " . number_format($proposal['max_price']);?></i></h4>
+                <form action="core/handleForms.php" method="POST" class="updateProposalForm d-none">
+                  <div class="row mt-4">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="#">Minimum Price</label>
+                        <input type="number" class="form-control" name="min_price" value="<?php echo $proposal['min_price']; ?>">
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="#">Maximum Price</label>
+                        <input type="number" class="form-control" name="max_price" value="<?php echo $proposal['max_price']; ?>">
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="#">Description</label>
+                        <input type="hidden" name="proposal_id" value="<?php echo $proposal['proposal_id']; ?>">
+                        <textarea name="description" class="form-control"><?php echo $proposal['description']; ?></textarea>
+                        <input type="submit" class="btn btn-primary form-control mt-2" name="updateProposalBtn">
+                      </div>
+                    </div>
+                  </div>
+                </form>
             </div>
           </div>
-          <div class="card shadow mt-4 mb-4">
-            <div class="card-body">
-              <h2><a href="#">Ivan</a></h2>
-              <img src="https://images.unsplash.com/photo-1755371034010-51c25321312d?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="img-fluid" alt="">
-              <p class="mt-4 mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus ab, eum alias quaerat minus! Delectus tenetur, maxime velit, deleniti eius sint vero. Atque tempora nam natus magni architecto voluptas, distinctio!</p>
-              <h4><i>5000 - 10000 PHP</i></h4>
-              <div class="float-right">
-                <a href="#">Check out services</a>
-              </div>
-            </div>
-          </div>
+          <?php } ?>
         </div>
       </div>
     </div>
+    <script>
+       $('.proposalCard').on('dblclick', function (event) {
+          var updateProposalForm = $(this).find('.updateProposalForm');
+          updateProposalForm.toggleClass('d-none');
+        });
+    </script>
   </body>
 </html>

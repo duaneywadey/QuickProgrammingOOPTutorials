@@ -41,7 +41,7 @@ class User extends Database {
      * @param bool $is_admin Whether the user is an admin.
      * @return bool True on success, false on failure.
      */
-    public function registerUser($username, $email, $password, $is_client = 0, $contact_number) {
+    public function registerUser($username, $email, $password, $contact_number, $is_client = 0) {
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);
         $sql = "INSERT INTO fiverr_clone_users (username, email, password, is_client, contact_number) VALUES (?, ?, ?, ?, ?)";
         try {

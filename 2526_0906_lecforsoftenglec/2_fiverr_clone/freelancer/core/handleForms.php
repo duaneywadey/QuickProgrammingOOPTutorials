@@ -14,7 +14,7 @@ if (isset($_POST['insertNewUserBtn'])) {
 
 			if (!$userObj->usernameExists($username)) {
 
-				if ($userObj->registerUser($username, $email, $password)) {
+				if ($userObj->registerUser($username, $email, $password, $contact_number)) {
 					header("Location: ../login.php");
 				}
 
@@ -77,6 +77,8 @@ if (isset($_POST['updateUserBtn'])) {
 	$contact_number = htmlspecialchars($_POST['contact_number']);
 	$bio_description = htmlspecialchars($_POST['bio_description']);
 	if ($userObj->updateUser($contact_number, $bio_description, $_SESSION['user_id'])) {
+		$_SESSION['status'] = "200";
+		$_SESSION['message'] = "Profile updated successfully!";
 		header("Location: ../profile.php");
 	}
 }
@@ -112,5 +114,17 @@ if (isset($_POST['insertNewProposalBtn'])) {
 			$_SESSION['message'] = "Proposal saved successfully!";
 			header("Location: ../index.php");
 		}
+	}
+}
+
+if (isset($_POST['updateProposalBtn'])) {
+	$min_price = $_POST['min_price'];
+	$max_price = $_POST['max_price'];
+	$proposal_id = $_POST['proposal_id'];
+	$description = htmlspecialchars($_POST['description']);
+	if ($proposalObj->updateProposal($description, $min_price, $max_price, $proposal_id)) {
+		$_SESSION['status'] = "200";
+		$_SESSION['message'] = "Proposal updated successfully!";
+		header("Location: ../your_proposals.php");
 	}
 }

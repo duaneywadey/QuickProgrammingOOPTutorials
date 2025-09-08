@@ -26,16 +26,22 @@ class Proposal extends Database {
             $sql = "SELECT * FROM Proposals JOIN fiverr_clone_users on Proposals.user_id = fiverr_clone_users.user_id WHERE Proposal_id = ?";
             return $this->executeQuerySingle($sql, [$id]);
         }
-        $sql = "SELECT Proposals.*, fiverr_clone_users.*, Proposals.date_added AS proposals_date_added
-                FROM Proposals JOIN fiverr_clone_users ON Proposals.user_id = fiverr_clone_users.user_id
+        $sql = "SELECT Proposals.*, fiverr_clone_users.*, 
+                Proposals.date_added AS proposals_date_added
+                FROM Proposals JOIN fiverr_clone_users ON 
+                Proposals.user_id = fiverr_clone_users.user_id
                 ORDER BY Proposals.date_added DESC";
         return $this->executeQuery($sql);
     }
 
 
     public function getProposalsByUserID($user_id) {
-        $sql = "SELECT * FROM Proposals WHERE user_id = ? 
-                ORDER BY date_added DESC";
+        $sql = "SELECT Proposals.*, fiverr_clone_users.*, 
+                Proposals.date_added AS proposals_date_added
+                FROM Proposals JOIN fiverr_clone_users ON 
+                Proposals.user_id = fiverr_clone_users.user_id
+                WHERE proposals.user_id = ?
+                ORDER BY Proposals.date_added DESC";
         return $this->executeQuery($sql, [$user_id]);
     }
 
@@ -46,7 +52,7 @@ class Proposal extends Database {
      * @param string $content The new content.
      * @return int The number of affected rows.
      */
-    public function updateProposal($description, $image, $min_price, $max_price, $proposal_id) {
+    public function updateProposal($description, $min_price, $max_price, $proposal_id, $image="") {
         if (!empty($image)) {
             $sql = "UPDATE Proposals SET description = ?, image = ?, min_price = ?, max_price = ? WHERE Proposal_id = ?";
             return $this->executeNonQuery($sql, [$description, $image, 

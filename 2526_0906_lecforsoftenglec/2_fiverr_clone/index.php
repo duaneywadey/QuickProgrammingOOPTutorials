@@ -30,7 +30,7 @@
               <h1>Are you looking for a talent?</h1>
               <img src="https://images.unsplash.com/photo-1549923746-c502d488b3ea?q=80&w=1171&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="img-fluid">
               <p>Content writers create clear, engaging, and informative content that helps businesses communicate their services or products effectively, build brand authority, attract and retain customers, and drive web traffic and conversions.</p>
-              <h3><a href="#">Get started here as client</a></h3>
+              <h3><a href="client/index.php">Get started here as client</a></h3>
             </div>
           </div>
         </div>
@@ -40,7 +40,7 @@
               <h1>Are you looking for a job?</h1>
               <img src="https://plus.unsplash.com/premium_photo-1661582394864-ebf82b779eb0?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="img-fluid">
               <p>Admin writers play a key role in content team development. They are the highest-ranking editorial authority responsible for managing the entire editorial process, and aligning all published material with the publication’s overall vision and strategy. </p>
-              <h3><a href="#">Get started here as freelancer</a></h3>
+              <h3><a href="freelancer/index.php">Get started here as freelancer</a></h3>
             </div>
           </div>
         </div>

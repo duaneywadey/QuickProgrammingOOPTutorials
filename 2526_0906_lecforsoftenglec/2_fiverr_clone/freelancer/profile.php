@@ -21,6 +21,23 @@
     <?php $userInfo = $userObj->getUsers($_SESSION['user_id']); ?>
     <div class="container-fluid">
       <div class="display-4 text-center">Hello there and welcome! </div>
+      <div class="text-center">
+        <?php  
+          if (isset($_SESSION['message']) && isset($_SESSION['status'])) {
+
+            if ($_SESSION['status'] == "200") {
+              echo "<h1 style='color: green;'>{$_SESSION['message']}</h1>";
+            }
+
+            else {
+              echo "<h1 style='color: red;'>{$_SESSION['message']}</h1>"; 
+            }
+
+          }
+          unset($_SESSION['message']);
+          unset($_SESSION['status']);
+        ?>
+      </div>
       <div class="row justify-content-center">
         <div class="col-md-12">
           <div class="card shadow mt-4 mb-4">

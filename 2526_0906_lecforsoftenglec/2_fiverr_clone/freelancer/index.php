@@ -71,9 +71,9 @@
             <div class="card-body">
               <h2><a href="#"><?php echo $proposal['username']; ?></a></h2>
               <img src="<?php echo '../images/' . $proposal['image']; ?>" alt="">
-              <p class="mt-4"><?php echo $proposal['description']; ?></p>
-              <p><i><?php echo $proposal['proposals_date_added']; ?></i></p>
-              <h4><i><?php echo $proposal['min_price'] . " - " . $proposal['max_price']; ?> PHP</i></h4>
+              <p class="mt-4"><i><?php echo $proposal['proposals_date_added']; ?></i></p>
+              <p class="mt-2"><?php echo $proposal['description']; ?></p>
+              <h4><i><?php echo number_format($proposal['min_price']) . " - " . number_format($proposal['max_price']); ?> PHP</i></h4>
               <div class="float-right">
                 <a href="#">Check out services</a>
               </div>

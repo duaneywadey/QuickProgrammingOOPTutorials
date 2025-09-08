@@ -23,6 +23,7 @@ class Database {
         ];
         try {
             $this->pdo = new PDO($dsn, $this->user, $this->pass, $options);
+            $this->pdo->exec("SET time_zone = '+08:00';");
         } catch (\PDOException $e) {
             throw new \PDOException($e->getMessage(), (int)$e->getCode());
         }

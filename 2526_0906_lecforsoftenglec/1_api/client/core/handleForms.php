@@ -4,6 +4,7 @@ require_once '../classloader.php';
 if (isset($_POST['insertNewUserBtn'])) {
 	$username = htmlspecialchars(trim($_POST['username']));
 	$email = htmlspecialchars(trim($_POST['email']));
+	$contact_number = htmlspecialchars(trim($_POST['contact_number']));
 	$password = trim($_POST['password']);
 	$confirm_password = trim($_POST['confirm_password']);
 
@@ -13,7 +14,7 @@ if (isset($_POST['insertNewUserBtn'])) {
 
 			if (!$userObj->usernameExists($username)) {
 
-				if ($userObj->registerUser($username, $email, $password)) {
+				if ($userObj->registerUser($username, $email, $password, $contact_number)) {
 					header("Location: ../login.php");
 				}
 
@@ -72,32 +73,39 @@ if (isset($_GET['logoutUserBtn'])) {
 	header("Location: ../index.php");
 }
 
-if (isset($_POST['insertAdminArticleBtn'])) {
-	$title = $_POST['title'];
-	$description = $_POST['description'];
-	$author_id = $_SESSION['user_id'];
-	if ($articleObj->createArticle($title, $description, $author_id)) {
+if (isset($_POST['updateUserBtn'])) {
+	$contact_number = htmlspecialchars($_POST['contact_number']);
+	$bio_description = htmlspecialchars($_POST['bio_description']);
+	if ($userObj->updateUser($contact_number, $bio_description, $_SESSION['user_id'])) {
+		header("Location: ../profile.php");
+	}
+}
+
+if (isset($_POST['insertOfferBtn'])) {
+	$user_id = $_SESSION['user_id'];
+	$proposal_id = $_POST['proposal_id'];
+	$description = htmlspecialchars($_POST['description']);
+	if ($offerObj->createOffer($user_id, $description, $proposal_id)) {
 		header("Location: ../index.php");
 	}
-
 }
 
-if (isset($_POST['editArticleBtn'])) {
-	$title = $_POST['title'];
-	$description = $_POST['description'];
-	$article_id = $_POST['article_id'];
-	if ($articleObj->updateArticle($article_id, $title, $description)) {
-		header("Location: ../articles_submitted.php");
+if (isset($_POST['updateOfferBtn'])) {
+	$description = htmlspecialchars($_POST['description']);
+	$offer_id = $_POST['offer_id'];
+	if ($offerObj->updateOffer($description, $offer_id)) {
+		$_SESSION['message'] = "Offer updated successfully!";
+		$_SESSION['status'] = '200';
+		header("Location: ../index.php");
 	}
 }
 
-if (isset($_POST['deleteArticleBtn'])) {
-	$article_id = $_POST['article_id'];
-	echo $articleObj->deleteArticle($article_id);
+if (isset($_POST['deleteOfferBtn'])) {
+	$offer_id = $_POST['offer_id'];
+	if ($offerObj->deleteOffer($offer_id)) {
+		$_SESSION['message'] = "Offer deleted successfully!";
+		$_SESSION['status'] = '200';
+		header("Location: ../index.php");
+	}
 }
 
-if (isset($_POST['updateArticleVisibility'])) {
-	$article_id = $_POST['article_id'];
-	$status = $_POST['status'];
-	echo $articleObj->updateArticleVisibility($article_id,$status);
-}

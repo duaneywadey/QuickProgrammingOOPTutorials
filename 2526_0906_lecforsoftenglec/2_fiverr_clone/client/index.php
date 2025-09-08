@@ -27,7 +27,7 @@ if (!$userObj->isAdmin()) {
   <body>
     <?php include 'includes/navbar.php'; ?>
     <div class="container-fluid">
-      <div class="display-4 text-center">Hello there and welcome! <span class="text-success"><?php echo $_SESSION['username']; ?></span></div>
+      <div class="display-4 text-center">Hello there and welcome! <span class="text-success"><?php echo $_SESSION['username']; ?>. </span> Double click to edit your offers and then press enter to save!</div>
       <div class="row justify-content-center">
         <div class="col-md-12">
           <?php $getProposals = $proposalObj->getProposals(); ?>
@@ -36,7 +36,7 @@ if (!$userObj->isAdmin()) {
             <div class="card-body">
               <div class="row">
                 <div class="col-md-6">
-                  <h2><a href="#"><?php echo $proposal['username']; ?></a></h2>
+                  <h2><a href="other_profile_view.php?user_id=<?php echo $proposal['user_id'] ?>"><?php echo $proposal['username']; ?></a></h2>
                   <img src="<?php echo '../images/'.$proposal['image']; ?>" class="img-fluid" alt="">
                   <p class="mt-4 mb-4"><?php echo $proposal['description']; ?></p>
                   <h4><i><?php echo number_format($proposal['min_price']) . " - " . number_format($proposal['max_price']);?> PHP</i></h4>
@@ -49,8 +49,27 @@ if (!$userObj->isAdmin()) {
                       <?php $getOffersByProposalID = $offerObj->getOffersByProposalID($proposal['proposal_id']); ?>
                       <?php foreach ($getOffersByProposalID as $offer) { ?>
                       <div class="offer">
-                        <h4><?php echo $offer['username']; ?></h4>
+                        <h4><?php echo $offer['username']; ?> <span class="text-primary">( <?php echo $offer['contact_number']; ?> )</span></h4>
+                        <small><i><?php echo $offer['offer_date_added']; ?></i></small>
                         <p><?php echo $offer['description']; ?></p>
+
+                        <?php if ($offer['user_id'] == $_SESSION['user_id']) { ?>
+                          <form action="core/handleForms.php" method="POST">
+                            <div class="form-group">
+                              <input type="submit" class="btn btn-danger" value="Delete">
+                            </div>
+                          </form>
+
+                          <form action="core/handleForms.php" method="POST" class="updateOfferForm d-none">
+                            <div class="form-group">
+                              <label for="#">Description</label>
+                              <input type="text" class="form-control" value="<?php echo $offer['description']; ?>" name="description">
+                              <input type="hidden" class="form-control" value="<?php echo $offer['offer_id']; ?>" name="offer_id" >
+                              <input type="submit" class="btn btn-primary form-control" name="updateOfferBtn">
+                            </div>
+                          </form>
+                        <?php } ?>
+                        <hr>
                       </div>
                       <?php } ?>
 
@@ -74,5 +93,11 @@ if (!$userObj->isAdmin()) {
         </div>
       </div>
     </div>
+    <script>
+       $('.offer').on('dblclick', function (event) {
+          var updateOfferForm = $(this).find('.updateOfferForm');
+          updateOfferForm.toggleClass('d-none');
+        });
+    </script>
   </body>
 </html>

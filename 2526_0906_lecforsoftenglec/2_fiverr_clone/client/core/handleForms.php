@@ -90,3 +90,11 @@ if (isset($_POST['insertOfferBtn'])) {
 	}
 }
 
+if (isset($_POST['updateOfferBtn'])) {
+	$description = htmlspecialchars($_POST['description']);
+	$offer_id = $_POST['offer_id'];
+	if ($offerObj->updateOffer($description, $offer_id)) {
+		header("Location: ../index.php");
+	}
+}
+

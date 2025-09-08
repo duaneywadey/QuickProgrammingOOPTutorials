@@ -4,9 +4,9 @@ if (!$userObj->isLoggedIn()) {
   header("Location: login.php");
 }
 
-if ($userObj->isAdmin()) {
-  header("Location: ../client/index.php");
-}  
+if (!$userObj->isAdmin()) {
+  header("Location: ../freelancer/index.php");
+} 
 ?>
 <!doctype html>
   <html lang="en">

@@ -77,7 +77,7 @@ if ($userObj->isAdmin()) {
           <?php foreach ($getProposals as $proposal) { ?>
           <div class="card shadow mt-4 mb-4">
             <div class="card-body">
-              <h2><a href="#"><?php echo $proposal['username']; ?></a></h2>
+              <h2><a href="other_profile_view.php?user_id=<?php echo $proposal['user_id']; ?>"><?php echo $proposal['username']; ?></a></h2>
               <img src="<?php echo '../images/' . $proposal['image']; ?>" alt="">
               <p class="mt-4"><i><?php echo $proposal['proposals_date_added']; ?></i></p>
               <p class="mt-2"><?php echo $proposal['description']; ?></p>

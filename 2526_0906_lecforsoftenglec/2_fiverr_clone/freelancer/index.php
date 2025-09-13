@@ -78,7 +78,7 @@ if ($userObj->isAdmin()) {
           <div class="card shadow mt-4 mb-4">
             <div class="card-body">
               <h2><a href="other_profile_view.php?user_id=<?php echo $proposal['user_id']; ?>"><?php echo $proposal['username']; ?></a></h2>
-              <img src="<?php echo '../images/' . $proposal['image']; ?>" alt="">
+              <img src="<?php echo '../images/' . $proposal['image']; ?>" alt="" class="img-fluid">
               <p class="mt-4"><i><?php echo $proposal['proposals_date_added']; ?></i></p>
               <p class="mt-2"><?php echo $proposal['description']; ?></p>
               <h4><i><?php echo number_format($proposal['min_price']) . " - " . number_format($proposal['max_price']); ?> PHP</i></h4>

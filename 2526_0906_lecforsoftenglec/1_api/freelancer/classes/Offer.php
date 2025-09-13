@@ -22,9 +22,9 @@ class Offer extends Database {
      * @return array
      */
     public function getOffers($offer_id = null) {
-        if ($id) {
+        if ($offer_id) {
             $sql = "SELECT * FROM offers WHERE offer_id = ?";
-            return $this->executeQuerySingle($sql, [$id]);
+            return $this->executeQuerySingle($sql, [$offer_id]);
         }
         $sql = "SELECT * FROM offers JOIN fiverr_clone_users ON 
                 offers.user_id = fiverr_clone_users.user_id 

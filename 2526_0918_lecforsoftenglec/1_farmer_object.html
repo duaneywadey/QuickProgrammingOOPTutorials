@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		const farmer = {
+			name: "Phil Doe",
+			age: 45,
+			farmName: "Green Valley Ranch",
+			crops: ["corn", "wheat", "soybeans"],
+			hours_worked_daily: 9,
+
+			greet: function() {
+				console.log(`Hello, my name is ${this.name} and I own ${this.farmName}.`);
+			},
+
+			harvestReport: function() {
+				console.log(`This season, we harvested ${this.crops.length} types of crops 
+					and I worked ${this.hours_worked_daily} hours today.`);
+			}
+		};
+
+		// Access values
+		console.log(farmer.name);        
+		console.log(farmer.age);         
+		console.log(farmer.crops[0]);    
+
+		// Execute methods
+		farmer.greet();                
+		farmer.harvestReport();       
+	</script>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		// Array of agricultural land objects
+		const agriLands = [
+		  {
+		    name: "Greenfield Farm",
+		    location: "California",
+		    sizeAcres: 150,
+		    cropType: "Corn",
+		    owner: "John Doe",
+		    irrigated: true
+		  },
+		  {
+		    name: "Sunnydale Ranch",
+		    location: "Texas",
+		    sizeAcres: 200,
+		    cropType: "Wheat",
+		    owner: "Susan Smith",
+		    irrigated: false
+		  },
+		  {
+		    name: "Harvest Grove",
+		    location: "Iowa",
+		    sizeAcres: 175,
+		    cropType: "Soybeans",
+		    owner: "Michael Johnson",
+		    irrigated: true
+		  },
+		  {
+		    name: "Cedar Valley",
+		    location: "Oregon",
+		    sizeAcres: 300,
+		    cropType: "Apples",
+		    owner: "Emma Wilson",
+		    irrigated: true
+		  },
+		  {
+		    name: "Golden Acres",
+		    location: "Nebraska",
+		    sizeAcres: 220,
+		    cropType: "Corn",
+		    owner: "William Brown",
+		    irrigated: false
+		  }
+		];
+
+		// Showing all agriLand objects
+		for (var i = 0; i < agriLands.length; i++) {
+			document.write(
+							agriLands[i].name + "<br>" 
+							+ agriLands[i].location + "<br>"
+							+ agriLands[i].sizeAcres + "<br>" 
+							+ agriLands[i].cropType + "<br>" 
+							+ agriLands[i].owner + "<br><br>"
+						  );
+		}
+
+		// Accessing by index
+		console.log(agriLands[0]);
+		console.log(agriLands[1]);
+		console.log(agriLands[2]);
+		console.log(agriLands[3]);
+		console.log(agriLands[4]);
+
+		// Converting obj to string
+		console.log(JSON.stringify(agriLands[0]));
+		console.log(JSON.stringify(agriLands[1]));
+		console.log(JSON.stringify(agriLands[2]));
+		console.log(JSON.stringify(agriLands[3]));
+		console.log(JSON.stringify(agriLands[4]));
+
+	</script>
+</body>
+
+
+</html>

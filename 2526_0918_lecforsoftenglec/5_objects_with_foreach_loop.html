@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		// Array of agricultural land objects
+		const agriLands = [
+		  {
+		    name: "Greenfield Farm",
+		    location: "California",
+		    sizeAcres: 150,
+		    cropType: "Corn",
+		    owner: "John Doe",
+		    irrigated: true
+		  },
+		  {
+		    name: "Sunnydale Ranch",
+		    location: "Texas",
+		    sizeAcres: 200,
+		    cropType: "Wheat",
+		    owner: "Susan Smith",
+		    irrigated: false
+		  },
+		  {
+		    name: "Harvest Grove",
+		    location: "California",
+		    sizeAcres: 175,
+		    cropType: "Soybeans",
+		    owner: "Michael Johnson",
+		    irrigated: true
+		  },
+		  {
+		    name: "Cedar Valley",
+		    location: "Texas",
+		    sizeAcres: 300,
+		    cropType: "Apples",
+		    owner: "Emma Wilson",
+		    irrigated: true
+		  },
+		  {
+		    name: "Golden Acres",
+		    location: "California",
+		    sizeAcres: 220,
+		    cropType: "Corn",
+		    owner: "William Brown",
+		    irrigated: false
+		  }
+		];
+
+		agriLands.forEach(function(land) {
+			document.write(
+				land.name + "<br>" 
+				+ land.location + "<br>"
+				+ land.sizeAcres + "<br>" 
+				+ land.cropType + "<br>" 
+				+ land.owner + "<br><br>"
+			);
+		});
+	</script>
+</body>
+</html>

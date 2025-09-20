@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		// Array of agricultural land objects
+		const agriLands = [
+		  {
+		    name: "Greenfield Farm",
+		    location: "California",
+		    sizeAcres: 150,
+		    cropType: "Corn",
+		    owner: "John Doe",
+		    irrigated: true
+		  },
+		  {
+		    name: "Sunnydale Ranch",
+		    location: "Texas",
+		    sizeAcres: 200,
+		    cropType: "Wheat",
+		    owner: "Susan Smith",
+		    irrigated: false
+		  },
+		  {
+		    name: "Harvest Grove",
+		    location: "Iowa",
+		    sizeAcres: 175,
+		    cropType: "Soybeans",
+		    owner: "Michael Johnson",
+		    irrigated: true
+		  },
+		  {
+		    name: "Cedar Valley",
+		    location: "Oregon",
+		    sizeAcres: 300,
+		    cropType: "Apples",
+		    owner: "Emma Wilson",
+		    irrigated: true
+		  },
+		  {
+		    name: "Golden Acres",
+		    location: "Nebraska",
+		    sizeAcres: 220,
+		    cropType: "Corn",
+		    owner: "William Brown",
+		    irrigated: false
+		  }
+		];
+
+		// push() - Add a new agricultural land object
+		agriLands.push({
+		  name: "Maple Ridge",
+		  location: "Kentucky",
+		  sizeAcres: 180,
+		  cropType: "Tobacco",
+		  owner: "Linda Davis",
+		  irrigated: false
+		});
+		console.log("After push:", agriLands);
+
+		// find() - Find the first land where cropType is "Corn"
+		const cornFarm = agriLands.find(land => land.cropType === "Corn");
+		console.log("First corn farm found:", cornFarm);
+
+		// filter() - Filter to get all lands that are irrigated
+		const irrigatedLands = agriLands.filter(land => land.irrigated);
+		console.log("Irrigated lands:", irrigatedLands);
+
+		// map() - Create an array of strings describing each farm's name and size
+		const descriptions = agriLands.map(land => `${land.name} covers ${land.sizeAcres} acres.`);
+		console.log("Descriptions:", descriptions);
+
+		// reduce() - Calculate the total size of all agricultural lands combined
+		const totalSize = agriLands.reduce((acc, land) => acc + land.sizeAcres, 0);
+		console.log("Total acreage of all lands:", totalSize);
+
+	</script>
+</body>
+</html>

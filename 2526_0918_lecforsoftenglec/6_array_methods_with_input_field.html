@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AgriLands Management</title>
+<style>
+	#result {
+		margin-top: 20px;
+		padding: 15px;
+		border-radius: 8px;
+	}
+	label {
+		display: block;
+		margin-top: 10px;
+	}
+	input, select {
+		margin-top: 5px;
+		width: 200px;
+	}
+	button {
+		margin-top: 15px;
+	}
+	.record {
+		background: #f2f2f2;
+		padding: 10px;
+		margin-bottom: 10px;
+		border-radius: 5px;
+		white-space: pre-line;
+		position: relative;
+	}
+	.deleteBtn {
+		position: absolute;
+		top: 10px;
+		right: 10px;
+		background-color: #d9534f;
+		color: white;
+		border: none;
+		padding: 5px 10px;
+		border-radius: 3px;
+		cursor: pointer;
+	}
+	.deleteBtn:hover {
+		background-color: #c9302c;
+	}
+</style>
+</head>
+<body>
+<h2>AgriLand Records</h2>
+<form id="farmerForm">
+	<h3>Add Farmer Record</h3>
+	<label>
+		Farm Name:
+		<input type="text" id="name" required />
+	</label>
+	<label>
+		Location:
+		<input type="text" id="location" required />
+	</label>
+	<label>
+		Size (Acres):
+		<input type="number" id="sizeAcres" required min="1" />
+	</label>
+	<label>
+		Crop Type:
+		<input type="text" id="cropType" required />
+	</label>
+	<label>
+		Owner:
+		<input type="text" id="owner" required />
+	</label>
+	<label>
+		Irrigated:
+		<select id="irrigated" required>
+			<option value="true">Yes</option>
+			<option value="false">No</option>
+		</select>
+	</label>
+	<button type="submit">Add Farmer Record</button>
+</form>
+<hr />
+<div>
+	<h3>Filter Records</h3>
+	<label>
+		Filter by Location:
+		<input type="text" id="filterLocation" placeholder="Enter location" />
+	</label>
+	<label>
+		Find by Farmer Name:
+		<input type="text" id="findOwnerName" placeholder="Enter farmer name" />
+	</label>
+	<button id="filterBtn">Show Filtered/Finder Results</button>
+</div>
+<div id="result"></div>
+<script>
+	let agriLands = [
+		{
+			name: "Greenfield Farm",
+			location: "California",
+			sizeAcres: 150,
+			cropType: "Corn",
+			owner: "John Doe",
+			irrigated: true,
+		},
+		{
+			name: "Sunnydale Ranch",
+			location: "Texas",
+			sizeAcres: 200,
+			cropType: "Wheat",
+			owner: "Susan Smith",
+			irrigated: false,
+		},
+		{
+			name: "Harvest Grove",
+			location: "California",
+			sizeAcres: 175,
+			cropType: "Soybeans",
+			owner: "Michael Johnson",
+			irrigated: true,
+		},
+		{
+			name: "Cedar Valley",
+			location: "Texas",
+			sizeAcres: 300,
+			cropType: "Apples",
+			owner: "Emma Wilson",
+			irrigated: true,
+		},
+		{
+			name: "Golden Acres",
+			location: "California",
+			sizeAcres: 220,
+			cropType: "Corn",
+			owner: "William Brown",
+			irrigated: false,
+		},
+	];
+
+	const form = document.getElementById("farmerForm");
+	const resultDiv = document.getElementById("result");
+	const filterBtn = document.getElementById("filterBtn");
+
+	// Function to display records with delete buttons
+	function displayRecords(records) {
+		resultDiv.innerHTML = "";
+		if (records.length === 0) {
+			resultDiv.textContent = "No records found.";
+			return;
+		}
+		records.forEach((land) => {
+			const recordDiv = document.createElement("div");
+			recordDiv.className = "record";
+			recordDiv.innerHTML = 
+				`Name: ${land.name}\n` +
+				`Location: ${land.location}\n` +
+				`Size (Acres): ${land.sizeAcres}\n` +
+				`Crop Type: ${land.cropType}\n` +
+				`Owner: ${land.owner}\n` +
+				`Irrigated: ${land.irrigated ? "Yes" : "No"}`;
+
+			const deleteBtn = document.createElement("button");
+			deleteBtn.textContent = "Delete";
+			deleteBtn.className = "deleteBtn";
+			deleteBtn.addEventListener("click", () => {
+
+				// Use filter to remove the specific record
+				agriLands = agriLands.filter(item => item !== land);
+
+				// Redisplay filtered or full based on current filter inputs
+				showCurrentFiltered();
+			});
+
+			recordDiv.appendChild(deleteBtn);
+			resultDiv.appendChild(recordDiv);
+		});
+	}
+
+	// Function to obtain current filters and display accordingly
+	function showCurrentFiltered() {
+		const locationFilter = document.getElementById("filterLocation").value.trim().toLowerCase();
+		const ownerFind = document.getElementById("findOwnerName").value.trim().toLowerCase();
+		let filteredRecords = agriLands;
+		if (locationFilter) {
+			filteredRecords = filteredRecords.filter((land) =>
+				land.location.toLowerCase().includes(locationFilter)
+			);
+		}
+		if (ownerFind) {
+			const foundRecord = filteredRecords.find(
+				(land) => land.owner.toLowerCase() === ownerFind
+			);
+			if (foundRecord) {
+				displayRecords([foundRecord]);
+				return;
+			} else {
+				resultDiv.textContent = `No farmer record found for owner "${ownerFind}".`;
+				return;
+			}
+		}
+		displayRecords(filteredRecords);
+	}
+
+	// Initial display of all records
+	displayRecords(agriLands);
+
+	// Handle adding a new farmer record
+	form.addEventListener("submit", function (e) {
+		e.preventDefault();
+		const newLand = {
+			name: document.getElementById("name").value.trim(),
+			location: document.getElementById("location").value.trim(),
+			sizeAcres: parseFloat(document.getElementById("sizeAcres").value),
+			cropType: document.getElementById("cropType").value.trim(),
+			owner: document.getElementById("owner").value.trim(),
+			irrigated: document.getElementById("irrigated").value === "true",
+		};
+		agriLands.push(newLand);
+		showCurrentFiltered();
+		form.reset();
+	});
+
+	// Handle filtering and finding
+	filterBtn.addEventListener("click", function () {
+		showCurrentFiltered();
+	});
+</script>
+</body>
+</html>

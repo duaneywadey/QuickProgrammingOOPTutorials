@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+<body>
+
+	<input id="input1" placeholder="Enter your name" />
+	<button onclick="greetUser(document.getElementById('input1').value)">Greet</button>
+	<p id="output1"></p>
+
+	<input id="input2" type="number" placeholder="Enter number" />
+	<button onclick="multiplyBy(document.getElementById('input2').value, 10)">Multiply by 10</button>
+	<p id="output2"></p>
+
+	<script>
+		// // Classic JS Functions
+
+		// function sayLoremIpsum() {
+		// 	return "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Saepe nobis ipsum numquam eveniet libero suscipit at natus dolore impedit quaerat tempora similique minima eligendi non beatae rerum cumque accusamus, modi";
+		// }
+
+		// function greetUser(name) {
+		// 	document.getElementById("output1").textContent = "Hello, " + name + "!";
+		// }
+
+		// function multiplyBy(num, factor) {
+		// 	var result = Number(num) * factor;
+		// 	document.getElementById("output2").textContent = "Result: " + result;
+		// 
+
+		const sayLoremIpsum = () => "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Saepe nobis ipsum numquam eveniet libero suscipit at natus dolore impedit quaerat tempora similique minima eligendi non beatae rerum cumque accusamus, modi";
+
+		console.log(sayLoremIpsum());  // Output: LoremIpsum!
+
+		const greetUser = (name) => {
+			document.getElementById("output1").textContent = `Hello, ${name}!`;
+		};
+
+		const multiplyBy = (num, factor) => {
+			const result = Number(num) * factor;
+			document.getElementById("output2").textContent = `Result: ${result}`;
+		};
+	</script>
+
+</body>
+</html>

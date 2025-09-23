@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		let army = {
+			minAge: 18,
+			maxAge: 27,
+			canJoin(user) {
+				return user.age >= this.minAge && user.age < this.maxAge;
+			}
+		};
+
+		let armyApplicants = [
+			{name:"Ivan", age: 16},
+			{name:"Kyle", age: 20},
+			{name:"Josh", age: 23},
+			{name:"Liam", age: 30}
+		];
+
+		// find users, for who army.canJoin returns true
+		let soldiers = armyApplicants.filter(army.canJoin, army);
+
+		document.write("<br>")
+		document.write(JSON.stringify(soldiers));
+		document.write("<br>")
+
+	</script>
+</body>
+</html>

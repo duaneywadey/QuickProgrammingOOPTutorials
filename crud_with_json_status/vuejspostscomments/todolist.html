@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Vue.js Todo List with Search & Bootstrap 4</title>
+  <link
+    rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+  />
+  <style>
+    .line-through {
+      text-decoration: line-through;
+    }
+  </style>
+</head>
+<body>
+  <div id="app" class="container py-4">
+    <h2 class="mb-4">Todo List</h2>
+
+    <!-- Search Tasks -->
+    <div class="form-group">
+      <input
+        v-model="searchQuery"
+        type="text"
+        class="form-control"
+        placeholder="Search tasks..."
+        autocomplete="off"
+      />
+    </div>
+
+    <!-- Add Task -->
+    <form @submit.prevent="addTask" class="mb-3">
+      <div class="input-group">
+        <input
+          v-model="newTaskText"
+          type="text"
+          class="form-control"
+          placeholder="Add a new task"
+          required
+        />
+        <div class="input-group-append">
+          <button class="btn btn-primary" type="submit">Add</button>
+        </div>
+      </div>
+    </form>
+
+    <!-- Task List -->
+    <ul class="list-group">
+      <li
+        v-for="(task, index) in filteredTasks"
+        :key="task.id"
+        class="list-group-item d-flex justify-content-between align-items-center"
+        :class="[task.done ? 'list-group-item-success' : '']"
+      >
+        <div>
+          <input
+            type="checkbox"
+            class="mr-2"
+            v-model="task.done"
+            :id="'done-' + task.id"
+          />
+          <label
+            :for="'done-' + task.id"
+            :class="[task.done ? 'line-through' : 'text-muted']"
+          >
+            {{ task.text }}
+          </label>
+        </div>
+        <div>
+          <button
+            class="btn btn-sm btn-info mr-2"
+            @click="openEditModal(task, index)"
+          >
+            Edit
+          </button>
+          <button
+            class="btn btn-sm btn-danger"
+            @click="openDeleteModal(task, index)"
+          >
+            Delete
+          </button>
+        </div>
+      </li>
+      <li v-if="filteredTasks.length === 0" class="list-group-item text-center text-muted">
+        No tasks found.
+      </li>
+    </ul>
+
+    <!-- Edit Task Modal -->
+    <div
+      class="modal fade"
+      id="editTaskModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="editTaskModalLabel"
+      aria-hidden="true"
+      ref="editModal"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <form @submit.prevent="saveEditTask">
+            <div class="modal-header">
+              <h5 class="modal-title" id="editTaskModalLabel">Edit Task</h5>
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"
+                @click="closeEditModal"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <input
+                v-model="editTaskText"
+                type="text"
+                class="form-control"
+                required
+                autofocus
+              />
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-dismiss="modal"
+                @click="closeEditModal"
+              >
+                Cancel
+              </button>
+              <button type="submit" class="btn btn-primary">Save</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Delete Task Modal -->
+    <div
+      class="modal fade"
+      id="deleteTaskModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="deleteTaskModalLabel"
+      aria-hidden="true"
+      ref="deleteModal"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="deleteTaskModalLabel">Delete Task</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+              @click="closeDeleteModal"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            Are you sure you want to delete this task?
+            <p><strong>{{ deleteTaskText }}</strong></p>
+            You created this last {{deleteTaskTime}}
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+              @click="closeDeleteModal"
+            >
+              Cancel
+            </button>
+            <button type="button" class="btn btn-danger" @click="confirmDeleteTask">
+              Delete
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Vue.js and Bootstrap JS dependencies -->
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  <script>
+    const now = new Date();
+
+    for (var i = 1; i <10; i++) {
+      console.log(i);
+    }
+    
+    new Vue({
+      el: '#app',
+      data: {
+        tasks: [],
+        newTaskText: '',
+        editTaskIndex: null,
+        editTaskText: '',
+        deleteTaskIndex: null,
+        deleteTaskText: '',
+        deleteTaskTime:null,
+        searchQuery: '',
+        dateString : now.toDateString()
+      },
+      computed: {
+        filteredTasks() {
+          const query = this.searchQuery.trim().toLowerCase();
+          if (!query) return this.tasks;
+          return this.tasks.filter(task =>
+            task.text.toLowerCase().includes(query)
+          );
+        },
+      },
+      methods: {
+        addTask() {
+          this.tasks.push({
+            id: Date.now(),
+            text: this.newTaskText.trim(),
+            done: false,
+            date_added: this.dateString,
+          });
+          this.newTaskText = '';
+        },
+        openEditModal(task, index) {
+          this.editTaskIndex = this.tasks.indexOf(task);
+          this.editTaskText = task.text;
+          $(this.$refs.editModal).modal('show');
+        },
+        closeEditModal() {
+          this.editTaskIndex = null;
+          this.editTaskText = '';
+          $(this.$refs.editModal).modal('hide');
+        },
+        saveEditTask() {
+          if (this.editTaskText.trim() !== '') {
+            this.tasks[this.editTaskIndex].text = this.editTaskText.trim();
+            this.closeEditModal();
+          }
+        },
+        openDeleteModal(task, index) {
+          this.deleteTaskIndex = this.tasks.indexOf(task);
+          this.deleteTaskText = task.text;
+          this.deleteTaskTime = task.date_added
+          $(this.$refs.deleteModal).modal('show');
+        },
+        closeDeleteModal() {
+          this.deleteTaskIndex = null;
+          this.deleteTaskText = '';
+          $(this.$refs.deleteModal).modal('hide');
+        },
+        confirmDeleteTask() {
+          if (this.deleteTaskIndex !== null) {
+            this.tasks.splice(this.deleteTaskIndex, 1);
+            this.closeDeleteModal();
+          }
+        },
+      },
+    });
+  </script>
+</body>
+</html>

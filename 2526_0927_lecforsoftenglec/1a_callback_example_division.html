@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<input type="number" id="num1Callback" placeholder="Enter numerator">
+<input type="number" id="num2Callback" placeholder="Enter denominator">
+<button onclick="divideWithCallback()">Divide (Callback)</button>
+<p id="callbackResult"></p>
+
+<script>
+// Async division using callbacks
+function asyncDivideWithCallback(a, b, callback) {
+  setTimeout(() => {
+    if (b === 0) {
+      callback('Error: Division by zero');
+    } else {
+      callback(`Result: ${a / b}`);
+    }
+  }, 5000); // Simulate 5-second delay
+}
+
+function divideWithCallback() {
+  const numerator = Number(document.getElementById('num1Callback').value);
+  const denominator = Number(document.getElementById('num2Callback').value);
+
+  asyncDivideWithCallback(numerator, denominator, (result) => {
+    // Runs only after async operation finishes
+    document.getElementById('callbackResult').textContent = result;
+  });
+
+  // Runs immediately after calling asyncDivideWithCallback (before callback)
+  console.log('Callback division called, waiting for result...');
+}
+</script>
+
+</body>
+</html>

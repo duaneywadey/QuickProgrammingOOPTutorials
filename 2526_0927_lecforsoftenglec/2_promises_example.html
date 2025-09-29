@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<body>
+<p>Type your name to see how promises work!</p>
+<input type="text" id="promiseInput" placeholder="Enter text">
+<button onclick="processInputWithPromise()">Submit (Promise)</button>
+<p id="promiseResult"></p>
+
+<script>
+// Async operation returning a Promise
+function asyncOperationWithPromise(input) {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      // Async result after 1 second
+      resolve(`Already processed with promises. Hello there! ${input}`);
+    }, 3000);
+  });
+}
+
+function processInputWithPromise() {
+  const userInput = document.getElementById('promiseInput').value;
+  asyncOperationWithPromise(userInput)
+    .then((result) => {
+      // Executes when promise resolves
+      document.getElementById('promiseResult').textContent = result;
+    });
+
+  // This runs immediately after calling asyncOperationWithPromise 
+  console.log('Promise function called, waiting for result...');
+}
+</script>
+</body>
+</html>

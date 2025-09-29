@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<input type="number" id="num1Async" placeholder="Enter numerator">
+<input type="number" id="num2Async" placeholder="Enter denominator">
+<button onclick="divideWithAsync()">Divide (async/await)</button>
+<p id="asyncResult"></p>
+
+<script>
+// Async division returning a Promise
+function asyncDivide(a, b) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      if (b === 0) {
+        reject('Error: Division by zero');
+      } else {
+        resolve(`Result: ${a / b}`);
+      }
+    }, 1000);
+  });
+}
+
+async function divideWithAsync() {
+  const numerator = Number(document.getElementById('num1Async').value);
+  const denominator = Number(document.getElementById('num2Async').value);
+
+  console.log('Waiting for async division to complete...');
+  try {
+    // Pause execution until promise resolves or rejects
+    const result = await asyncDivide(numerator, denominator);
+    document.getElementById('asyncResult').textContent = result;
+    console.log('Async division complete, result displayed.');
+  } catch (error) {
+    document.getElementById('asyncResult').textContent = error;
+  }
+}
+</script>
+
+</body>
+</html>

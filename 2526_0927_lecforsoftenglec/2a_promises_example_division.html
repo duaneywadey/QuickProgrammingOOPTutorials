@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<input type="number" id="num1Promise" placeholder="Enter numerator">
+<input type="number" id="num2Promise" placeholder="Enter denominator">
+<button onclick="divideWithPromise()">Divide (Promise)</button>
+<p id="promiseResult"></p>
+
+<script>
+// Async division returning a Promise
+function asyncDivideWithPromise(a, b) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      if (b === 0) {
+        reject('Error: Division by zero');
+      } else {
+        resolve(`Result: ${a / b}`);
+      }
+    }, 3000);
+  });
+}
+
+function divideWithPromise() {
+  const numerator = Number(document.getElementById('num1Promise').value);
+  const denominator = Number(document.getElementById('num2Promise').value);
+
+  asyncDivideWithPromise(numerator, denominator)
+    .then(result => {
+      document.getElementById('promiseResult').textContent = result;
+    })
+    .catch(error => {
+      document.getElementById('promiseResult').textContent = error;
+    });
+
+  // Runs immediately after calling asyncDivideWithPromise
+  console.log('Promise division called, waiting for result...');
+}
+</script>
+
+</body>
+</html>

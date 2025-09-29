@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<body>
+  <p>Type your name to see how callback works!</p>
+  <input type="text" id="callbackInput" placeholder="Enter name">
+  <button onclick="processInputWithCallback()">Submit (Callback)</button>
+  <p id="callbackResult"></p>
+  <script>
+    // Simulate async operation using callback
+    function asyncOperationWithCallback(input, callback) {
+      setTimeout(() => {
+        // Async task done here
+        callback(`Already processed with callback! Hello there, ${input}`);
+      }, 3000); // 3 second delay to simulate async
+    }
+
+    function processInputWithCallback() {
+      const userInput = document.getElementById('callbackInput').value;
+      // Call async function with a callback
+      asyncOperationWithCallback(userInput, (result) => {
+        // This executes only after async operation completes
+        document.getElementById('callbackResult').textContent = result;
+      });
+
+      // This line runs immediately after calling asyncOperationWithCallback (before callback)
+      console.log('Callback function called, waiting for result...');
+      console.log('Please wait.........');
+    }
+  </script>
+</body>
+</html>

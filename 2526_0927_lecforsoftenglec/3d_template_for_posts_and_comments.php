@@ -11,13 +11,16 @@
 <script>
 async function fetchPostsAndComments() {
     try {
-        const response = await fetch('3d_posts_and_comments_api.php'); // Adjust to your PHP API path
-        if (!response.ok) throw new Error('HTTP error ' + response.status);
+        const response = await fetch('3d_posts_and_comments_api.php'); 
+        if (!response.ok) {
+            throw new Error('HTTP error ' + response.status);
+        }
         const posts = await response.json();
 
         const container = document.getElementById('posts-container');
         container.innerHTML = '';
         // container.textContent = JSON.stringify(posts);
+        // console.log(posts);
 
         posts.forEach(post => {
             const postEl = document.createElement('div');
@@ -44,6 +47,5 @@ async function fetchPostsAndComments() {
 
 fetchPostsAndComments();
 </script>
-
 </body>
 </html>

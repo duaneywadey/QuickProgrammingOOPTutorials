@@ -17,7 +17,9 @@
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
                 const data = await response.json();
-                document.getElementById('jsonData').textContent = JSON.stringify(data,);
+                document.getElementById('jsonData').textContent = JSON.stringify(data);
+                // console.log(data);
+                // console.log(JSON.stringify(data));
             } catch (error) {
                 document.getElementById('jsonData').textContent = 'Error fetching data: ' + error;
             }

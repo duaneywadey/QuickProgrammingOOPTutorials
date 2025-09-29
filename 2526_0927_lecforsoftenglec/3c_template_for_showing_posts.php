@@ -30,6 +30,8 @@
 
                 const container = document.getElementById('posts-container');
                 container.innerHTML = ''; // clear loading text
+                console.log(posts);
+                console.log(JSON.stringify(posts));
 
                 posts.forEach((post) => {
                     const div = document.createElement('div');

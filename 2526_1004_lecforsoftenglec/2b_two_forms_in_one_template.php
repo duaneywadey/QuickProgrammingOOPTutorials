@@ -36,12 +36,9 @@
 <script>
 async function sendUserData(event) {
     event.preventDefault();
-
     const name = document.getElementById('name').value.trim();
     const age = document.getElementById('age').value.trim();
-
     const data = { name, age };
-
     try {
         const response = await fetch('2ba_api_for_two_forms.php?action=getNameAndAge', {
             method: 'POST',
@@ -72,12 +69,9 @@ async function sendUserData(event) {
 
 async function divideNumbers(event) {
     event.preventDefault();
-
     const numerator = document.getElementById('numerator').value.trim();
     const denominator = document.getElementById('denominator').value.trim();
-
     const data = { numerator, denominator };
-
     try {
         const response = await fetch('2ba_api_for_two_forms.php?action=getQuotient', {
             method: 'POST',

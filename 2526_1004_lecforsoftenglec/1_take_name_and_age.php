@@ -16,20 +16,16 @@
     <br /><br />
     <button type="submit">Submit</button>
 </form>
-
 <p id="result"></p>
 <script>
 async function sendUserData(event) {
     event.preventDefault();
     const name = document.getElementById('name').value;
     const age = document.getElementById('age').value;
-
     // Prepare data to send
     const data = { name, age };
-
     // console.log(data);
     // console.log(JSON.stringify(data));
-
     try {
         const response = await fetch('1a_name_and_age_api.php', {
             method: 'POST',
@@ -46,7 +42,6 @@ async function sendUserData(event) {
         
         // console.log(result);
         // console.log(JSON.stringify(result));
-
         if (response.ok) {
             document.getElementById('result').textContent = 'Your name is ' 
                 + result.name + ', and you are ' + result.age + ' years old';

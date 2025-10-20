@@ -9,7 +9,8 @@
   <script>
     // 1. Total cows on two farms
     function totalCows(farm1, farm2, callback) {
-      callback(farm1 + farm2);
+      var allCows = farm1 + farm2;
+      callback(allCows);
     }
     totalCows(35, 40, function(result) {
       console.log("Total cows:", result);
@@ -17,15 +18,17 @@
 
     // 2. Check school attendance percentage
     function checkAttendance(attended, total, callback) {
-      callback((attended / total) * 100);
+      var attendancePercentage = (attended / total) * 100;
+      callback(attendancePercentage);
     }
-    checkAttendance(180, 200, function(percent) {
+    checkAttendance(90, 200, function(percent) {
       console.log("Attendance %:", percent);
     });
 
     // 3. Add sheep and goats counts
     function totalAnimals(sheep, goats, callback) {
-      callback(sheep + goats);
+      var allAnimals = sheep + goats; 
+      callback(allAnimals);
     }
     totalAnimals(25, 30, function(total) {
       console.log("Total animals:", total);
@@ -109,7 +112,8 @@
 
     // 13. Calculate total students in multiple grades
     function totalStudents(grade1, grade2, grade3, callback) {
-      callback(grade1 + grade2 + grade3);
+      var allStudents = grade1 + grade2 + grade3; 
+      callback(allStudents);
     }
     totalStudents(100, 120, 110, function(total) {
       console.log("Total students:", total);
@@ -117,7 +121,8 @@
 
     // 14. Calculate milk production per day
     function milkProduction(cows, mlPerCow, callback) {
-      callback(cows * mlPerCow);
+      var totalMilkInMl = cows * mlPerCow;
+      callback(totalMilkInMl);
     }
     milkProduction(50, 20, function(total) {
       console.log("Milk production (liters):", total);

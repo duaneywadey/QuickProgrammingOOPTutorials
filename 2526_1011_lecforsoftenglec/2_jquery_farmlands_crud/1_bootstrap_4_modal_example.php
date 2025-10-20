@@ -12,14 +12,10 @@
 <body>
 <div class="container mt-4">
     <h2>Bootstrap 4 (JQUERY) Agrilands Management</h2>
-
-    <div class="mb-3">
-        <input type="text" id="searchInput" class="form-control" placeholder="Search farms..." />
-    </div>
     <button class="btn btn-primary mb-3" id="btnResetForm">Reset Form</button>
-    <button class="btn btn-primary mb-3" id="btnShowLocation" data-whatever="Batangas">Show Location</button>
+    <button class="btn btn-primary mb-3" id="btnShowLocation" data-locationinput="Batangas">Show Location</button>
 
-    <button class="btn btn-primary mb-3" id="btnShowJsonData" data-whatever='{ "farmland_id": 2,"farm_name": "Sunny Acres", "location": "Batangas", "crop_type": "Mango", "owner": "Maria Santos","date_added": "2024-11-30"}'>Show Farm JSON in Modal</button>
+    <button class="btn btn-primary mb-3" id="btnShowJsonData" data-farmdatajson='{ "farmland_id": 2,"farm_name": "Sunny Acres", "location": "Cavite", "crop_type": "Corn", "owner": "Maria Santos","date_added": "2024-11-30"}'>Show Farm JSON in Modal</button>
 </div>
 
 <!-- Add/Edit Farm Modal -->
@@ -67,7 +63,7 @@
 // Show modal containing string
 $('#btnShowLocation').click(function() {
     var button = $(this); // 'this' is the clicked button
-    var farmData = button.data('whatever'); // get value from data-whatever attribute
+    var farmData = button.data('locationinput'); // get value from data-whatever attribute
     console.log(farmData);
     $('#farmModal').modal('show');
 });
@@ -75,7 +71,7 @@ $('#btnShowLocation').click(function() {
 // Show modal containing new farm data
 $('#btnShowJsonData').click(function() {
     var button = $(this); // 'this' is the clicked button
-    var farmData = button.data('whatever'); // get value from data-whatever attribute
+    var farmData = button.data('farmdatajson'); // get value from data-whatever attribute
     console.log(farmData);
     $('#farm_name').val(farmData.farm_name);
     $('#location').val(farmData.location);
@@ -90,7 +86,7 @@ $('#btnResetForm').click(function () {
 })
 
 // Returns the element
-console.log($('#farmForm')[0]);
+// console.log($('#farmForm')[0]);
 </script>
 </body>
 </html>

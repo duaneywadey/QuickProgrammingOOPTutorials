@@ -16,8 +16,15 @@
                 if (!response.ok) { 
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
-                const data = await response.json();
-                document.getElementById('jsonData').textContent = JSON.stringify(data);
+                // const data = await response.json();
+                // document.getElementById('jsonData').textContent = JSON.stringify(data);
+                
+                // logs the entire Response object from a fetch request
+                console.log(response); 
+
+                // logs a Promise object because the json() method reads the response body stream and parses it as JSON asynchronously,
+                console.log(response.json());
+                
                 // console.log(data);
                 // console.log(JSON.stringify(data));
             } catch (error) {

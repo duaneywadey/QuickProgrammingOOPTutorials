@@ -31,7 +31,7 @@ switch ($action) {
             $farm['crop_type'],
             $farm['owner']
         ]);
-        echo json_encode(['success' => $success]);
+        echo json_encode(['success' => $success, 'input' => $input]);
         break;
 
     case 'read':

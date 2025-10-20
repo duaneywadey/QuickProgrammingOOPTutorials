@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Farm Callback Hell</title>
+</head>
+<body>
+  <script>
+    function plantSeeds(crop, callback) {
+      setTimeout(() => {
+        console.log(`Seeds of ${crop} planted.`);
+        callback(null, crop);
+      }, 2000);
+    }
+
+    function waterPlants(crop, callback) {
+      setTimeout(() => {
+        console.log(`${crop} plants watered.`);
+        callback(null, crop);
+      }, 2000);
+    }
+
+    function fertilizePlants(crop, callback) {
+      setTimeout(() => {
+        console.log(`${crop} plants fertilized.`);
+        callback(null, crop);
+      }, 2000);
+    }
+
+    function harvestCrop(crop, callback) {
+      setTimeout(() => {
+        console.log(`${crop} harvested.`);
+        callback(null, crop);
+      }, 2000);
+    }
+
+    function checkSoilQuality(crop, callback) {
+      setTimeout(() => {
+        console.log(`Soil quality checked for ${crop}.`);
+        callback(null, crop);
+      }, 2000);
+    }
+
+    function applyPesticide(crop, callback) {
+      setTimeout(() => {
+        console.log(`Pesticide applied to ${crop}.`);
+        callback(null, crop);
+      }, 2000);
+    }
+
+    function sellCrop(crop, callback) {
+      setTimeout(() => {
+        console.log(`${crop} sold.`);
+        callback(null, `Sale of ${crop} completed!`);
+      }, 2000);
+    }
+
+    // Callback hell with extended farm tasks
+    plantSeeds('corn', function(err, crop) {
+      if (err) {
+        console.error('Error planting seeds:', err);
+      } else {
+        waterPlants(crop, function(err, crop) {
+          if (err) {
+            console.error('Error watering plants:', err);
+          } else {
+            fertilizePlants(crop, function(err, crop) {
+              if (err) {
+                console.error('Error fertilizing plants:', err);
+              } else {
+                checkSoilQuality(crop, function(err, crop) {
+                  if (err) {
+                    console.error('Error checking soil quality:', err);
+                  } else {
+                    applyPesticide(crop, function(err, crop) {
+                      if (err) {
+                        console.error('Error applying pesticide:', err);
+                      } else {
+                        harvestCrop(crop, function(err, crop) {
+                          if (err) {
+                            console.error('Error harvesting crop:', err);
+                          } else {
+                            sellCrop(crop, function(err, message) {
+                              if (err) {
+                                console.error('Error selling crop:', err);
+                              } else {
+                                console.log(message); // Final output
+                              }
+                            });
+                          }
+                        });
+                      }
+                    });
+                  }
+                });
+              }
+            });
+          }
+        });
+      }
+    });
+  </script>
+</body>
+</html>

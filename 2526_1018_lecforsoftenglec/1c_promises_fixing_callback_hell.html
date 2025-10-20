@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Farm Promises</title>
+</head>
+<body>
+  <script>
+    function plantSeeds(crop) {
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          console.log(`Seeds of ${crop} planted.`);
+          resolve(crop);
+        }, 2000);
+      });
+    }
+
+    function waterPlants(crop) {
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          console.log(`${crop} plants watered.`);
+          resolve(crop);
+        }, 2000);
+      });
+    }
+
+    function fertilizePlants(crop) {
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          console.log(`${crop} plants fertilized.`);
+          resolve(crop);
+        }, 2000);
+      });
+    }
+
+    function harvestCrop(crop) {
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          console.log(`${crop} harvested.`);
+          resolve(crop);
+        }, 2000);
+      });
+    }
+
+    function checkSoilQuality(crop) {
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          console.log(`Soil quality checked for ${crop}.`);
+          resolve(crop);
+        }, 2000);
+      });
+    }
+
+    function applyPesticide(crop) {
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          console.log(`Pesticide applied to ${crop}.`);
+          resolve(crop);
+        }, 2000);
+      });
+    }
+
+    function sellCrop(crop) {
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          console.log(`${crop} sold.`);
+          resolve(`Sale of ${crop} completed!`);
+        }, 2000);
+      });
+    }
+
+    // Using promise chaining to avoid callback hell
+    plantSeeds('corn')
+      .then(waterPlants)
+      .then(fertilizePlants)
+      .then(checkSoilQuality)
+      .then(applyPesticide)
+      .then(harvestCrop)
+      .then(sellCrop)
+      .then(message => {
+        console.log(message); // Final outcome
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
+  </script>
+</body>
+</html>

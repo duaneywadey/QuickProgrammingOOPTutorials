@@ -247,6 +247,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ action: 'read', search: search })
             });
+            console.log(response)
             const res = await response.json();
 
             if (res.success) {

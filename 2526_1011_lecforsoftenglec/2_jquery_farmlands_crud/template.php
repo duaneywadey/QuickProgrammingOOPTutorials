@@ -148,6 +148,7 @@ $(function() {
                 if (res.success) {
                     $('#addFarmModal').modal('hide');
                     loadFarms($('#searchInput').val());
+                    console.log(res);
                 } else {
                     alert(res.message || 'An error occurred');
                 }

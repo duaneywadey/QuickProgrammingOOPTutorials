@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 1. Total cows on two farms
+    function totalCows(farm1, farm2, callback) {
+      callback(farm1 + farm2);
+    }
+    totalCows(35, 40, function(result) {
+      console.log("Total cows:", result);
+    });
+
+    // 2. Check school attendance percentage
+    function checkAttendance(attended, total, callback) {
+      callback((attended / total) * 100);
+    }
+    checkAttendance(180, 200, function(percent) {
+      console.log("Attendance %:", percent);
+    });
+
+    // 3. Add sheep and goats counts
+    function totalAnimals(sheep, goats, callback) {
+      callback(sheep + goats);
+    }
+    totalAnimals(25, 30, function(total) {
+      console.log("Total animals:", total);
+    });
+
+    // 4. Average grade calculation
+    function averageGrade(totalPoints, students, callback) {
+      callback(totalPoints / students);
+    }
+    averageGrade(850, 20, function(avg) {
+      console.log("Average grade:", avg);
+    });
+
+    // 5. Compare apples of two farms
+    function compareApples(farmOne, farmTwo, callback) {
+      callback(farmOne - farmTwo);
+    }
+    compareApples(120, 95, function(diff) {
+      console.log("Apple difference:", diff);
+    });
+
+    // 6. Calculate total eggs from chickens
+    function totalEggs(chickens, eggsPerChicken, callback) {
+      callback(chickens * eggsPerChicken);
+    }
+    totalEggs(12, 5, function(total) {
+      console.log("Total eggs:", total);
+    });
+
+    // 7. Calculate total books in school library
+    function totalBooks(sections, booksPerSection, callback) {
+      callback(sections * booksPerSection);
+    }
+    totalBooks(8, 150, function(total) {
+      console.log("Total books:", total);
+    });
+
+    // 8. Check if farm has enough hay bales
+    function hayCheck(bales, needed, callback) {
+      if (bales >= needed) {
+        callback("Sufficient hay");
+      } else {
+        callback("Need more hay");
+      }
+    }
+    hayCheck(50, 40, function(status) {
+      console.log("Hay check:", status);
+    });
+
+    // 9. Multiply students by classes to get total seats
+    function totalSeats(classes, studentsPerClass, callback) {
+      callback(classes * studentsPerClass);
+    }
+    totalSeats(10, 25, function(total) {
+      console.log("Total seats:", total);
+    });
+
+    // 10. Number of tractors plus harvesters
+    function totalVehicles(tractors, harvesters, callback) {
+      callback(tractors + harvesters);
+    }
+    totalVehicles(6, 4, function(total) {
+      console.log("Total vehicles:", total);
+    });
+
+    // 11. Calculate bus capacity remaining
+    function remainingSeats(totalSeats, filledSeats, callback) {
+      callback(totalSeats - filledSeats);
+    }
+    remainingSeats(50, 38, function(remaining) {
+      console.log("Remaining seats:", remaining);
+    });
+
+    // 12. Sum chickens and ducks on farm
+    function totalPoultry(chickens, ducks, callback) {
+      callback(chickens + ducks);
+    }
+    totalPoultry(18, 7, function(total) {
+      console.log("Total poultry:", total);
+    });
+
+    // 13. Calculate total students in multiple grades
+    function totalStudents(grade1, grade2, grade3, callback) {
+      callback(grade1 + grade2 + grade3);
+    }
+    totalStudents(100, 120, 110, function(total) {
+      console.log("Total students:", total);
+    });
+
+    // 14. Calculate milk production per day
+    function milkProduction(cows, mlPerCow, callback) {
+      callback(cows * mlPerCow);
+    }
+    milkProduction(50, 20, function(total) {
+      console.log("Milk production (liters):", total);
+    });
+
+    // 15. Check if student passed based on score
+    function checkPass(score, passingScore, callback) {
+      if (score >= passingScore) {
+        var message = "You scored " + score + ", and the passing score is " + passingScore
+        callback("Pass", message);
+      } else {
+        var message = "You scored " + score + ", but the passing score is " + passingScore
+        callback("Fail", message);
+      }
+    }
+    checkPass(50, 60, function(result, message) {
+      console.log("Exam result:", result);
+      console.log("Message:", message);
+    });
+
+</script>
+</body>
+</html>

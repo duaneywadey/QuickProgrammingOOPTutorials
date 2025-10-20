@@ -24,8 +24,7 @@ $action = $input['action'] ?? '';
 switch ($action) {
     case 'create':
         $farm = $input['farm'];
-        $stmt = $pdo->prepare('INSERT INTO agrilands (farm_name, location, crop_type, owner) 
-                                VALUES (?, ?, ?, ?)');
+        $stmt = $pdo->prepare('INSERT INTO agrilands (farm_name, location, crop_type, owner) VALUES (?, ?, ?, ?)');
         $success = $stmt->execute([
             $farm['farm_name'],
             $farm['location'],
@@ -36,20 +35,15 @@ switch ($action) {
         break;
 
     case 'read':
-        $search = '%' . ($input['search'] ?? '') . '%';
-        $stmt = $pdo->prepare('SELECT * FROM agrilands WHERE farm_name 
-                LIKE ? OR location LIKE ? OR crop_type LIKE ? OR owner LIKE ? 
-                ORDER BY date_added DESC');
-        $stmt->execute([$search, $search, $search, $search]);
+        $stmt = $pdo->prepare('SELECT * FROM agrilands LIMIT 5');
+        $stmt->execute();
         $farms = $stmt->fetchAll();
-        echo json_encode(['success' => true, 'data' => $farms, 'section' => 'UCOS 4-2', 'greeting' => 'good morning to all UCOS 4-2 STUDENTS!!']);
+        echo json_encode(['success' => true, 'data' => $farms]);
         break;
 
     case 'update':
         $farm = $input['farm'];
-        $stmt = $pdo->prepare('UPDATE agrilands SET farm_name = ?, 
-                                location = ?, crop_type = ?, owner = ?
-                                 WHERE farmland_id = ?');
+        $stmt = $pdo->prepare('UPDATE agrilands SET farm_name = ?, location = ?, crop_type = ?, owner = ? WHERE farmland_id = ?');
         $success = $stmt->execute([
             $farm['farm_name'],
             $farm['location'],

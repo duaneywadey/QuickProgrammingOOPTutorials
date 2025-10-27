@@ -18,12 +18,19 @@
             throw new Error('Network response was not ok')
           };
           return response.json();
-        }).then(data => {
-          console.log(data)
         })
     }
+    
+    var commentVal = fetchComment(63).then(data => {
+      console.log(data.id)
+      console.log(data.email)
+      console.log(data.body)
+      console.log(data.name)
+      console.log(data.postId)
+      return data;
+    });
 
-    console.log(fetchComment(5));
+    console.log(commentVal);
   </script>
 </body>
 </html>

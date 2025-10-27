@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>Login</title>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="sweetalert.js"></script>
 </head>
 <body>
 <h2>Login</h2>

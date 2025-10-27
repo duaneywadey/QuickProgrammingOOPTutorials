@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>Register</title>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="sweetalert.js"></script>
 </head>
 <body>
 <h2>Register</h2>

@@ -9,7 +9,7 @@ if (!isset($_SESSION['user_id'])) {
 <html>
 <head>
     <title>Welcome</title>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="sweetalert.js"></script>
 </head>
 <body>
     <h2>Welcome, <?php echo htmlspecialchars($_SESSION['username']); ?>!</h2>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Callback Demo - Fetch Comment</title>
+</head>
+<body>
+  <h2>Callback Demo: Fetch Comment</h2>
+  <input id="commentId" type="number" placeholder="Enter Comment ID" min="1" />
+  <button id="fetchBtn">Fetch Comment</button>
+  <pre id="result"></pre>
+
+  <script>
+    function fetchComment(id, callback) {
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', 'https://jsonplaceholder.typicode.com/comments/' + id);
+      xhr.onload = function () {
+        if (xhr.status === 200) {
+          try {
+            const data = JSON.parse(xhr.responseText);
+            callback(null, data);
+          } catch (e) {
+            callback('Invalid JSON');
+          }
+        } else {
+          callback('Error: ' + xhr.status);
+        }
+      };
+      xhr.onerror = function () {
+        callback('Network Error');
+      };
+      xhr.send();
+    }
+
+    document.getElementById('fetchBtn').addEventListener('click', function () {
+      const id = document.getElementById('commentId').value.trim();
+      const result = document.getElementById('result');
+      result.textContent = 'Loading...';
+
+      fetchComment(id, function (err, data) {
+        if (err) {
+          result.textContent = err;
+        } else {
+          result.textContent = 
+            `ID: ${data.id}\n` +
+            `Name: ${data.name}\n` +
+            `Email: ${data.email}\n` +
+            `Comment: ${data.body}`;
+        }
+      });
+    });
+  </script>
+</body>
+</html>

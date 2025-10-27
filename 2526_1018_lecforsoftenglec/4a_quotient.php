@@ -12,12 +12,12 @@ if (isset($input['action']) && $input['action'] === "getQuotient") {
     if ($divisor === 0) {
         $response = [
             'status' => 'error',
-            'message' => 'Division by zero is not allowed'
+            'message' => 'Good morning, UCOS 4-2. This is from a PHP script. Just a reminder that division by zero is not allowed.'
         ];
     } else if ($dividend < 0 || $divisor < 0) {
         $response = [
             'status' => 'error',
-            'message' => 'Negative numbers are not allowed'
+            'message' => 'Hello this is from PHP Script and now shown on Sweetalert. Negative numbers are not allowed'
         ];
     } else {
         $quotient = $dividend / $divisor;

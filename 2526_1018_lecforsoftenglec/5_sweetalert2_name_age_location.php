@@ -7,6 +7,7 @@
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
+  <h1>Only people from NCR and age at least 18 are accepted!</h1>
   <form id="checkForm">
     <label>
       Name:

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>XHR Demo - Fetch Comment</title>
+</head>
+<body>
+  <h2>XHR Demo: Fetch Comment</h2>
+  <input id="commentId" type="number" placeholder="Enter Comment ID" min="1" />
+  <button id="fetchBtn">Fetch Comment</button>
+  <pre id="result"></pre>
+
+  <script>
+    function fetchComment(id, callback, errorCallback) {
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', 'https://jsonplaceholder.typicode.com/comments/' + id);
+      xhr.responseType = 'json';
+
+      xhr.onload = function () {
+        if (xhr.status >= 200 && xhr.status < 300) {
+          callback(xhr.response);
+        } else {
+          errorCallback(new Error('Network response was not ok'));
+        }
+      };
+
+      xhr.onerror = function () {
+        errorCallback(new Error('Network error occurred'));
+      };
+
+      xhr.send();
+    }
+
+    // Example usage:
+    fetchComment(63, function(data) {
+      console.log(data.id);
+      console.log(data.email);
+      console.log(data.body);
+      console.log(data.name);
+      console.log(data.postId);
+    }, function(err) {
+      console.error('Fetch error:', err);
+    });
+  </script>
+</body>
+</html>

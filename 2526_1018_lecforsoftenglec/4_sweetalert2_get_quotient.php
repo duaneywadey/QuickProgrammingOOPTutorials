@@ -44,7 +44,7 @@
                     Swal.fire({
                         icon: 'success',
                         title: 'Division Successful',
-                        html: 'The quotient is <strong>' + result.quotient + '</strong>'
+                        text: 'The quotient is ' + result.quotient
                     });
                 } else {
                     // Single error popup for any error state

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>XHR POST with Inputs and SweetAlert2</title>
+  <script src="sweetalert.js"></script>
+</head>
+<body>
+  <h2>Send Comment (XHR)</h2>
+  <input id="postId" type="number" placeholder="Post ID" />
+  <input id="name" type="text" placeholder="Name" />
+  <input id="email" type="email" placeholder="Email" />
+  <input id="body" type="text" placeholder="Comment body" />
+  <button id="sendBtn">Send</button>
+
+  <script>
+    document.getElementById('sendBtn').addEventListener('click', function () {
+      const postId = Number(document.getElementById('postId').value);
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const body = document.getElementById('body').value.trim();
+
+      if (!postId || !name || !email || !body) {
+        Swal.fire('Input Required', 'Please fill all fields', 'warning');
+        return;
+      }
+
+      const data = { postId, name, email, body };
+
+      const xhr = new XMLHttpRequest();
+      xhr.open('POST', 'https://jsonplaceholder.typicode.com/comments/');
+      xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+
+      xhr.onload = function () {
+        if (xhr.status >= 200 && xhr.status < 300) {
+          Swal.fire('Success', 'Comment posted with XHR!', 'success');
+          console.log('XHR Response:', JSON.parse(xhr.responseText));
+        } else {
+          Swal.fire('Error', `XHR Error: ${xhr.status}`, 'error');
+        }
+      };
+      
+      xhr.send(JSON.stringify(data));
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Fetch POST with Inputs and SweetAlert2</title>
+  <script src="sweetalert.js"></script>
+</head>
+<body>
+  <h2>Send Comment (Promise)</h2>
+  <input id="postId" type="number" placeholder="Post ID" />
+  <input id="name" type="text" placeholder="Name" />
+  <input id="email" type="email" placeholder="Email" />
+  <input id="body" type="text" placeholder="Comment body" />
+  <button id="sendBtn">Send</button>
+
+  <script>
+    document.getElementById('sendBtn').addEventListener('click', function () {
+      const postId = Number(document.getElementById('postId').value);
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const body = document.getElementById('body').value.trim();
+
+      if (!postId || !name || !email || !body) {
+        Swal.fire('Input Required', 'Please fill all fields', 'warning');
+        return;
+      }
+
+      const data = { postId, name, email, body };
+
+      fetch('https://jsonplaceholder.typicode.com/comments/', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(data)
+      })
+      .then(response => {
+        return response.json();
+      })
+      .then(json => {
+        Swal.fire('Success', 'Comment posted with Promise!', 'success');
+        console.log('Fetch Response:', json);
+      })
+      .catch(error => {
+        Swal.fire('Error', error.message, 'error');
+      });
+    });
+  </script>
+</body>
+</html>

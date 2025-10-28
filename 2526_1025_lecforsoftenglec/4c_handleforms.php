@@ -8,6 +8,7 @@ $input = json_decode($inputJSON, true);
 
 header('Content-Type: application/json');
 
+// A response data will return two values back to the template, success status and message value
 $response = ["success" => false, "message" => "Unknown error"];
 
 $action = $input['action'] ?? '';

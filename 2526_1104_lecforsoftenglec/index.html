@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Toggle Form Below Row</title>
+  <link rel="stylesheet" href="vendor/bootstrap.css" />
+  <script src="vendor/jquery.js"></script>
+</head>
+<body>
+  <div class="container mt-4">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>StudentID</th>
+          <th>FirstName</th>
+          <th>LastName</th>
+          <th>DateOfBirth</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="mainRow" style="cursor:pointer;">
+          <td>1001</td>
+          <td>Mark</td>
+          <td>Otto</td>
+          <td>08/21/2000</td>
+        </tr>
+        <tr class="editForm d-none">
+          <td colspan="4">
+            <form action="#" method="POST" class="form-inline">
+              <input type="text" name="studentID" class="form-control mr-2" />
+              <input type="text" name="firstName" class="form-control mr-2" />
+              <input type="text" name="lastName" class="form-control mr-2" />
+              <input type="text" name="dob" class="form-control mr-2" />
+              <button type="submit" class="btn btn-primary">Save</button>
+            </form>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+    $(document).ready(function () {
+      $('.mainRow').on('dblclick', function () {
+        var formRow = $(this).next('.editForm');
+        // Toggle the form visibility
+        formRow.toggleClass('d-none');
+      });
+    });
+  </script>
+</body>
+</html>

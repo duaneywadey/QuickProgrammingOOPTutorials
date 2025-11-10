@@ -63,6 +63,43 @@
   </div>
 </div>
 
+<!-- Update Farm Modal -->
+<div class="modal fade" id="updateFarmModal" tabindex="-1" aria-labelledby="updateFarmModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form id="updateFarmForm" class="modal-form">
+        <div class="modal-header">
+          <h5 class="modal-title" id="updateFarmModalLabel">Update Farm</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <!-- Hidden input for farm id -->
+          <input type="hidden" id="updateFarmlandId" name="farmland_id" />
+          <div class="form-group">
+            <label for="updateFarmlandAddressInput">Address</label>
+            <input type="text" class="form-control" id="updateFarmlandAddressInput" name="farmland_address" required>
+          </div>
+          <div class="form-group">
+            <label for="updateFarmlandLocInput">Location</label>
+            <input type="text" class="form-control" id="updateFarmlandLocInput" name="location" required>
+          </div>
+          <div class="form-group">
+            <label for="updateFarmlandCropTypeInput">Crop Type</label>
+            <input type="text" class="form-control" id="updateFarmlandCropTypeInput" name="crop_type" required>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Update Farm</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
 <script>
 const userID = "<?php echo $_SESSION['user_id']; ?>";
 
@@ -79,12 +116,16 @@ function getFarmsByUserID() {
       const item = data[i];
       rows += `
         <div class="col-md-4 mt-4">
-          <div class="card shadow mt-4">
+          <div class="farmCard card shadow mt-4">
             <div class="card-body">
               <h4>Location: ${item.location}</h4>
               <p>Address: ${item.farmland_address}</p>
               <p>Crop: ${item.crop_type}</p>
+              
+              <button class="showInfo btn btn-info btn-sm mt-2" data-json='${JSON.stringify(item)}'>Update</button>
+
               <button class="btn btn-danger btn-sm mt-2" onclick="deleteFarm(${item.farmland_id})">Delete</button>
+
             </div>
           </div>
         </div>`;
@@ -132,7 +173,61 @@ function deleteFarm(farmlandId) {
 
 
 document.addEventListener('DOMContentLoaded', function () {
+  // existing call
   getFarmsByUserID();
+
+  // Delegate click on update buttons to open modal with data
+  document.getElementById('farmsByUserHere').addEventListener('click', function(e) {
+    if(e.target && e.target.classList.contains('showInfo')) {
+      const farmData = JSON.parse(e.target.getAttribute('data-json'));
+      // fill update modal inputs
+      document.getElementById('updateFarmlandId').value = farmData.farmland_id;
+      document.getElementById('updateFarmlandAddressInput').value = farmData.farmland_address;
+      document.getElementById('updateFarmlandLocInput').value = farmData.location;
+      document.getElementById('updateFarmlandCropTypeInput').value = farmData.crop_type;
+
+      // show the update modal
+      $('#updateFarmModal').modal('show');
+    }
+  });
+
+  // Handle update form submit
+  document.getElementById('updateFarmForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const payload = {
+      farmland_id: document.getElementById('updateFarmlandId').value,
+      farmland_address: document.getElementById('updateFarmlandAddressInput').value.trim(),
+      location: document.getElementById('updateFarmlandLocInput').value.trim(),
+      crop_type: document.getElementById('updateFarmlandCropTypeInput').value.trim(),
+      action: 'updateFarm'
+    };
+
+    if (!payload.farmland_address || !payload.location || !payload.crop_type) {
+      alert('Please fill in all fields.');
+      return;
+    }
+
+    fetch('api.php', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    })
+    .then(res => res.json())
+    .then(result => {
+      if (result.success) {
+        // Success: hide modal, refresh list
+        $('#updateFarmModal').modal('hide');
+        return getFarmsByUserID();
+      } else {
+        alert('Error updating farm: ' + (result.error || 'Unknown error'));
+      }
+    })
+    .catch(err => {
+      console.error('Update error:', err);
+      alert('Update request failed');
+    });
+  });
 });
 
 // Handle form submission with Promises
@@ -173,6 +268,7 @@ document.getElementById('insertNewFarmForm').addEventListener('submit', function
     console.error('Insert error:', err);
   });
 });
+
 </script>
 <script src="vendor/logout.js"></script>
 </body>

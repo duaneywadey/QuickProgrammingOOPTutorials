@@ -30,7 +30,6 @@ if (!isset($_SESSION['username'])) {
 		</div>
 	</div>
 	<script>
-
 		function loadAllUsers() {
 			fetch('api.php', {
 				method: 'POST',
@@ -72,6 +71,6 @@ if (!isset($_SESSION['username'])) {
 			loadAllUsers();
 		})
 	</script>
-	<script src="logout.js"></script>
+	<script src="vendor/logout.js"></script>
 </body>
 </html>

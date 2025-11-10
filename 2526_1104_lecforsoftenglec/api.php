@@ -134,6 +134,20 @@ if (isset($input['action']) && $input['action'] === 'deleteFarm') {
     exit;
 }
 
+if (isset($input['action']) && $input['action'] === 'updateFarm') {
+    $sql = "UPDATE agrilands SET farmland_address = ?, location = ?, crop_type = ?
+            WHERE farmland_id = ?";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([
+        $input['farmland_address'],
+        $input['location'],
+        $input['crop_type'],
+        $input['farmland_id']
+    ]);
+    echo json_encode(['success' => true]);
+    exit;
+}
+
 // Optional: return a helpful error if action is missing or incorrect
 echo json_encode(['error' => 'Invalid action']);
 exit;

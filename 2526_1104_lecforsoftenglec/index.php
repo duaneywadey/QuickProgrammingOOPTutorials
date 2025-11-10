@@ -42,19 +42,20 @@ if (!isset($_SESSION['username'])) {
 				return response.json();
 			})
 			.then(data => {
+				console.log(data);
 				let rows = "";
-				for (var i = 1; i < data.length; i++) {
+				for (var i = 1; i < data.result_set.length; i++) {
 					rows += `
 							<div class="col-md-4">
 								<div class="card shadow mt-4 ml-4">
 									<div class="card-header">
 										<h2>
-											<a href="farmlands.php?user_id=${data[i].user_id}&username=${data[i].username}">${data[i].username}</a>
+											<a href="farmlands.php?user_id=${data.result_set[i].user_id}&username=${data.result_set[i].username}">${data.result_set[i].username}</a>
 										</h2>
 									</div>
 									<div class="card-body">
-										<h1 class="locationClass" jsonattr='${JSON.stringify(data[i])}' >Username: ${data[i].username}</h1>
-										<h4 class="addressClass" croptypeattr='${JSON.stringify(data[i].crop_type)}'>Email: ${data[i].email} </h1>
+										<h1>Username: ${data.result_set[i].username}</h1>
+										<h4>Email: ${data.result_set[i].email} </h1>
 									</div>
 								</div>
 							</div>

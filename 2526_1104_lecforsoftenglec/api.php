@@ -70,32 +70,13 @@ if (isset($input['action']) && $input['action'] === 'logout') {
     exit;
 } 
 
-if (isset($input['action']) && $input['action'] === 'getFarmLandJson') {
-    $sql = "SELECT * FROM agrilands";
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute();
-    $result_set = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    echo json_encode($result_set);
-    exit;
-}
-
 if (isset($input['action']) && $input['action'] === 'getAllUsers') {
     $sql = "SELECT * FROM agriland_users";
     $stmt = $pdo->prepare($sql);
     $stmt->execute();
     $result_set = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    echo json_encode($result_set);
+    echo json_encode(['success' => 'true', 'result_set' => $result_set]);
     exit;
-}
-
-
-if (isset($input['action']) && $input['action'] === 'getSingleFarmLandJson') {
-    $sql = "SELECT * FROM agrilands WHERE farmland_id = ?";
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute([$input['farmIDInput']]);
-    $result_set = $stmt->fetch();
-    echo json_encode(['message'=>'good afternoon', 'phpname' => $input['phpGetVar']]);
-    exit;     
 }
 
 if (isset($input['action']) && $input['action'] === 'getAllFarmsByUserID') {
@@ -107,7 +88,7 @@ if (isset($input['action']) && $input['action'] === 'getAllFarmsByUserID') {
     $stmt = $pdo->prepare($sql);
     $stmt->execute([$input['userIDInput']]);
     $result_set = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    echo json_encode($result_set);
+    echo json_encode(['success' => 'true', 'result_set' => $result_set]);
     exit;
 }
 

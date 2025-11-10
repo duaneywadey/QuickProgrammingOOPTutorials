@@ -40,14 +40,14 @@
 		})
 		.then(data => {
 			let rows = ''
-			for (var i = 0; i < data.length; i++) {
+			for (var i = 0; i < data.result_set.length; i++) {
 				rows += `
 						<div class="col-md-4 mt-4">
 							<div class="card shadow mt-4">
 								<div class="card-body">
-									<h3 class="locationClass" jsonattr='${JSON.stringify(data[i])}' >Location: ${data[i].location} </h1>
-									<h4 class="text-success" jsonattr='${JSON.stringify(data[i])}' >Crop type: ${data[i].crop_type} </h1>
-									<h5 class="addressClass" croptypeattr='${JSON.stringify(data[i].crop_type)}'>Address: ${data[i].farmland_address} </h4>
+									<h3 class="locationClass">Location: ${data.result_set[i].location} </h1>
+									<h4 class="text-success" jsonattr='${JSON.stringify(data.result_set[i])}' >Crop type: ${data.result_set[i].crop_type} </h1>
+									<h5 class="addressClass" croptypeattr='${JSON.stringify(data.result_set[i].crop_type)}'>Address: ${data.result_set[i].farmland_address} </h4>
 								</div>
 							</div>	
 						</div>

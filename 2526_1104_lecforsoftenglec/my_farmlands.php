@@ -112,19 +112,18 @@ function getFarmsByUserID() {
   .then(res => res.json())
   .then(data => {
     let rows = '';
-    for (let i = 0; i < data.length; i++) {
-      const item = data[i];
+    for (let i = 0; i < data.result_set.length; i++) {
       rows += `
         <div class="col-md-4 mt-4">
           <div class="farmCard card shadow mt-4">
             <div class="card-body">
-              <h4>Location: ${item.location}</h4>
-              <p>Address: ${item.farmland_address}</p>
-              <p>Crop: ${item.crop_type}</p>
+              <h4>Location: ${data.result_set[i].location}</h4>
+              <p>Address: ${data.result_set[i].farmland_address}</p>
+              <p>Crop: ${data.result_set[i].crop_type}</p>
               
-              <button class="showInfo btn btn-info btn-sm mt-2" data-json='${JSON.stringify(item)}'>Update</button>
+              <button class="showInfo btn btn-info btn-sm mt-2" data-json='${JSON.stringify(data.result_set[i])}'>Update</button>
 
-              <button class="btn btn-danger btn-sm mt-2" onclick="deleteFarm(${item.farmland_id})">Delete</button>
+              <button class="btn btn-danger btn-sm mt-2" onclick="deleteFarm(${data.result_set[i].farmland_id})">Delete</button>
 
             </div>
           </div>
@@ -190,6 +189,47 @@ document.addEventListener('DOMContentLoaded', function () {
       $('#updateFarmModal').modal('show');
     }
   });
+});
+
+// Handle form submission with Promises
+document.getElementById('insertNewFarmForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+
+  const payload = {
+    userIDInput: userID,
+    farmlandAddressInput: document.getElementById('farmlandAddressInput').value.trim(),
+    farmlandLocInput: document.getElementById('farmlandLocInput').value.trim(),
+    farmlandCropTypeInput: document.getElementById('farmlandCropTypeInput').value.trim(),
+    action: 'insertFarm'
+  };
+
+  // Client-side validation
+  if (!payload.farmlandAddressInput || !payload.farmlandLocInput || !payload.farmlandCropTypeInput) {
+    Swal.fire('Error', 'Please fill all required fields', 'error');
+    return;
+  }
+
+  fetch('api.php', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  })
+  .then(res => res.json())
+  .then(result => {
+    if (result.success) {
+      // Success: hide modal, reset form, refresh list
+      $('#exampleModal').modal('hide');
+      document.getElementById('insertNewFarmForm').reset();
+      getFarmsByUserID();
+    } 
+    else {
+      alert('Error saving farm: ' + (result.error || 'Unknown error'));
+    }
+  })
+  .catch(err => {
+    console.error('Insert error:', err);
+  });
+});
 
   // Handle update form submit
   document.getElementById('updateFarmForm').addEventListener('submit', function(e) {
@@ -218,8 +258,9 @@ document.addEventListener('DOMContentLoaded', function () {
       if (result.success) {
         // Success: hide modal, refresh list
         $('#updateFarmModal').modal('hide');
-        return getFarmsByUserID();
-      } else {
+        getFarmsByUserID();
+      } 
+      else {
         alert('Error updating farm: ' + (result.error || 'Unknown error'));
       }
     })
@@ -228,47 +269,7 @@ document.addEventListener('DOMContentLoaded', function () {
       alert('Update request failed');
     });
   });
-});
-
-// Handle form submission with Promises
-document.getElementById('insertNewFarmForm').addEventListener('submit', function(e) {
-  e.preventDefault();
-
-  const payload = {
-    userIDInput: userID,
-    farmlandAddressInput: document.getElementById('farmlandAddressInput').value.trim(),
-    farmlandLocInput: document.getElementById('farmlandLocInput').value.trim(),
-    farmlandCropTypeInput: document.getElementById('farmlandCropTypeInput').value.trim(),
-    action: 'insertFarm'
-  };
-
-  // Client-side validation
-  if (!payload.farmlandAddressInput || !payload.farmlandLocInput || !payload.farmlandCropTypeInput) {
-    alert('Please fill in all fields.');
-    return;
-  }
-
-  fetch('api.php', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(payload)
-  })
-  .then(res => res.json())
-  .then(result => {
-    if (result.success) {
-      // Success: hide modal, reset form, refresh list
-      $('#exampleModal').modal('hide');
-      document.getElementById('insertNewFarmForm').reset();
-      return getFarmsByUserID();
-    } else {
-      alert('Error saving farm: ' + (result.error || 'Unknown error'));
-    }
-  })
-  .catch(err => {
-    console.error('Insert error:', err);
-  });
-});
-
+  
 </script>
 <script src="vendor/logout.js"></script>
 </body>

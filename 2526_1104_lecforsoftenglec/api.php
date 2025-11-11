@@ -17,10 +17,10 @@ if (isset($input['action']) && $input['action'] === 'register') {
     if ($username === '' || $email === '' || $password === '') {
         $response['message'] = "Fields cannot be empty";
     } else {
-        $stmt = $pdo->prepare("SELECT user_id FROM agriland_users WHERE username = ?");
-        $stmt->execute([$username]);
+        $stmt = $pdo->prepare("SELECT user_id FROM agriland_users WHERE username = ? OR email = ?");
+        $stmt->execute([$username, $email]);
         if ($stmt->fetch()) {
-            $response['message'] = "Username already taken";
+            $response['message'] = "Username/email already taken";
         } else {
             $hash = password_hash($password, PASSWORD_DEFAULT);
             $stmt = $pdo->prepare("INSERT INTO agriland_users (username, email, password, contact_number) VALUES (?, ?, ?, ?)");

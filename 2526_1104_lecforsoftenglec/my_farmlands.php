@@ -12,6 +12,7 @@
 <script src="vendor/popper.js"></script>
 <script src="vendor/bootstrap.js"></script>
 <script src="vendor/sweetalert.js"></script>
+
 <style>
 .redBorder { border-style: solid; }
 </style>

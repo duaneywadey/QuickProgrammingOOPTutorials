@@ -234,6 +234,7 @@ document.getElementById('updateFarmForm').addEventListener('submit', function(e)
   axios.post('api.php', payload)
   .then(res => {
     const result = res.data;
+    console.log(result);
     if (result.success) {
       $('#updateFarmModal').modal('hide');
       getFarmsByUserID();

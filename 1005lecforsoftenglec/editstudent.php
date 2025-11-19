@@ -47,6 +47,10 @@
 			<label for="adviser">Adviser</label>
 			<input type="text" name="adviser" value="<?php echo $getStudentById['adviser']; ?>"></p>
 		<p>
+			<label for="adviser">Student ID</label>
+			<input type="hidden" name="student_id" value="<?php echo $getStudentById['student_id']; ?>">
+		</p>
+		<p>
 			<label for="religion">Religion</label>
 			<input type="text" name="religion" value="<?php echo $getStudentById['religion']; ?>">
 			<input type="submit" name="editStudentBtn">

@@ -33,7 +33,7 @@ if (isset($_POST['insertNewStudentBtn'])) {
 
 
 if (isset($_POST['editStudentBtn'])) {
-	$student_id = $_GET['student_id'];
+	$student_id = trim($_POST['student_id']);
 	$firstName = trim($_POST['firstName']);
 	$lastName = trim($_POST['lastName']);
 	$gender = trim($_POST['gender']);

@@ -52,6 +52,7 @@
           '<br><strong>Username:</strong> ' + response.data.username +
           '<br><strong>Email:</strong> ' + response.data.email +
           '</div>';
+        console.log(response);
       })
       .catch(function(error) {
         document.getElementById('statusMessage').innerHTML =

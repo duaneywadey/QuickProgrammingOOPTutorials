@@ -4,7 +4,7 @@
 $host = "localhost";
 $user = "root";
 $password = "";
-$dbname = "dequito";
+$dbname = "mockdb";
 $dsn = "mysql:host={$host};dbname={$dbname}";
 $pdo = new PDO($dsn, $user, $password);
 

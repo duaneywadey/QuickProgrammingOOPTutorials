@@ -125,7 +125,7 @@ if (isset($input['action']) && $input['action'] === 'updateFarm') {
         $input['crop_type'],
         $input['farmland_id']
     ]);
-    echo json_encode(['success' => true]);
+    echo json_encode(['success' => true, 'message' => 'Edit was successful! Good morning UCOS 4-1!!']);
     exit;
 }
 

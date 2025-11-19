@@ -34,6 +34,7 @@
   <script>
     function divideNumbers() {
       var data = { 
+        action: "divideNumber", 
         numerator: document.getElementById('numerator').value, 
         denominator: document.getElementById('denominator').value 
       };

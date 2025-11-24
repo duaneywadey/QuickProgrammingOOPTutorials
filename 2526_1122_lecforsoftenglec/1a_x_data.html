@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Alpine.js x-data from Function Example</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+</head>
+<body>
+
+<div class="container mt-5" x-data="greetComponent()">
+  <!-- Using x-data with a function defined in script -->
+  <h1 class="mb-3">x-data from Function</h1>
+  <p x-text="message"></p>
+  <button class="btn btn-primary" @click="updateMessage">
+    Click to update message
+  </button>
+</div>
+
+<script>
+  // Define the function returning the data object for Alpine component
+  function greetComponent() {
+    return {
+      message: 'Hello from function!',
+      updateMessage() {
+        this.message = 'Message updated by button click!';
+      }
+    };
+  }
+</script>
+
+</body>
+</html>

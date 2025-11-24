@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Alpine.js x-ref Example</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+</head>
+<body>
+
+<div class="container mt-5" x-data>
+  <!-- x-ref references DOM element inside Alpine component -->
+  <h1 class="mb-3">x-ref Directive</h1>
+  <input x-ref="nameInput" class="form-control mb-3" placeholder="Type something here" />
+  <button class="btn btn-primary" @click="$refs.nameInput.focus()">
+    Focus Input
+  </button>
+</div>
+
+</body>
+</html>

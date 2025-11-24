@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Alpine.js x-text Example</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+</head>
+<body>
+
+<div class="container mt-5" x-data="{ message: 'This text is rendered with x-text.' }">
+  <!-- x-text safely renders text content -->
+  <h1 class="mb-3">x-text Directive</h1>
+  <p class="lead" x-text="message"></p>
+</div>
+
+</body>
+</html>

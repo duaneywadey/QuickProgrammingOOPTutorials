@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Alpine.js x-bind Example</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+</head>
+<body>
+
+<div class="container mt-5" x-data="{ isDisabled: true }">
+  <!-- x-bind dynamically binds attributes -->
+  <h1 class="mb-3">x-bind Directive</h1>
+  <button class="btn btn-primary" x-bind:disabled="isDisabled">
+    Click if enabled
+  </button>
+  <input type="text" class="form-control" x-bind:disabled="isDisabled">
+  <br />
+  <button class="btn btn-secondary mt-3" @click="isDisabled = !isDisabled">
+    Toggle Disabled
+  </button>
+</div>
+
+</body>
+</html>

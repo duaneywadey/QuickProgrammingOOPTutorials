@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Alpine.js x-on Example</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+</head>
+<body>
+
+<div class="container mt-5" x-data="{ count: 0 }">
+  <!-- x-on listens to events, here click increments count -->
+  <h1 class="mb-3">x-on Directive</h1>
+  <button class="btn btn-success" x-on:click="count++">Increment</button>
+  <p class="lead mt-3">Count: <span x-text="count"></span></p>
+</div>
+
+</body>
+</html>

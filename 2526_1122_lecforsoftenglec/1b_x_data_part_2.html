@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Alpine.js x-data from Function Example</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+</head>
+<body>
+
+<div class="container mt-5" x-data="greetComponent()">
+  <!-- Original x-data function component -->
+  <h1 class="mb-3">x-data from Function</h1>
+  <p x-text="message"></p>
+  <button class="btn btn-primary mb-5" @click="updateMessage">
+    Click to update message
+  </button>
+</div>
+
+<!-- Counter component -->
+<div class="container mt-3 border p-3" x-data="counterComponent()">
+  <h2>Counter Example</h2>
+  <p>Count: <span x-text="count"></span></p>
+  <button class="btn btn-success mr-2" @click="increment">Increment</button>
+  <button class="btn btn-danger" @click="decrement">Decrement</button>
+</div>
+
+<!-- Toggle visibility component -->
+<div class="container mt-3 border p-3" x-data="toggleComponent()">
+  <h2>Toggle Visibility Example</h2>
+  <button class="btn btn-info mb-2" @click="toggle">Toggle Text</button>
+  <p x-show="isVisible" class="alert alert-secondary">Now you see me!</p>
+</div>
+
+<!-- Input binding component -->
+<div class="container mt-3 border p-3" x-data="inputComponent()">
+  <h2>Input Binding Example</h2>
+  <input type="text" class="form-control mb-2" x-model="userInput" placeholder="Type something..." />
+  <p>You typed: <strong x-text="userInput"></strong></p>
+</div>
+
+<script>
+  function greetComponent() {
+    return {
+      message: 'Hello from function!',
+      updateMessage() {
+        this.message = 'Message updated by button click!';
+      }
+    };
+  }
+
+  function counterComponent() {
+    return {
+      count: 0,
+      increment() {
+        this.count++;
+      },
+      decrement() {
+        if(this.count > 0) { 
+          this.count--;
+        }
+      }
+    };
+  }
+
+  function toggleComponent() {
+    return {
+      isVisible: true,
+      toggle() {
+        this.isVisible = !this.isVisible;
+      }
+    };
+  }
+
+  function inputComponent() {
+    return {
+      userInput: '',
+    };
+  }
+</script>
+
+</body>
+</html>

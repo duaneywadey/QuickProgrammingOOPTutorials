@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Alpine.js x-model Example</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+</head>
+<body>
+
+<div class="container mt-5" x-data="{ name: '', age: '', address: ''}">
+  <!-- Two-way binding input to Alpine state -->
+  <h1 class="mb-3">x-model Directive</h1>
+  <input type="text" class="form-control mb-3" placeholder="Type your name" x-model="name" />
+  <input type="text" class="form-control mb-3" placeholder="Type your age" x-model="age" />
+  <input type="text" class="form-control mb-3" placeholder="Type your address" x-model="address" />
+
+  <div class="card shadow">
+    <div class="card-header">
+      <h2>User Information</h2>
+    </div>
+    <div class="card-body">
+      <p class="lead">Hello, <span x-text="name"></span>!</p>
+      <p class="lead">You are <span x-text="age"></span>!</p>
+      <p class="lead">You are from <span x-text="address"></span>!</p>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

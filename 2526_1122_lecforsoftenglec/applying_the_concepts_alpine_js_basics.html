@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Alpine.js with Bootstrap 4 Demo</title>
+  <!-- Bootstrap 4 CSS CDN -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+  <!-- Alpine.js CDN -->
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+<body>
+
+  <div class="container mt-5" x-data="userForm()" x-init="checkIfMoreThanFive()">
+    <h2>User Info Form</h2>
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input id="name" type="text" class="form-control" placeholder="Enter name" x-model="name" />
+    </div>
+
+    <div class="form-group">
+      <label for="age">Age</label>
+      <input id="age" type="number" class="form-control" placeholder="Enter age" x-model.number="age" />
+    </div>
+
+    <button 
+    class="btn btn-primary"
+    x-on:click="submitForm()"
+    x-bind:disabled="!canSubmit() || submissions.length >= 5"
+    >
+    Submit
+  </button>
+
+  <div x-effect="console.log('Name:', name, 'Age:', age)"></div>
+
+  <template x-if="submitted">
+    <div class="alert alert-success mt-4" role="alert" x-ref="resultBox" tabindex="-1">
+      <p><strong>Name:</strong> <span x-text="name"></span></p>
+      <p><strong>Age:</strong> <span x-text="age"></span></p>
+      <p x-text="ageCategory()"></p>
+      <button class="btn btn-sm btn-info mt-2" x-on:click="$el.style.backgroundColor = 'green'">Highlight</button>
+    </div>
+  </template>
+
+  <button 
+  class="btn btn-secondary mt-4"
+  x-on:click="toggleHistory()"
+  x-text="showHistory ? 'Hide History' : 'Show History'"
+  ></button>
+
+  <div class="mt-3" x-show="showHistory" style="display: none;">
+    <h4>Submission History</h4>
+    <ul class="list-group" role="list">
+      <template x-for="(entry, index) in submissions" :key="index">
+        <li class="list-group-item">
+          <span>
+            This is index number
+            <span x-text="index"></span>
+          </span>
+          <span x-text="entry.name"></span> - <span x-text="entry.age"></span> years old
+          <button class="btn btn-danger btn-sm" x-on:click="deleteEntry(index)">
+            Delete
+          </button>
+        </li>
+      </template>
+    </ul>
+  </div>
+</div>
+
+<script>
+  function userForm() {
+    return {
+      name: '',
+      age: null,
+      submitted: false,
+      submissions: [],
+      showHistory: false,
+
+      canSubmit() {
+        if (this.name.trim().length > 0 && this.age > 0) {
+          return true;
+        } else {
+          return false;
+        }
+      },
+
+      ageCategory() {
+        if (this.age == null) {
+          return '';
+        }
+        if (this.age < 18) {
+          return "You are a minor.";
+        } else if (this.age < 65) {
+          return "You are an adult.";
+        } else {
+          return "You are a senior.";
+        }
+      },
+
+      submitForm() {
+        if (!this.canSubmit()) {
+          return;
+        }
+        if (this.submissions.length >= 5) {
+          return;
+        }
+        this.submitted = true;
+        this.submissions.push({ 
+          name: this.name, 
+          age: this.age 
+        });
+        this.$dispatch('form-submitted', { 
+          name: this.name, 
+          age: this.age 
+        });
+      },
+
+      toggleHistory() {
+        this.showHistory = !this.showHistory;
+      },
+
+      deleteEntry(index) {
+        if (confirm(`Are you sure you want to delete the entry for ${this.submissions[index].name}?`)) {
+        // Use splice to remove the item at the specified index
+        this.submissions.splice(index, 1);
+
+        // Hide the last submitted box if the last entry was deleted
+        if (this.submissions.length === 0) {
+          this.submitted = false;
+        }
+      }
+    },
+
+    checkIfMoreThanFive() {
+      this.$watch('submissions.length', (value) => {
+        if (value >= 5) {
+          alert('Maximum of 5 submissions reached.');
+        }
+      });
+    }
+  }
+}
+
+// Global listener for form-submitted custom events
+document.addEventListener('form-submitted', event => {
+  console.log('Form submitted event caught:', event.detail);
+});
+</script>
+
+</body>
+</html>

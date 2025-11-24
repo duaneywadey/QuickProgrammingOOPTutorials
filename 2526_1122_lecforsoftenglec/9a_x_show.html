@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Alpine.js x-show Example</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+</head>
+<body>
+
+<div class="container mt-5" x-data="{ visible: true }">
+  <!-- x-show toggles element visibility with CSS -->
+  <h1 class="mb-3">x-show Directive</h1>
+  <button class="btn btn-outline-primary" @click="visible = !visible">
+    Toggle Text Visibility
+  </button>
+
+  <p class="mt-3" x-show="visible">
+    This text is toggled using <code>x-show</code>.
+  </p>
+</div>
+
+</body>
+</html>

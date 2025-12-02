@@ -12,8 +12,12 @@
   <!-- Using x-data with a function defined in script -->
   <h1 class="mb-3">x-data from Function</h1>
   <p x-text="message"></p>
+  <p x-text="gift"></p>
   <button class="btn btn-primary" @click="updateMessage">
     Click to update message
+  </button>
+  <button class="btn btn-primary" @click="receiveAGift">
+    Click to receive a gift!
   </button>
 </div>
 
@@ -22,8 +26,12 @@
   function greetComponent() {
     return {
       message: 'Hello from function!',
+      gift: 'Click the button to receive a gift',
       updateMessage() {
-        this.message = 'Message updated by button click!';
+        this.message = 'Good morning, UCOS 4-1';
+      },
+      receiveAGift() {
+        this.gift = 'Heres your gift: 100 USD'
       }
     };
   }

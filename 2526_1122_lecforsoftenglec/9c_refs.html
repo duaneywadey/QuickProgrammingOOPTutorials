@@ -15,6 +15,7 @@
 <body>
   <div class="container mt-5" x-data="twoInputRefs()">
     <h3 x-ref="displayText">Initial text here</h3>
+    <h3 x-ref="greetingText">Greeting text here</h3>
     
     <div class="form-group">
       <input type="text" class="form-control mb-2" placeholder="First name" x-ref="inputOne" />
@@ -31,6 +32,7 @@
           const first = this.$refs.inputOne.value.trim();
           const last = this.$refs.inputTwo.value.trim();
           this.$refs.displayText.textContent = `Hello, ${first} ${last}!`;
+          this.$refs.greetingText.textContent = `Good morning from ${first} ${last}!`;
           console.log(this.$refs);
           console.log(this.$refs.inputOne);
           console.log(this.$refs.inputTwo);

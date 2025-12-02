@@ -53,10 +53,6 @@
     <ul class="list-group" role="list">
       <template x-for="(entry, index) in submissions" :key="index">
         <li class="list-group-item">
-          <span>
-            This is index number
-            <span x-text="index"></span>
-          </span>
           <span x-text="entry.name"></span> - <span x-text="entry.age"></span> years old
           <button class="btn btn-danger btn-sm" x-on:click="deleteEntry(index)">
             Delete

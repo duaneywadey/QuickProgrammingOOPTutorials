@@ -19,7 +19,7 @@ $action = $_GET['action'] ?? '';
 
 switch ($action) {
     case 'list':
-        $stmt = $pdo->query("SELECT * FROM students ORDER BY id DESC");
+        $stmt = $pdo->query("SELECT * FROM students ORDER BY id");
         $students = $stmt->fetchAll();
         echo json_encode($students);
         break;

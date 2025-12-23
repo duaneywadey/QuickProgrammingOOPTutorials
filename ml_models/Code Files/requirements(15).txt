@@ -1,4 +1,0 @@
-streamlit
-sklearn
-ibm_watson
-requests
